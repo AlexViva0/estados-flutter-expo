@@ -1,0 +1,30 @@
+<section id="s4-elegir" data-transition="fade" style="background:#F5F3EE;color:#172033;font-family:Inter, Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:16px">
+<x-embed style="position:absolute;left:128px;top:290px;width:1664px;height:630px"><!doctype html><html><head><meta charset="utf-8"><style>
+html,body{margin:0;background:transparent;overflow:hidden;font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+rect,line,path{transition:fill .4s,stroke .4s}
+</style></head><body>
+<svg id="s" width="1664" height="630" viewBox="0 0 1664 630">
+<defs><marker id="a" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M0 0 L12 6 L0 12 z" fill="#4A5568"/></marker></defs>
+<text id="caso" x="832" y="44" font-size="32" font-weight="700" text-anchor="middle" fill="#C2410C"></text>
+</svg>
+<script>
+var ns='http://www.w3.org/2000/svg',s=document.getElementById('s');
+function el(t,a,txt){var e=document.createElementNS(ns,t);for(var k in a)e.setAttribute(k,a[k]);if(txt)e.textContent=txt;s.appendChild(e);return e;}
+var Q=[[240,190,'¿Lo usa un solo widget?'],[760,190,'¿App pequeña o mediana?'],[1300,190,'¿Rastrear cada evento?']];
+var R=[[240,480,'setState / ValueNotifier'],[760,480,'Provider'],[1120,480,'BLoC'],[1480,480,'Cubit o Riverpod']];
+var E={q0r0:[240,245,240,425,'Sí'],q0q1:[450,190,550,190,'No'],q1r1:[760,245,760,425,'Sí'],q1q2:[970,190,1090,190,'No'],q2r2:[1240,245,1140,425,'Sí'],q2r3:[1360,245,1460,425,'No']};
+var L={};for(var k in E){var e=E[k];L[k]=el('line',{x1:e[0],y1:e[1],x2:e[2],y2:e[3],stroke:'#C9C3B5','stroke-width':5,'marker-end':'url(#a)'});el('text',{x:(e[0]+e[2])/2+14,y:(e[1]+e[3])/2-10,'font-size':24,'font-weight':700,fill:'#4A5568'},e[4]);}
+var QB=Q.map(function(q){var r=el('rect',{x:q[0]-210,y:q[1]-55,width:420,height:110,rx:55,fill:'#FFFFFF',stroke:'#C9C3B5','stroke-width':3});el('text',{x:q[0],y:q[1]+10,'text-anchor':'middle','font-size':28,'font-weight':700,fill:'#172033'},q[2]);return r;});
+var RB=R.map(function(q){var r=el('rect',{x:q[0]-170,y:q[1]-50,width:340,height:100,rx:20,fill:'#E8EEF8',stroke:'#C9C3B5','stroke-width':3});el('text',{x:q[0],y:q[1]+10,'text-anchor':'middle','font-size':28,'font-weight':700,fill:'#172033'},q[2]);return r;});
+var C=[['Caso: mostrar u ocultar la contraseña',[0],['q0r0'],0],['Caso: carrito en tres pantallas',[0,1],['q0q1','q1r1'],1],['Caso: app bancaria con historial de acciones',[0,1,2],['q0q1','q1q2','q2r2'],2],['Caso: catálogo grande que consume una API',[0,1,2],['q0q1','q1q2','q2r3'],3]];
+var i=0;function go(){var c=C[i];document.getElementById('caso').textContent=c[0];
+QB.forEach(function(r,k){r.setAttribute('stroke',c[1].indexOf(k)>=0?'#C2410C':'#C9C3B5');});
+for(var k in L)L[k].setAttribute('stroke',c[2].indexOf(k)>=0?'#C2410C':'#C9C3B5');
+RB.forEach(function(r,k){r.setAttribute('fill',k==c[3]?'#C2410C':'#E8EEF8');r.nextSibling.setAttribute('fill',k==c[3]?'#F5F3EE':'#172033');});i=(i+1)%C.length;}
+go();setInterval(go,3200);
+</script></body></html></x-embed>
+<p style="font-size:24px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#C2410C">Guía práctica</p>
+<h2 style="font-family:'Space Grotesk', Arial, sans-serif;font-size:72px;font-weight:700;line-height:1.1;color:#172033">¿Cuál elijo? Tres preguntas</h2>
+<p style="position:absolute;left:128px;bottom:64px;width:1664px;font-size:24px;color:#6B7689">Día 2 · Bloque 4 · [Expositor 4]</p>
+<aside>Guía propia del equipo, no una regla oficial. Antes de que la animación muestre el resultado de cada caso, preguntar al grupo qué elegirían. Mensaje: empieza por lo más simple y sube de nivel solo cuando el problema lo pida. El estado global debe usarse solo cuando hay una necesidad real de compartir, porque aumenta el acoplamiento.</aside>
+</section>

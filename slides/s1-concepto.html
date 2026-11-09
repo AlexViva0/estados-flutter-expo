@@ -1,0 +1,42 @@
+<section id="s1-concepto" data-transition="fade" style="background:#F5F3EE;color:#172033;font-family:Inter, Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:24px">
+<x-embed style="position:absolute;left:128px;top:440px;width:1664px;height:440px"><!doctype html><html><head><meta charset="utf-8"><style>
+html,body{margin:0;background:transparent;overflow:hidden;font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.box{fill:#FFFFFF;stroke:#E2DED4;stroke-width:3}
+.flash{animation:f .7s}
+@keyframes f{0%{fill:#FFFFFF}40%{fill:#FDE7C8}100%{fill:#FFFFFF}}
+.mono{font-family:"JetBrains Mono",Consolas,monospace}
+</style></head><body>
+<svg width="1664" height="440" viewBox="0 0 1664 440">
+<defs><marker id="a" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M0 0 L12 6 L0 12 z" fill="#4A5568"/></marker></defs>
+<text x="250" y="60" font-size="28" font-weight="700" text-anchor="middle" fill="#C2410C">ESTADO (datos)</text>
+<rect id="b1" class="box" x="20" y="90" width="460" height="200" rx="24"/>
+<text x="250" y="180" class="mono" font-size="40" text-anchor="middle" fill="#172033">likes = <tspan id="v1" fill="#1D4ED8" font-weight="700">0</tspan></text>
+<text x="250" y="240" font-size="26" text-anchor="middle" fill="#4A5568">vive en memoria</text>
+<line x1="490" y1="190" x2="650" y2="190" stroke="#4A5568" stroke-width="4" marker-end="url(#a)"/>
+<text x="832" y="60" font-size="28" font-weight="700" text-anchor="middle" fill="#C2410C">build( )</text>
+<circle id="b2" class="box" cx="832" cy="190" r="120"/>
+<text x="832" y="185" font-size="30" font-weight="700" text-anchor="middle" fill="#172033">Flutter</text>
+<text x="832" y="225" font-size="26" text-anchor="middle" fill="#4A5568">reconstruye</text>
+<line x1="1012" y1="190" x2="1172" y2="190" stroke="#4A5568" stroke-width="4" marker-end="url(#a)"/>
+<text x="1414" y="60" font-size="28" font-weight="700" text-anchor="middle" fill="#C2410C">INTERFAZ (lo que ves)</text>
+<rect id="b3" class="box" x="1184" y="90" width="460" height="200" rx="24"/>
+<text x="1340" y="200" font-size="56" text-anchor="middle" fill="#C2410C">♥</text>
+<text x="1480" y="205" font-size="48" font-weight="700" text-anchor="middle" fill="#172033"><tspan id="v3">0</tspan></text>
+<circle id="dot" r="12" fill="#F59E0B" cx="490" cy="190" opacity="0"/>
+<text x="832" y="400" font-size="30" text-anchor="middle" fill="#172033">Cambias el dato → Flutter vuelve a dibujar → la pantalla muestra el valor nuevo</text>
+</svg>
+<script>
+var n=0;
+function fl(id){var e=document.getElementById(id);e.classList.remove('flash');void e.getBBox();e.classList.add('flash');}
+var dot=document.getElementById('dot');
+function mv(x0,x1,ms,cb){var t0=null;dot.setAttribute('opacity','1');function f(t){if(!t0)t0=t;var k=Math.min(1,(t-t0)/ms);dot.setAttribute('cx',x0+(x1-x0)*k);if(k<1)requestAnimationFrame(f);else cb&&cb();}requestAnimationFrame(f);}
+function tick(){n++;document.getElementById('v1').textContent=n;fl('b1');
+ mv(490,712,450,function(){fl('b2');setTimeout(function(){mv(952,1184,450,function(){dot.setAttribute('opacity','0');document.getElementById('v3').textContent=n;fl('b3');});},300);});}
+setInterval(tick,2600);setTimeout(tick,600);
+</script></body></html></x-embed>
+<p style="font-size:24px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#C2410C">Concepto</p>
+<h2 style="font-family:'Space Grotesk', Arial, sans-serif;font-size:120px;font-weight:700;line-height:1.05;color:#172033">UI = f(estado)</h2>
+<p style="font-size:32px;line-height:1.4;color:#4A5568;width:1500px">El <b>estado</b> es la información que puede cambiar mientras la app corre y que decide cómo se ve. Flutter es <b>declarativo</b>: describes la pantalla según los datos y él la vuelve a dibujar.</p>
+<p style="position:absolute;left:128px;bottom:64px;width:1664px;font-size:24px;color:#6B7689">Día 1 · Bloque 1 · [Expositor 1]</p>
+<aside>Explicar la fórmula UI = f(estado): la interfaz es el resultado de una función que recibe el estado. Diferencias clave: el estado son los datos que pueden cambiar (número de elementos en una lista); la interfaz son los textos, botones y listas que muestran esos datos; la gestión de estados son los mecanismos para modificar los datos, avisar del cambio y actualizar la interfaz. Comparar con el enfoque imperativo (Android clásico): ahí tú buscas el TextView y le cambias el texto a mano. En Flutter solo cambias el dato.</aside>
+</section>

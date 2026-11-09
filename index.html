@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Estados en Flutter · Equipo 2</title>
+<meta name="description" content="Exposición de la Unidad 4 de Desarrollo de Aplicaciones Móviles: estados en Flutter, de setState a BLoC y Cubit.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230F1B2D'/%3E%3Ccircle cx='16' cy='9' r='4' fill='%23F59E0B'/%3E%3Ccircle cx='9' cy='23' r='4' fill='%233B82F6'/%3E%3Ccircle cx='23' cy='23' r='4' fill='%233B82F6'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="assets/deck.css">
+</head>
+<body>
+<div id="app">
+  <div id="viewport"><div id="stage" aria-live="polite"></div></div>
+  <aside id="presenter-panel" hidden>
+    <div class="pp-top">
+      <div class="pp-clock"><span id="pp-timer">00:00</span><button id="pp-reset" type="button" title="Reiniciar cronómetro">↺</button></div>
+      <div class="pp-count" id="pp-count"></div>
+    </div>
+    <div class="pp-next-label">Siguiente</div>
+    <div class="pp-next"><div id="next-stage"></div></div>
+    <div class="pp-notes-label">Notas del orador</div>
+    <div id="pp-notes" class="pp-notes"></div>
+  </aside>
+</div>
+<div id="notes-overlay" hidden></div>
+<div id="overview" hidden><div id="overview-grid"></div></div>
+<div id="hud">
+  <div id="progress"><div id="progress-bar"></div></div>
+  <div id="hud-controls">
+    <button type="button" data-act="prev" title="Anterior (←)">‹</button>
+    <span id="counter"></span>
+    <button type="button" data-act="next" title="Siguiente (→ o espacio)">›</button>
+    <button type="button" data-act="overview" title="Vista general (O)">▦</button>
+    <button type="button" data-act="presenter" title="Vista del orador (P)">✎</button>
+    <button type="button" data-act="fullscreen" title="Pantalla completa (F)">⛶</button>
+    <button type="button" data-act="help" title="Atajos (?)">?</button>
+  </div>
+</div>
+<div id="help" hidden>
+  <div class="help-card">
+    <h2>Atajos</h2>
+    <dl>
+      <dt>→ · espacio · clic</dt><dd>siguiente paso o lámina</dd>
+      <dt>←</dt><dd>anterior</dd>
+      <dt>F</dt><dd>pantalla completa</dd>
+      <dt>P</dt><dd>abrir la vista del orador en otra ventana (se sincroniza)</dd>
+      <dt>N</dt><dd>mostrar u ocultar notas en esta ventana</dd>
+      <dt>O</dt><dd>vista general para saltar a una lámina</dd>
+      <dt>Inicio · Fin</dt><dd>primera y última lámina</dd>
+    </dl>
+    <p>Pulsa cualquier tecla para cerrar.</p>
+  </div>
+</div>
+<script src="assets/deck.js"></script>
+</body>
+</html>

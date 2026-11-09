@@ -1,0 +1,44 @@
+<section id="s5-cinco" data-transition="fade" style="background:#F5F3EE;color:#172033;font-family:Inter, Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:32px">
+<x-embed style="position:absolute;left:1152px;top:120px;width:640px;height:800px"><!doctype html><html><head><meta charset="utf-8"><style>
+html,body{margin:0;background:transparent;overflow:hidden;font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.v{transition:opacity .35s}
+#sp{transform-origin:320px 380px;animation:r 1s linear infinite}
+@keyframes r{to{transform:rotate(360deg)}}
+</style></head><body>
+<svg width="640" height="800" viewBox="0 0 640 800">
+<rect x="130" y="70" width="380" height="700" rx="52" fill="#FFFFFF" stroke="#172033" stroke-width="8"/>
+<rect x="134" y="74" width="372" height="100" rx="48" fill="#1D4ED8"/><rect x="134" y="124" width="372" height="50" fill="#1D4ED8"/>
+<text x="164" y="146" font-size="28" font-weight="700" fill="#F5F3EE">Estudiantes</text>
+<rect x="150" y="10" width="340" height="48" rx="24" fill="#172033"/>
+<text id="chip" x="320" y="42" font-size="24" font-weight="700" text-anchor="middle" fill="#F59E0B">Inicial</text>
+<g id="s0" class="v"><text x="320" y="380" font-size="26" text-anchor="middle" fill="#4A5568">Presiona el botón</text><text x="320" y="414" font-size="26" text-anchor="middle" fill="#4A5568">para comenzar</text></g>
+<g id="s1" class="v" opacity="0"><g id="sp"><circle cx="320" cy="380" r="44" fill="none" stroke="#E2DED4" stroke-width="10"/><path d="M320 336 a44 44 0 0 1 44 44" fill="none" stroke="#1D4ED8" stroke-width="10"/></g></g>
+<g id="s2" class="v" opacity="0"></g>
+<g id="s3" class="v" opacity="0"><circle cx="320" cy="340" r="44" fill="#E8EEF8"/><text x="320" y="356" font-size="44" text-anchor="middle" fill="#1D4ED8">∅</text><text x="320" y="430" font-size="26" text-anchor="middle" fill="#172033">No hay estudiantes</text><text x="320" y="464" font-size="26" text-anchor="middle" fill="#172033">registrados</text></g>
+<g id="s4" class="v" opacity="0"><circle cx="320" cy="320" r="40" fill="none" stroke="#C2410C" stroke-width="6"/><text x="320" y="336" font-size="44" font-weight="700" text-anchor="middle" fill="#C2410C">!</text><text x="320" y="410" font-size="26" text-anchor="middle" fill="#172033">No se pudieron</text><text x="320" y="444" font-size="26" text-anchor="middle" fill="#172033">cargar los datos</text><rect x="230" y="476" width="180" height="56" rx="28" fill="#C2410C"/><text x="320" y="512" font-size="24" font-weight="700" text-anchor="middle" fill="#F5F3EE">Reintentar</text></g>
+<rect x="290" y="660" width="196" height="64" rx="20" fill="#C2410C"/><text x="388" y="700" font-size="24" font-weight="700" text-anchor="middle" fill="#F5F3EE">Cargar</text>
+</svg>
+<script>
+var ns='http://www.w3.org/2000/svg',g=document.getElementById('s2');
+['Ana López','Luis Pérez','Sofía Ruiz','Juan Díaz'].forEach(function(n,i){var y=200+i*100;
+var c=document.createElementNS(ns,'circle');c.setAttribute('cx',190);c.setAttribute('cy',y+30);c.setAttribute('r',26);c.setAttribute('fill','#DCE6F7');g.appendChild(c);
+var t=document.createElementNS(ns,'text');t.setAttribute('x',190);t.setAttribute('y',y+39);t.setAttribute('font-size',24);t.setAttribute('text-anchor','middle');t.setAttribute('fill','#1D4ED8');t.textContent=i+1;g.appendChild(t);
+var a=document.createElementNS(ns,'text');a.setAttribute('x',234);a.setAttribute('y',y+40);a.setAttribute('font-size',26);a.setAttribute('fill','#172033');a.textContent=n;g.appendChild(a);});
+var seq=[[0,'Inicial'],[1,'Carga'],[2,'Éxito'],[1,'Carga'],[3,'Vacío'],[1,'Carga'],[4,'Error']],i=0;
+function go(){var s=seq[i];for(var k=0;k<5;k++)document.getElementById('s'+k).setAttribute('opacity',k==s[0]?1:0);document.getElementById('chip').textContent='estado: '+s[1];i=(i+1)%seq.length;}
+go();setInterval(go,1600);
+</script></body></html></x-embed>
+<div style="display:flex;flex-direction:column;gap:16px;width:960px">
+<p style="font-size:24px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#C2410C">6 · Estados de una operación</p>
+<h2 style="font-family:'Space Grotesk', Arial, sans-serif;font-size:72px;font-weight:700;line-height:1.1;color:#172033">Una consulta, cinco pantallas</h2>
+</div>
+<div style="display:flex;flex-direction:column;gap:14px;width:900px">
+<div style="background:#FFFFFF;border:2px solid #E2DED4;border-radius:16px;padding:18px 28px"><p style="font-size:28px"><b>Inicial</b> <span style="color:#6B7689">initial</span> · aún no se pide nada</p></div>
+<div style="background:#FFFFFF;border:2px solid #E2DED4;border-radius:16px;padding:18px 28px"><p style="font-size:28px"><b>Carga</b> <span style="color:#6B7689">loading</span> · esperando la respuesta</p></div>
+<div style="background:#FFFFFF;border:2px solid #E2DED4;border-radius:16px;padding:18px 28px"><p style="font-size:28px"><b>Éxito</b> <span style="color:#6B7689">success</span> · llegaron los datos</p></div>
+<div style="background:#FFFFFF;border:2px solid #E2DED4;border-radius:16px;padding:18px 28px"><p style="font-size:28px"><b>Vacío</b> <span style="color:#6B7689">empty</span> · todo bien, pero sin datos</p></div>
+<div style="background:#FFFFFF;border:2px solid #E2DED4;border-radius:16px;padding:18px 28px"><p style="font-size:28px"><b style="color:#C2410C">Error</b> <span style="color:#6B7689">error</span> · algo falló</p></div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:900px;font-size:24px;color:#6B7689">Día 2 · Bloque 5 · [Expositor 5]</p>
+<aside>Estos nombres son una convención muy usada, no una lista obligatoria del framework. Pregunta al grupo: “¿Qué diferencia hay entre Vacío y Error?”. Vacío: la consulta salió bien pero la lista viene vacía (aún no hay estudiantes registrados). Error: la consulta falló (sin internet, servidor caído). Importancia: el usuario siempre sabe qué está pasando, nunca ve una pantalla en blanco, y los errores se controlan.</aside>
+</section>

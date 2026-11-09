@@ -1,0 +1,18 @@
+<section id="s3-ui" data-transition="fade" style="background:#F5F3EE;color:#172033;font-family:Inter, Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:32px">
+<div style="display:flex;flex-direction:column;gap:16px">
+<p style="font-size:24px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#C2410C">Código · paso 2 de 2</p>
+<h2 style="font-family:'Space Grotesk', Arial, sans-serif;font-size:72px;font-weight:700;line-height:1.1;color:#172033">Proveer arriba, usar abajo</h2>
+</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:40px">
+<div style="display:flex;flex-direction:column;gap:16px">
+<p style="font-size:28px;font-weight:700;color:#1D4ED8">1 · En main.dart, arriba de todo</p>
+<div style="background:#0F1B2D;border-radius:20px;padding:32px 36px"><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;line-height:1.5;color:#E6EDF3;white-space:nowrap"><span style="color:#7AB8FF">void</span> main() {<br>&#160;&#160;runApp(<br>&#160;&#160;&#160;&#160;<span style="color:#F59E0B">ChangeNotifierProvider</span>(<br>&#160;&#160;&#160;&#160;&#160;&#160;create: (_) =&gt; <span style="color:#FFC66D">Carrito</span>(),<br>&#160;&#160;&#160;&#160;&#160;&#160;child: <span style="color:#7AB8FF">const</span> <span style="color:#FFC66D">MiApp</span>(),<br>&#160;&#160;&#160;&#160;),<br>&#160;&#160;);<br>}</p></div>
+</div>
+<div style="display:flex;flex-direction:column;gap:16px">
+<p style="font-size:28px;font-weight:700;color:#1D4ED8">2 · En cualquier widget de abajo</p>
+<div style="background:#0F1B2D;border-radius:20px;padding:32px 36px"><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;line-height:1.5;color:#E6EDF3;white-space:nowrap"><span style="color:#7C8BA1">// escucha: se reconstruye</span><br><span style="color:#7AB8FF">final</span> n = context.<span style="color:#F59E0B">watch</span>&lt;<span style="color:#FFC66D">Carrito</span>&gt;().cantidad;<br><span style="color:#FFC66D">Text</span>(<span style="color:#A5D6A7">'Carrito: $n'</span>);<br><br><span style="color:#7C8BA1">// solo actúa: no se reconstruye</span><br><span style="color:#FFC66D">ElevatedButton</span>(<br>&#160;&#160;onPressed: () =&gt; context<br>&#160;&#160;&#160;&#160;&#160;&#160;.<span style="color:#F59E0B">read</span>&lt;<span style="color:#FFC66D">Carrito</span>&gt;().agregar(<span style="color:#A5D6A7">'Gorra'</span>),<br>&#160;&#160;child: <span style="color:#7AB8FF">const</span> <span style="color:#FFC66D">Text</span>(<span style="color:#A5D6A7">'Agregar'</span>),<br>)</p></div>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1664px;font-size:24px;color:#6B7689">Día 1 · Bloque 3 · [Expositor 3]</p>
+<aside>DEMO PROPIA: mostrar el carrito funcionando en el emulador con dos pantallas (catálogo y resumen) y navegar entre ellas: el número se conserva porque el Carrito vive arriba de las dos. Regla práctica: watch dentro de build para mostrar datos; read dentro de callbacks como onPressed para ejecutar acciones. Usar watch dentro de onPressed provoca un error en tiempo de ejecución.</aside>
+</section>

@@ -1,0 +1,15 @@
+<section id="s2-familia" data-transition="fade" style="background:#F5F3EE;color:#172033;font-family:Inter, Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:48px">
+<div style="display:flex;flex-direction:column;gap:16px">
+<p style="font-size:24px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#C2410C">4.4 – 4.6 · La familia Inherited</p>
+<h2 style="font-family:'Space Grotesk', Arial, sans-serif;font-size:72px;font-weight:700;line-height:1.1;color:#172033">Tres variantes, una misma idea</h2>
+</div>
+<table style="font-family:Inter, Arial, sans-serif;font-size:28px;color:#172033;background:#FFFFFF;border-radius:16px">
+<tr style="background:#172033"><th style="width:26%;color:#F5F3EE;padding:20px 24px">Mecanismo</th><th style="width:40%;color:#F5F3EE">Qué agrega</th><th style="width:34%;color:#F5F3EE">Cuándo usarlo</th></tr>
+<tr><td><b>InheritedWidget</b></td><td>Comparte datos con los descendientes</td><td>Configuración o datos comunes</td></tr>
+<tr style="background:#EEF2F8"><td><b>InheritedModel</b></td><td>Dependencias por aspecto: nombre, preferencias…</td><td>Datos grandes divididos en partes</td></tr>
+<tr><td><b>InheritedNotifier</b></td><td>Se une a un Listenable (ChangeNotifier o ValueNotifier) y avisa solo</td><td>Compartir un objeto que cambia</td></tr>
+</table>
+<div style="background:#172033;border-radius:20px;padding:32px 40px;display:flex;flex-direction:row;gap:28px;align-items:center"><x-icon name="Lightbulb" style="color:#F59E0B;width:56px;height:56px"></x-icon><p style="font-size:32px;line-height:1.4;color:#F5F3EE">Casi nadie los escribe a mano en apps grandes, pero <b>Provider</b>, <b>BLoC</b> y <b>Riverpod</b> se apoyan en esta idea.</p></div>
+<p style="position:absolute;left:128px;bottom:64px;width:1664px;font-size:24px;color:#6B7689">Día 1 · Bloque 2 · [Expositor 2]</p>
+<aside>InheritedModel: un widget puede depender solo del nombre del usuario y otro solo de sus preferencias visuales; si cambia el nombre, solo se reconstruye el primero. InheritedNotifier: combina InheritedWidget con un objeto observable; cuando ese objeto notifica, los dependientes se reconstruyen. Desventaja de los tres: hay que entender bien el árbol de widgets y el BuildContext. Todos aparecen en la guía oficial de Flutter sobre manejo de estado.</aside>
+</section>

@@ -1,0 +1,41 @@
+<section id="s2-inherited" data-transition="fade" style="background:#F5F3EE;color:#172033;font-family:Inter, Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:16px">
+<x-embed style="position:absolute;left:128px;top:300px;width:1664px;height:620px"><!doctype html><html><head><meta charset="utf-8"><style>
+html,body{margin:0;background:transparent;overflow:hidden;font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.n{fill:#FFFFFF;stroke:#C9C3B5;stroke-width:3}
+.hi{animation:h .6s}
+@keyframes h{0%,100%{fill:#FFFFFF}40%{fill:#FDE7C8}}
+</style></head><body>
+<svg width="1664" height="620" viewBox="0 0 1664 620">
+<defs><marker id="a" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M0 0 L12 6 L0 12 z" fill="#C2410C"/></marker></defs>
+<text x="400" y="36" font-size="30" font-weight="700" text-anchor="middle" fill="#C2410C">Sin InheritedWidget</text>
+<text x="400" y="72" font-size="24" text-anchor="middle" fill="#4A5568">cada nivel recibe y pasa el dato</text>
+<text x="1264" y="36" font-size="30" font-weight="700" text-anchor="middle" fill="#1D4ED8">Con InheritedWidget</text>
+<text x="1264" y="72" font-size="24" text-anchor="middle" fill="#4A5568">el descendiente lo pide directo</text>
+<line x1="832" y1="20" x2="832" y2="600" stroke="#E2DED4" stroke-width="3"/>
+<g id="g"></g>
+<path id="arc" d="M1110 162 C 960 300 960 460 1110 535" fill="none" stroke="#C2410C" stroke-width="5" stroke-dasharray="12 10" marker-end="url(#a)" opacity="0"/>
+<circle id="d1" r="14" fill="#F59E0B" cx="400" cy="140"/>
+<circle id="d2" r="14" fill="#F59E0B" cx="1264" cy="140" opacity="0"/>
+</svg>
+<script>
+var ns='http://www.w3.org/2000/svg',g=document.getElementById('g');
+function el(t,a){var e=document.createElementNS(ns,t);for(var k in a)e.setAttribute(k,a[k]);g.appendChild(e);return e;}
+var L=['App (usuario)','HomePage','PerfilPage','Avatar'],R=['Usuario (Inherited)','HomePage','PerfilPage','Avatar'],Y=[140,272,404,536],A=[],B=[];
+function col(names,cx,arr,first){names.forEach(function(n,i){if(i<3)el('line',{x1:cx,y1:Y[i]+36,x2:cx,y2:Y[i+1]-36,stroke:'#C9C3B5','stroke-width':3});
+var r=el('rect',{x:cx-160,y:Y[i]-36,width:320,height:72,rx:18,'class':'n'});if(i==0&&first)r.setAttribute('stroke','#1D4ED8');arr.push(r);
+var t=el('text',{x:cx,y:Y[i]+9,'text-anchor':'middle','font-size':26,'font-weight':i==3?700:400,fill:'#172033'});t.textContent=n;});}
+col(L,400,A,false);col(R,1264,B,true);
+function hi(r){r.classList.remove('hi');void r.getBBox();r.classList.add('hi');}
+var d1=document.getElementById('d1'),d2=document.getElementById('d2'),arc=document.getElementById('arc');
+function anim(dot,y0,y1,ms,cb){var t0=null;function f(t){if(!t0)t0=t;var k=Math.min(1,(t-t0)/ms);dot.setAttribute('cy',y0+(y1-y0)*k);if(k<1)requestAnimationFrame(f);else cb();}requestAnimationFrame(f);}
+function left(i){hi(A[i]);if(i<3)anim(d1,Y[i],Y[i+1],550,function(){left(i+1);});else setTimeout(function(){d1.setAttribute('cy',140);},600);}
+function right(){hi(B[0]);arc.setAttribute('opacity','1');d2.setAttribute('opacity','1');d2.setAttribute('cy',140);
+var len=arc.getTotalLength(),t0=null;function f(t){if(!t0)t0=t;var k=Math.min(1,(t-t0)/900),p=arc.getPointAtLength(len*k);d2.setAttribute('cx',p.x);d2.setAttribute('cy',p.y);if(k<1)requestAnimationFrame(f);else{hi(B[3]);setTimeout(function(){arc.setAttribute('opacity','0');d2.setAttribute('opacity','0');},800);}}
+setTimeout(function(){requestAnimationFrame(f);},300);}
+function cycle(){left(0);right();}cycle();setInterval(cycle,3600);
+</script></body></html></x-embed>
+<p style="font-size:24px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#C2410C">4.4 · InheritedWidget</p>
+<h2 style="font-family:'Space Grotesk', Arial, sans-serif;font-size:72px;font-weight:700;line-height:1.1;color:#172033">Datos hacia abajo en el árbol</h2>
+<p style="position:absolute;left:128px;bottom:64px;width:1664px;font-size:24px;color:#6B7689">Día 1 · Bloque 2 · [Expositor 2]</p>
+<aside>Problema de la izquierda: “prop drilling”. HomePage y PerfilPage no usan el usuario, pero tienen que recibirlo en el constructor solo para pasarlo. Con InheritedWidget, el dato se coloca arriba y cualquier descendiente lo pide con el BuildContext (por ejemplo, Theme.of(context) y MediaQuery.of(context) funcionan así). Además, el widget que lo pide queda registrado como dependiente y se reconstruye si el dato cambia. Un InheritedWidget no se modifica como variable: se crea uno nuevo y updateShouldNotify decide si avisar. Dato clave: Provider está construido sobre InheritedWidget.</aside>
+</section>

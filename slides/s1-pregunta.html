@@ -1,0 +1,52 @@
+<section id="s1-pregunta" data-transition="fade" style="background:#F5F3EE;color:#172033;font-family:Inter, Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<x-embed style="position:absolute;left:1152px;top:120px;width:640px;height:800px"><!doctype html><html><head><meta charset="utf-8"><style>
+html,body{margin:0;background:transparent;overflow:hidden;font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.pulse{animation:p .5s}
+@keyframes p{0%{transform:scale(1)}50%{transform:scale(1.35)}100%{transform:scale(1)}}
+#spin{transform-origin:320px 400px;animation:r 1s linear infinite}
+@keyframes r{to{transform:rotate(360deg)}}
+</style></head><body>
+<svg width="640" height="800" viewBox="0 0 640 800">
+<rect x="130" y="16" width="380" height="700" rx="52" fill="#FFFFFF" stroke="#172033" stroke-width="8"/>
+<rect x="134" y="20" width="372" height="110" rx="48" fill="#1D4ED8"/>
+<rect x="134" y="80" width="372" height="50" fill="#1D4ED8"/>
+<text x="170" y="100" font-size="34" font-weight="700" fill="#F5F3EE">Tienda</text>
+<rect x="420" y="66" width="44" height="38" rx="6" fill="none" stroke="#F5F3EE" stroke-width="5"/>
+<g id="badge" style="transform-origin:470px 62px"><circle cx="470" cy="62" r="20" fill="#F59E0B"/><text id="cnt" x="470" y="71" font-size="26" font-weight="700" text-anchor="middle" fill="#172033">0</text></g>
+<rect x="166" y="160" width="308" height="300" rx="20" fill="#EEF2F8"/>
+<rect x="186" y="180" width="268" height="170" rx="12" fill="#C9D6EA"/>
+<text x="190" y="400" font-size="30" font-weight="700" fill="#172033">Audífonos</text>
+<text x="190" y="438" font-size="26" fill="#4A5568">$499</text>
+<g id="heart" style="transform-origin:430px 410px"><path id="hp" d="M430 432 l-26 -26 a15 15 0 0 1 26 -20 a15 15 0 0 1 26 20 z" fill="none" stroke="#C2410C" stroke-width="5"/></g>
+<g id="load" opacity="0"><rect x="166" y="160" width="308" height="300" rx="20" fill="#FFFFFF" opacity=".9"/><g id="spin"><circle cx="320" cy="300" r="40" fill="none" stroke="#C9D6EA" stroke-width="10"/><path d="M320 260 a40 40 0 0 1 40 40" fill="none" stroke="#1D4ED8" stroke-width="10"/></g><text x="320" y="400" font-size="28" text-anchor="middle" fill="#172033">Cargando…</text></g>
+<line x1="134" y1="620" x2="506" y2="620" stroke="#E2DED4" stroke-width="3"/>
+<text x="196" y="672" font-size="26" text-anchor="middle" fill="#172033">Inicio</text>
+<text x="320" y="672" font-size="26" text-anchor="middle" fill="#172033">Buscar</text>
+<text x="444" y="672" font-size="26" text-anchor="middle" fill="#172033">Perfil</text>
+<rect id="tab" x="156" y="622" width="80" height="8" rx="4" fill="#1D4ED8" style="transition:x .4s"/>
+<text id="ev" x="320" y="776" font-size="30" font-weight="700" text-anchor="middle" fill="#C2410C">tocaste ♥</text>
+</svg>
+<script>
+var n=0,t=0,liked=false,s=0;
+var hp=document.getElementById('hp'),cnt=document.getElementById('cnt'),tab=document.getElementById('tab'),ev=document.getElementById('ev'),load=document.getElementById('load');
+function pulse(id){var e=document.getElementById(id);e.classList.remove('pulse');void e.getBBox();e.classList.add('pulse');}
+function step(){
+ load.setAttribute('opacity','0');
+ if(s==0){liked=!liked;hp.setAttribute('fill',liked?'#C2410C':'none');pulse('heart');ev.textContent=liked?'tocaste ♥ (me gusta)':'tocaste ♥ (quitar)';}
+ if(s==1){n++;cnt.textContent=n;pulse('badge');ev.textContent='agregaste al carrito';}
+ if(s==2){t=(t+1)%3;tab.setAttribute('x',156+t*124);ev.textContent='cambiaste de pestaña';}
+ if(s==3){load.setAttribute('opacity','1');ev.textContent='pidió datos al servidor';}
+ s=(s+1)%4;
+}
+step();setInterval(step,1700);
+</script></body></html></x-embed>
+<div style="display:flex;flex-direction:column;gap:16px;width:960px">
+<p style="font-size:24px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#C2410C">Pregunta al grupo</p>
+<h2 style="font-family:'Space Grotesk', Arial, sans-serif;font-size:72px;font-weight:700;line-height:1.1;color:#172033">Mira la app: ¿qué cosas cambian?</h2>
+</div>
+<p style="font-size:32px;line-height:1.4;color:#4A5568;width:900px">Nadie reescribe la pantalla a mano. Algo “recuerda” cada cambio y la pantalla lo refleja.</p>
+<p data-build-in="rise" style="position:absolute;left:128px;top:560px;width:900px;font-size:32px;line-height:1.5;color:#172033;background:#FFFFFF;border:2px solid #E2DED4;border-radius:20px;padding:32px 40px">Si el ♥ está activo · cuántos productos hay en el carrito · qué pestaña está elegida · si está cargando</p>
+<p data-build-in="pop" style="position:absolute;left:128px;top:790px;width:900px;font-size:44px;font-weight:700;color:#1D4ED8">Todo eso es <u>estado</u>.</p>
+<p style="position:absolute;left:128px;bottom:64px;width:900px;font-size:24px;color:#6B7689">Día 1 · Bloque 1 · [Expositor 1]</p>
+<aside>Arranque interactivo (cuenta en la rúbrica: “fomentan la participación”). Dejar correr la animación unos segundos y preguntar: “¿Qué cosas cambian en esta pantalla?”. Escuchar 2 o 3 respuestas. Luego hacer clic para revelar la lista y después la frase final. Mensaje clave: el estado es la información que puede cambiar mientras la app corre y que decide qué se ve.</aside>
+</section>

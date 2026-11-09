@@ -1,0 +1,79 @@
+:root{--bg:#05080F;--ink:#F5F3EE;--muted:#8FA3BF;--accent:#F59E0B;--blue:#3B82F6}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;background:var(--bg);color:var(--ink);font-family:Inter,Arial,sans-serif;overflow:hidden}
+button{font:inherit;color:inherit}
+
+/* ---------- escenario ---------- */
+#app{position:fixed;inset:0;display:flex}
+#viewport{position:relative;flex:1;overflow:hidden}
+#stage,#next-stage{position:absolute;left:50%;top:50%;width:1920px;height:1080px;transform-origin:center center;overflow:hidden;background:#0F1B2D}
+#stage>section,#next-stage>section{position:absolute;inset:0;width:1920px;height:1080px;display:flex;flex-direction:column;overflow:hidden;font-size:32px;line-height:1.4}
+#stage>section:not(.active):not(.leaving){display:none!important}
+#stage section *,#next-stage section *{margin:0;box-sizing:border-box}
+#stage h1,#next-stage h1{font-size:96px;font-weight:600;line-height:1.1}
+#stage h2,#next-stage h2{font-size:64px;font-weight:600;line-height:1.15}
+#stage h3,#next-stage h3{font-size:44px;font-weight:600;line-height:1.2}
+#stage p,#next-stage p{line-height:1.4}
+#stage ul,#stage ol{padding-left:1.2em}
+#stage table,#next-stage table{border-collapse:separate;border-spacing:0;width:100%;overflow:hidden}
+#stage th,#stage td,#next-stage th,#next-stage td{padding:.35em .6em;text-align:left;border-bottom:1px solid rgba(23,32,51,.10);vertical-align:middle}
+#stage th,#next-stage th{font-weight:700}
+#stage tr:last-child td{border-bottom:0}
+.x-embed{pointer-events:none}
+.x-embed iframe{display:block;width:100%;height:100%;border:0;background:transparent;color-scheme:normal}
+.x-icon{display:inline-block;flex:none}
+.x-icon svg{display:block;width:100%;height:100%}
+.embed-ph{width:100%;height:100%;border:3px dashed rgba(143,163,191,.45);border-radius:24px}
+
+/* ---------- builds ---------- */
+.build{opacity:0}
+.build.shown{opacity:1}
+
+/* ---------- HUD ---------- */
+#hud{position:fixed;left:0;right:0;bottom:0;z-index:20;opacity:0;transition:opacity .3s}
+body:not(.idle) #hud,#hud:hover{opacity:1}
+#progress{height:4px;background:rgba(255,255,255,.08)}
+#progress-bar{height:100%;width:0;background:linear-gradient(90deg,var(--blue),var(--accent));transition:width .4s ease}
+#hud-controls{position:absolute;right:16px;bottom:16px;display:flex;align-items:center;gap:6px;padding:6px 10px;border-radius:999px;background:rgba(10,16,28,.82);backdrop-filter:blur(8px);box-shadow:0 8px 24px rgba(0,0,0,.35)}
+#hud-controls button{width:36px;height:36px;border:0;border-radius:50%;background:transparent;cursor:pointer;font-size:18px}
+#hud-controls button:hover{background:rgba(255,255,255,.12)}
+#counter{min-width:72px;text-align:center;font-size:14px;color:var(--muted);font-variant-numeric:tabular-nums}
+
+/* ---------- notas en ventana ---------- */
+#notes-overlay{position:fixed;left:16px;right:16px;bottom:72px;z-index:25;max-height:38vh;overflow:auto;padding:20px 24px;border-radius:16px;background:rgba(10,16,28,.94);border:1px solid rgba(255,255,255,.1);font-size:18px;line-height:1.55;color:#DCE4F0;box-shadow:0 12px 40px rgba(0,0,0,.5)}
+
+/* ---------- vista general ---------- */
+#overview{position:fixed;inset:0;z-index:30;overflow:auto;background:rgba(5,8,15,.96);padding:32px}
+#overview-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;max-width:1500px;margin:0 auto}
+.ov-card{display:flex;flex-direction:column;gap:6px;text-align:left;padding:14px 16px;min-height:96px;border:1px solid rgba(255,255,255,.1);border-radius:14px;background:#0F1B2D;cursor:pointer}
+.ov-card:hover,.ov-card.current{border-color:var(--accent)}
+.ov-card b{font-size:12px;letter-spacing:.12em;color:var(--accent)}
+.ov-card span{font-size:15px;line-height:1.35}
+.ov-sec{grid-column:1/-1;margin-top:12px;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+
+/* ---------- ayuda ---------- */
+#help{position:fixed;inset:0;z-index:40;display:grid;place-items:center;padding:16px;background:rgba(5,8,15,.7)}
+#help[hidden],#overview[hidden],#notes-overlay[hidden],#presenter-panel[hidden]{display:none}
+.help-card{max-width:560px;width:100%;padding:28px 32px;border-radius:20px;background:#0F1B2D;border:1px solid rgba(255,255,255,.1)}
+.help-card h2{margin:0 0 16px;font-family:'Space Grotesk',Arial,sans-serif}
+.help-card dl{display:grid;grid-template-columns:auto 1fr;gap:10px 18px;margin:0}
+.help-card dt{font-family:'JetBrains Mono',monospace;color:var(--accent)}
+.help-card dd{margin:0;color:#DCE4F0}
+.help-card p{margin:18px 0 0;color:var(--muted);font-size:14px}
+
+/* ---------- vista del orador ---------- */
+body.presenter #viewport{flex:0 0 64%}
+#presenter-panel{flex:1;display:flex;flex-direction:column;gap:10px;min-width:0;padding:18px;background:#0A111E;border-left:1px solid rgba(255,255,255,.08)}
+.pp-top{display:flex;justify-content:space-between;align-items:center}
+.pp-clock{display:flex;align-items:center;gap:10px;font-family:'JetBrains Mono',monospace;font-size:34px;color:var(--accent)}
+.pp-clock button{border:1px solid rgba(255,255,255,.2);background:none;border-radius:8px;cursor:pointer;font-size:16px;padding:2px 8px}
+.pp-count{font-size:18px;color:var(--muted);font-variant-numeric:tabular-nums}
+.pp-next-label,.pp-notes-label{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.pp-next{position:relative;width:100%;aspect-ratio:16/9;overflow:hidden;border-radius:10px;background:#0F1B2D}
+.pp-notes{flex:1;overflow:auto;font-size:20px;line-height:1.6;color:#E6EDF3;white-space:pre-wrap}
+
+@media (max-width:700px){
+  body.presenter #viewport{flex-basis:auto}
+  #app{flex-direction:column}
+  #hud-controls{right:8px;bottom:8px}
+}

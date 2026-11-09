@@ -1,0 +1,43 @@
+<section id="s6-cubit" data-transition="fade" style="background:#F5F3EE;color:#172033;font-family:Inter, Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:16px">
+<x-embed style="position:absolute;left:128px;top:300px;width:1664px;height:600px"><!doctype html><html><head><meta charset="utf-8"><style>
+html,body{margin:0;background:transparent;overflow:hidden;font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+#btn{transform-origin:240px 440px}
+.pr{animation:p .35s}
+@keyframes p{50%{transform:scale(.9)}}
+.fl{animation:f .7s}
+@keyframes f{0%,100%{fill:#172033}40%{fill:#C2410C}}
+</style></head><body>
+<svg width="1664" height="600" viewBox="0 0 1664 600">
+<rect x="80" y="60" width="320" height="480" rx="40" fill="#FFFFFF" stroke="#172033" stroke-width="6"/>
+<text x="240" y="40" font-size="28" font-weight="700" text-anchor="middle" fill="#172033">Interfaz</text>
+<text x="240" y="200" font-size="26" text-anchor="middle" fill="#4A5568">Contador</text>
+<text id="n" x="240" y="320" font-size="110" font-weight="700" text-anchor="middle" fill="#172033">0</text>
+<g id="btn"><circle cx="240" cy="440" r="48" fill="#C2410C"/><text x="240" y="458" font-size="56" font-weight="700" text-anchor="middle" fill="#F5F3EE">+</text></g>
+<rect id="cb" x="1000" y="150" width="560" height="300" rx="28" fill="#172033"/>
+<text x="1280" y="225" font-size="38" font-weight="700" text-anchor="middle" fill="#F5F3EE">ContadorCubit</text>
+<text x="1280" y="290" font-family="JetBrains Mono,Consolas,monospace" font-size="26" text-anchor="middle" fill="#F59E0B">aumentar() =&gt;</text>
+<text x="1280" y="335" font-family="JetBrains Mono,Consolas,monospace" font-size="26" text-anchor="middle" fill="#F59E0B">emit(state + 1)</text>
+<text x="1280" y="400" font-size="24" text-anchor="middle" fill="#C7D2E0">state = <tspan id="st">0</tspan></text>
+<text x="700" y="185" font-size="24" font-weight="700" text-anchor="middle" fill="#1D4ED8">LLAMA A UN MÉTODO →</text>
+<text x="700" y="455" font-size="24" font-weight="700" text-anchor="middle" fill="#C2410C">← EMITE EL ESTADO</text>
+<line x1="405" y1="220" x2="995" y2="220" stroke="#C9C3B5" stroke-width="3" stroke-dasharray="8 8"/>
+<line x1="405" y1="390" x2="995" y2="390" stroke="#C9C3B5" stroke-width="3" stroke-dasharray="8 8"/>
+<text x="832" y="575" font-size="26" text-anchor="middle" fill="#4A5568">Sin clases de evento: la interfaz llama al método y el Cubit emite</text>
+<g id="pk"></g>
+</svg>
+<script>
+var ns='http://www.w3.org/2000/svg',pk=document.getElementById('pk'),n=0;
+function pill(txt,fill){var g=document.createElementNS(ns,'g');var w=txt.length*15+44;var r=document.createElementNS(ns,'rect');r.setAttribute('x',-w/2);r.setAttribute('y',-26);r.setAttribute('width',w);r.setAttribute('height',52);r.setAttribute('rx',26);r.setAttribute('fill',fill);g.appendChild(r);
+var t=document.createElementNS(ns,'text');t.setAttribute('y',9);t.setAttribute('text-anchor','middle');t.setAttribute('font-size',24);t.setAttribute('font-weight',700);t.setAttribute('fill','#F5F3EE');t.textContent=txt;g.appendChild(t);pk.appendChild(g);return g;}
+function mv(g,x0,y,x1,ms,cb){var t0=null;function f(t){if(!t0)t0=t;var k=Math.min(1,(t-t0)/ms);g.setAttribute('transform','translate('+(x0+(x1-x0)*k)+' '+y+')');if(1>k)requestAnimationFrame(f);else{pk.removeChild(g);cb();}}requestAnimationFrame(f);}
+function fl(id){var e=document.getElementById(id);e.classList.remove('fl');void e.getBBox();e.classList.add('fl');}
+function cycle(){var b=document.getElementById('btn');b.classList.remove('pr');void b.getBBox();b.classList.add('pr');
+mv(pill('aumentar()','#1D4ED8'),420,220,990,900,function(){n++;document.getElementById('st').textContent=n;fl('cb');
+mv(pill('emit('+n+')','#C2410C'),990,390,420,900,function(){document.getElementById('n').textContent=n;});});}
+cycle();setInterval(cycle,2800);
+</script></body></html></x-embed>
+<p style="font-size:24px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#C2410C">5.4 · Cubit</p>
+<h2 style="font-family:'Space Grotesk', Arial, sans-serif;font-size:72px;font-weight:700;line-height:1.1;color:#172033">Métodos en vez de eventos</h2>
+<p style="position:absolute;left:128px;bottom:64px;width:1664px;font-size:24px;color:#6B7689">Día 2 · Bloque 6 · [Expositor 6]</p>
+<aside>Cubit pertenece a la misma familia que BLoC (paquete flutter_bloc), pero en lugar de recibir eventos expone métodos. Funcionamiento: 1) un widget llama a un método del Cubit; 2) el Cubit procesa la operación; 3) emite el nuevo estado con emit(); 4) la interfaz reacciona. state siempre contiene el estado actual. Pregunta al grupo: “¿Qué diferencia ven con la animación de BLoC?”. Respuesta: no hay una clase de evento; es una llamada directa.</aside>
+</section>

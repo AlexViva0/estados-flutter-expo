@@ -1,0 +1,29 @@
+<section id="s4-mapa" data-transition="fade" style="background:#F5F3EE;color:#172033;font-family:Inter, Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:16px">
+<x-embed style="position:absolute;left:128px;top:290px;width:1664px;height:630px"><!doctype html><html><head><meta charset="utf-8"><style>
+html,body{margin:0;background:transparent;overflow:hidden;font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.p{opacity:0;transform-box:fill-box;transform-origin:center;animation:in .5s forwards}
+@keyframes in{from{opacity:0;transform:scale(.3)}to{opacity:1;transform:scale(1)}}
+</style></head><body>
+<svg width="1664" height="630" viewBox="0 0 1664 630">
+<defs><marker id="a" markerWidth="14" markerHeight="14" refX="12" refY="7" orient="auto"><path d="M0 0 L14 7 L0 14 z" fill="#4A5568"/></marker></defs>
+<line x1="120" y1="540" x2="1620" y2="540" stroke="#4A5568" stroke-width="4" marker-end="url(#a)"/>
+<line x1="120" y1="540" x2="120" y2="20" stroke="#4A5568" stroke-width="4" marker-end="url(#a)"/>
+<text x="1620" y="590" font-size="26" text-anchor="end" fill="#4A5568">tamaño y complejidad de la app →</text>
+<text x="0" y="0" font-size="26" fill="#4A5568" transform="translate(70 540) rotate(-90)">estructura y código que exige →</text>
+<rect x="130" y="380" width="460" height="150" rx="20" fill="#E8EEF8"/>
+<text x="150" y="420" font-size="24" font-weight="700" fill="#1D4ED8">Integrado en Flutter</text>
+<g id="g"></g>
+</svg>
+<script>
+var ns='http://www.w3.org/2000/svg',g=document.getElementById('g');
+var P=[['setState',230,490,'#1D4ED8'],['ValueNotifier',430,460,'#1D4ED8'],['Provider',700,380,'#C2410C'],['Signals',820,300,'#4A5568'],['GetX',960,370,'#4A5568'],['MobX',1080,250,'#4A5568'],['Riverpod',1200,300,'#C2410C'],['Cubit',1330,220,'#C2410C'],['Redux',1450,90,'#4A5568'],['BLoC',1500,160,'#C2410C']];
+P.forEach(function(p,i){var gg=document.createElementNS(ns,'g');gg.setAttribute('class','p');gg.style.animationDelay=(0.35*i+0.3)+'s';
+var c=document.createElementNS(ns,'circle');c.setAttribute('cx',p[1]);c.setAttribute('cy',p[2]);c.setAttribute('r',16);c.setAttribute('fill',p[3]);gg.appendChild(c);
+var t=document.createElementNS(ns,'text');t.setAttribute('x',p[1]+26);t.setAttribute('y',p[2]+9);t.setAttribute('font-size',28);t.setAttribute('font-weight',700);t.setAttribute('fill','#172033');t.textContent=p[0];gg.appendChild(t);g.appendChild(gg);});
+</script></body></html></x-embed>
+<p style="font-size:24px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#C2410C">Mapa de herramientas</p>
+<h2 style="font-family:'Space Grotesk', Arial, sans-serif;font-size:72px;font-weight:700;line-height:1.1;color:#172033">No hay una mejor: hay una adecuada</h2>
+<p style="position:absolute;left:1240px;top:740px;width:552px;font-size:24px;color:#4A5568;text-align:right">Naranja: las que más se usan · Azul: integradas</p>
+<p style="position:absolute;left:128px;bottom:64px;width:1664px;font-size:24px;color:#6B7689">Día 2 · Bloque 4 · [Expositor 4]</p>
+<aside>Mapa orientativo, no una medición exacta: muestra que, cuanto más grande y compleja la app, más estructura conviene. Abajo a la izquierda, lo integrado en Flutter (lo de ayer). En el centro, Provider y Riverpod. Arriba a la derecha, BLoC y Redux, que piden más código pero dan un flujo muy controlado. Las de color naranja son las más usadas en la industria y las que verán en el bloque 6.</aside>
+</section>

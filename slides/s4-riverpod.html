@@ -1,0 +1,16 @@
+<section id="s4-riverpod" data-transition="fade" style="background:#F5F3EE;color:#172033;font-family:Inter, Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:32px">
+<div style="display:flex;flex-direction:column;gap:16px">
+<p style="font-size:24px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#C2410C">5.2 · Riverpod</p>
+<h2 style="font-family:'Space Grotesk', Arial, sans-serif;font-size:72px;font-weight:700;line-height:1.1;color:#172033">Provider, rediseñado</h2>
+</div>
+<p style="font-size:32px;line-height:1.4;color:#4A5568;width:1600px">Expone datos y lógica con <b>proveedores</b> globales que no dependen del árbol de widgets. Trae soporte para datos asíncronos y facilita las pruebas.</p>
+<div style="display:flex;flex-direction:row;gap:40px">
+<div style="background:#0F1B2D;border-radius:20px;padding:32px 40px;width:960px"><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;line-height:1.5;color:#E6EDF3;white-space:nowrap"><span style="color:#7AB8FF">final</span> contadorProvider =<br>&#160;&#160;&#160;&#160;<span style="color:#FFC66D">NotifierProvider</span>&lt;<span style="color:#FFC66D">Contador</span>, <span style="color:#7AB8FF">int</span>&gt;(<span style="color:#FFC66D">Contador</span>.new);<br><br><span style="color:#7AB8FF">class</span> <span style="color:#FFC66D">Contador</span> <span style="color:#7AB8FF">extends</span> <span style="color:#FFC66D">Notifier</span>&lt;<span style="color:#7AB8FF">int</span>&gt; {<br>&#160;&#160;<span style="color:#7C8BA1">@override</span><br>&#160;&#160;<span style="color:#7AB8FF">int</span> build() =&gt; <span style="color:#F78C6C">0</span>;<br>&#160;&#160;<span style="color:#7AB8FF">void</span> sumar() =&gt; state++;<br>}<br><br><span style="color:#7C8BA1">// en un ConsumerWidget:</span><br><span style="color:#7AB8FF">final</span> n = ref.<span style="color:#F59E0B">watch</span>(contadorProvider);</p></div>
+<div style="flex:1;display:flex;flex-direction:column;gap:20px">
+<div style="background:#FFFFFF;border:2px solid #E2DED4;border-radius:20px;padding:28px;display:flex;flex-direction:column;gap:8px"><p style="font-size:28px;font-weight:700;color:#1D4ED8">Ventajas</p><p style="font-size:24px;line-height:1.4;color:#4A5568">Ordena dependencias, maneja lo asíncrono y se prueba fácil.</p></div>
+<div style="background:#FFFFFF;border:2px solid #E2DED4;border-radius:20px;padding:28px;display:flex;flex-direction:column;gap:8px"><p style="font-size:28px;font-weight:700;color:#C2410C">Desventajas</p><p style="font-size:24px;line-height:1.4;color:#4A5568">Hay varios tipos de proveedor que aprender.</p></div>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1664px;font-size:24px;color:#6B7689">Día 2 · Bloque 4 · [Expositor 4]</p>
+<aside>Riverpod fue creado por el mismo autor de Provider para resolver sus límites: los proveedores se declaran como variables globales, no dependen del BuildContext y se detectan errores en compilación. En la interfaz se usa ref.watch para escuchar y ref.read para actuar, igual que en Provider. Ejemplo real: una app turística con un proveedor que consulta destinos desde una API y otro que guarda los filtros. La sintaxis cambia según la versión, así que siempre revisar la documentación de riverpod.dev.</aside>
+</section>
