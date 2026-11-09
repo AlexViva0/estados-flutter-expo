@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Campo de estado</title>
+<style>html,body{margin:0;height:100%;overflow:hidden;background:transparent}canvas{display:block}
+.fade-bottom canvas{-webkit-mask-image:linear-gradient(to bottom,#000 45%,transparent 96%);mask-image:linear-gradient(to bottom,#000 45%,transparent 96%)}
+.fade-top canvas{-webkit-mask-image:linear-gradient(to top,#000 45%,transparent 96%);mask-image:linear-gradient(to top,#000 45%,transparent 96%)}</style>
+</head>
+<body>
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js"}}</script>
+<script type="module">
+import * as THREE from 'three';
+// Malla de puntos que ondula; cada cierto tiempo una "onda de cambio" se propaga
+// desde un punto, como un estado nuevo que llega a toda la interfaz.
+const q = new URLSearchParams(location.search);
+const TONO = q.get('tono') || 'azul';      // azul | calma | crema
+const PALETTES = {
+  azul:  { low: 0x1b2e4a, mid: 0x3b82f6, high: 0xf59e0b, size: 0.07, alpha: 0.95, speed: 1 },
+  calma: { low: 0x16273f, mid: 0x2f5ea8, high: 0xf59e0b, size: 0.06, alpha: 0.75, speed: 0.55 },
+  crema: { low: 0xd9733a, mid: 0xfde7c8, high: 0xfbf4ec, size: 0.07, alpha: 0.9, speed: 0.9 }
+};
+const P = PALETTES[TONO] || PALETTES.azul;
+if (q.get('fade')) document.body.classList.add('fade-' + q.get('fade'));
+
+let renderer;
+try { renderer = new THREE.WebGLRenderer({ antialias: true }); }
+catch (e) { throw e; } // sin WebGL el fondo queda liso: es solo decoración
+renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+renderer.setClearColor(new THREE.Color('#' + (q.get('bg') || '0F1B2D')), 1);
+document.body.style.background = '#' + (q.get('bg') || '0F1B2D');
+document.body.appendChild(renderer.domElement);
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(50, 1, 0.1, 100);
+
+const NX = 150, NZ = 70, SX = 34, SZ = 18;
+const count = NX * NZ;
+const geo = new THREE.BufferGeometry();
+const base = new Float32Array(count * 3), position = new Float32Array(count * 3), color = new Float32Array(count * 3);
+let k = 0;
+for (let j = 0; j < NZ; j++) for (let i = 0; i < NX; i++) {
+  base[k * 3] = (i / (NX - 1) - 0.5) * SX;
+  base[k * 3 + 2] = (j / (NZ - 1) - 0.5) * SZ;
+  k++;
+}
+position.set(base);
+geo.setAttribute('position', new THREE.BufferAttribute(position, 3));
+geo.setAttribute('color', new THREE.BufferAttribute(color, 3));
+
+function dotTexture() {
+  const c = document.createElement('canvas'); c.width = c.height = 64;
+  const g = c.getContext('2d'), gr = g.createRadialGradient(32, 32, 0, 32, 32, 32);
+  gr.addColorStop(0, 'rgba(255,255,255,1)'); gr.addColorStop(0.4, 'rgba(255,255,255,.8)'); gr.addColorStop(1, 'rgba(255,255,255,0)');
+  g.fillStyle = gr; g.fillRect(0, 0, 64, 64);
+  return new THREE.CanvasTexture(c);
+}
+const mat = new THREE.PointsMaterial({ size: P.size, map: dotTexture(), vertexColors: true, transparent: true, opacity: P.alpha, depthWrite: false, blending: TONO === 'crema' ? THREE.NormalBlending : THREE.AdditiveBlending });
+const pts = new THREE.Points(geo, mat);
+scene.add(pts);
+
+const cLow = new THREE.Color(P.low), cMid = new THREE.Color(P.mid), cHigh = new THREE.Color(P.high), tmp = new THREE.Color();
+const ripples = [];
+function ripple(t) {
+  ripples.push({ x: (Math.random() * 0.6 + 0.2) * SX - SX / 2, z: (Math.random() - 0.5) * SZ * 0.6, t0: t });
+  if (ripples.length > 4) ripples.shift();
+}
+
+function resize() {
+  renderer.setSize(innerWidth, innerHeight, false);
+  camera.aspect = innerWidth / innerHeight; camera.updateProjectionMatrix();
+}
+addEventListener('resize', resize); resize();
+
+const clock = new THREE.Clock();
+let nextRipple = 0.3;
+function frame() {
+  const t = clock.getElapsedTime() * P.speed;
+  if (t > nextRipple) { ripple(t); nextRipple = t + 2.6 + Math.random() * 1.5; }
+  camera.position.set(Math.sin(t * 0.05) * 2.5 + 3, 4.2 + Math.sin(t * 0.13) * 0.4, 11);
+  camera.lookAt(3, -0.5, -2);
+  for (let i = 0; i < count; i++) {
+    const x = base[i * 3], z = base[i * 3 + 2];
+    let y = Math.sin(x * 0.35 + t * 0.9) * 0.35 + Math.cos(z * 0.5 + t * 0.7) * 0.3 + Math.sin((x + z) * 0.18 + t * 0.5) * 0.4;
+    let heat = 0;
+    for (const r of ripples) {
+      const age = t - r.t0, d = Math.hypot(x - r.x, z - r.z), front = age * 6;
+      const band = Math.exp(-Math.pow(d - front, 2) * 0.35) * Math.exp(-age * 0.45);
+      y += band * 1.1; heat += band;
+    }
+    position[i * 3 + 1] = y;
+    const h = Math.min(1, Math.max(0, (y + 0.9) / 2.2));
+    tmp.copy(cLow).lerp(cMid, h);
+    tmp.lerp(cHigh, Math.min(1, heat * 1.2));
+    color[i * 3] = tmp.r; color[i * 3 + 1] = tmp.g; color[i * 3 + 2] = tmp.b;
+  }
+  geo.attributes.position.needsUpdate = true;
+  geo.attributes.color.needsUpdate = true;
+  renderer.render(scene, camera);
+  requestAnimationFrame(frame);
+}
+requestAnimationFrame(frame);
+</script>
+</body>
+</html>

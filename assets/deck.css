@@ -10,6 +10,8 @@ button{font:inherit;color:inherit}
 #stage>section,#next-stage>section{position:absolute;inset:0;width:1920px;height:1080px;display:flex;flex-direction:column;overflow:hidden;font-size:32px;line-height:1.4}
 #stage>section:not(.active):not(.leaving){display:none!important}
 #stage section *,#next-stage section *{margin:0;box-sizing:border-box}
+/* Los hijos en flujo se pintan en orden del documento, por encima de un fondo fijado antes. */
+#stage>section>:not(.x-embed):not([style*="position:absolute"]),#next-stage>section>:not(.x-embed):not([style*="position:absolute"]){position:relative}
 #stage h1,#next-stage h1{font-size:96px;font-weight:600;line-height:1.1}
 #stage h2,#next-stage h2{font-size:64px;font-weight:600;line-height:1.15}
 #stage h3,#next-stage h3{font-size:44px;font-weight:600;line-height:1.2}

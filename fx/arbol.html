@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Árbol de widgets 3D</title>
+<style>
+  html,body{margin:0;height:100%;overflow:hidden;background:transparent;font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+  canvas{display:block}
+  #labels{position:absolute;inset:0;pointer-events:none}
+  .lb{position:absolute;transform:translate(-50%,-50%);padding:6px 14px;border-radius:12px;font-size:24px;font-weight:600;white-space:nowrap;transition:background .5s,color .5s,box-shadow .5s;background:rgba(255,255,255,.92);color:#172033;box-shadow:0 2px 10px rgba(23,32,51,.12)}
+  .lb.on{background:#1D4ED8;color:#F5F3EE;box-shadow:0 6px 24px rgba(29,78,216,.45)}
+  #cap{position:absolute;left:0;right:0;bottom:18px;text-align:center;font-size:30px;font-weight:800;color:#C2410C;letter-spacing:.5px;transition:opacity .35s}
+  #hint{position:absolute;left:0;right:0;bottom:24px;text-align:center;font-size:26px;color:#8FA3BF}
+</style>
+</head>
+<body>
+<div id="labels"></div>
+<div id="cap"></div>
+<div id="hint"></div>
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js"}}</script>
+<script type="module">
+import * as THREE from 'three';
+
+const q = new URLSearchParams(location.search);
+const MODE = q.get('modo') || 'portada';          // portada | tipos
+const LIGHT = MODE === 'tipos';
+
+let renderer;
+try { renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true }); }
+catch (e) { location.replace('arbol-svg.html' + location.search); throw e; }
+renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+renderer.setClearColor(0x000000, 0);
+document.body.prepend(renderer.domElement);
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(38, 1, 0.1, 200);
+
+/* ---------- árbol ---------- */
+// [etiqueta, padre]
+const TREE = LIGHT
+  ? [['MaterialApp', -1], ['Login', 0], ['Home', 0], ['Formulario', 1], ['Botón', 1], ['Filtros', 2], ['Lista', 2], ['Ojo', 3], ['Tarjeta', 6]]
+  : [['App', -1], ['', 0], ['', 0], ['', 0], ['', 1], ['', 1], ['', 2], ['', 2], ['', 3], ['', 3], ['', 4], ['', 5], ['', 6], ['', 7], ['', 8], ['', 9]];
+
+const depth = TREE.map(function d(n, i) { return n[1] < 0 ? 0 : d(TREE[n[1]], n[1]) + 1; });
+const kids = TREE.map((_, i) => TREE.map((n, j) => n[1] === i ? j : -1).filter(j => j >= 0));
+const pos = [];
+// Coloca cada nivel en un anillo alrededor del eje Y, hijos cerca de su padre.
+function place(i, angle, spread) {
+  const d = depth[i];
+  const r = d === 0 ? 0 : (LIGHT ? 2.6 : 2.2) * d;
+  pos[i] = new THREE.Vector3(Math.cos(angle) * r, (LIGHT ? 2.6 : 3.0) - d * (LIGHT ? 1.75 : 1.9), Math.sin(angle) * r * (LIGHT ? 0.55 : 1));
+  const k = kids[i];
+  k.forEach((c, j) => {
+    const a = angle + (k.length === 1 ? 0 : (j / (k.length - 1) - 0.5) * spread);
+    place(c, a, spread * 0.55);
+  });
+}
+if (LIGHT) {
+  [[0, 2.9, 0], [-2.5, 1.2, 0.5], [2.5, 1.2, -0.5], [-3.7, -0.6, 1.0], [-1.3, -0.6, 0.0], [1.3, -0.6, 0.0], [3.7, -0.6, -1.0], [-3.7, -2.4, 1.4], [3.7, -2.4, -1.4]]
+    .forEach((v, i) => { pos[i] = new THREE.Vector3(v[0], v[1], v[2]); });
+} else {
+  place(0, 0, Math.PI * 2 * (2 / 3));
+}
+
+const root = new THREE.Group();
+scene.add(root);
+
+const COL = LIGHT
+  ? { node: 0xffffff, nodeOn: 0x1d4ed8, edge: 0xb9b3a5, edgeOn: 0x1d4ed8, pulse: 0xf59e0b, emissive: 0x000000 }
+  : { node: 0x16273f, nodeOn: 0x3b82f6, edge: 0x2a4366, edgeOn: 0x60a5fa, pulse: 0xf59e0b, emissive: 0x3b82f6 };
+
+scene.add(new THREE.AmbientLight(0xffffff, LIGHT ? 1.6 : 0.5));
+const key = new THREE.DirectionalLight(0xffffff, LIGHT ? 1.4 : 1.2); key.position.set(4, 8, 6); scene.add(key);
+const rim = new THREE.PointLight(0xf59e0b, LIGHT ? 0 : 30, 30); rim.position.set(-4, -2, 4); scene.add(rim);
+
+function glowTexture(color) {
+  const c = document.createElement('canvas'); c.width = c.height = 128;
+  const g = c.getContext('2d');
+  const gr = g.createRadialGradient(64, 64, 0, 64, 64, 64);
+  gr.addColorStop(0, color); gr.addColorStop(0.25, color.replace('1)', '.45)')); gr.addColorStop(1, color.replace('1)', '0)'));
+  g.fillStyle = gr; g.fillRect(0, 0, 128, 128);
+  return new THREE.CanvasTexture(c);
+}
+const halo = glowTexture('rgba(96,165,250,1)');
+const haloOrange = glowTexture('rgba(245,158,11,1)');
+
+const nodes = TREE.map((n, i) => {
+  const r = i === 0 ? 0.42 : (depth[i] === 1 ? 0.34 : 0.27);
+  const m = new THREE.Mesh(new THREE.SphereGeometry(r, 48, 32),
+    new THREE.MeshStandardMaterial({ color: COL.node, emissive: COL.emissive, emissiveIntensity: 0.15, roughness: 0.35, metalness: LIGHT ? 0 : 0.3 }));
+  m.position.copy(pos[i]);
+  root.add(m);
+  let s = null;
+  if (!LIGHT) {
+    s = new THREE.Sprite(new THREE.SpriteMaterial({ map: halo, transparent: true, opacity: 0.0, depthWrite: false, blending: THREE.AdditiveBlending }));
+    s.scale.setScalar(r * 6); s.position.copy(pos[i]); root.add(s);
+  }
+  return { mesh: m, halo: s, glow: 0, base: r };
+});
+
+const edges = [];
+TREE.forEach((n, i) => {
+  if (n[1] < 0) return;
+  const a = pos[n[1]], b = pos[i];
+  const mid = a.clone().lerp(b, 0.5); mid.y += 0.25;
+  const curve = new THREE.QuadraticBezierCurve3(a, mid, b);
+  const geo = new THREE.TubeGeometry(curve, 24, LIGHT ? 0.035 : 0.025, 8, false);
+  const mat = new THREE.MeshBasicMaterial({ color: COL.edge, transparent: true, opacity: LIGHT ? 1 : 0.8 });
+  const mesh = new THREE.Mesh(geo, mat);
+  root.add(mesh);
+  edges.push({ from: n[1], to: i, curve, mesh });
+});
+
+/* ---------- polvo de fondo (portada) ---------- */
+let dust = null;
+if (!LIGHT) {
+  const N = 900, g = new THREE.BufferGeometry(), p = new Float32Array(N * 3);
+  for (let i = 0; i < N; i++) { p[i * 3] = (Math.random() - .5) * 30; p[i * 3 + 1] = (Math.random() - .5) * 18; p[i * 3 + 2] = (Math.random() - .5) * 20 - 4; }
+  g.setAttribute('position', new THREE.BufferAttribute(p, 3));
+  dust = new THREE.Points(g, new THREE.PointsMaterial({ color: 0x8fa3bf, size: 0.05, transparent: true, opacity: 0.55, depthWrite: false }));
+  scene.add(dust);
+}
+
+/* ---------- pulsos: un cambio de estado que baja por el árbol ---------- */
+const pulses = [];
+function spawn(edgeIdx, delay) {
+  const sp = new THREE.Mesh(new THREE.SphereGeometry(LIGHT ? 0.11 : 0.1, 16, 12), new THREE.MeshBasicMaterial({ color: COL.pulse }));
+  let gl = null;
+  if (!LIGHT) { gl = new THREE.Sprite(new THREE.SpriteMaterial({ map: haloOrange, transparent: true, depthWrite: false, blending: THREE.AdditiveBlending })); gl.scale.setScalar(0.9); root.add(gl); }
+  sp.visible = false; root.add(sp);
+  pulses.push({ e: edges[edgeIdx], t: -delay, sp, gl });
+}
+function cascade(from, delay) {
+  edges.forEach((e, k) => { if (e.from === from) { spawn(k, delay); cascade(e.to, delay + 0.85); } });
+}
+function ease(t) { return t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; }
+
+/* ---------- modo tipos: alcance del estado ---------- */
+const labelsEl = document.getElementById('labels');
+const labels = LIGHT ? TREE.map(n => { const d = document.createElement('div'); d.className = 'lb'; d.textContent = n[0] === 'Ojo' ? 'Ojo 👁' : n[0]; labelsEl.appendChild(d); return d; }) : [];
+const SCOPES = [
+  ['EFÍMERO: solo el ícono del ojo', [7]],
+  ['LOCAL: el formulario y sus partes', [3, 4, 7]],
+  ['COMPARTIDO: Filtros y Lista usan el mismo dato', [2, 5, 6]],
+  ['GLOBAL: toda la app (sesión, idioma, tema)', TREE.map((_, i) => i)]
+];
+let scope = -1;
+const bubble = new THREE.Mesh(new THREE.SphereGeometry(1, 48, 32),
+  new THREE.MeshBasicMaterial({ color: 0x1d4ed8, transparent: true, opacity: 0.07, depthWrite: false }));
+const bubbleRing = new THREE.Mesh(new THREE.TorusGeometry(1, 0.012, 8, 96),
+  new THREE.MeshBasicMaterial({ color: 0x1d4ed8, transparent: true, opacity: 0.5 }));
+if (LIGHT) { root.add(bubble); root.add(bubbleRing); }
+const bubbleTarget = { c: new THREE.Vector3(), r: 1 };
+function nextScope() {
+  scope = (scope + 1) % SCOPES.length;
+  const set = SCOPES[scope][1];
+  const cap = document.getElementById('cap');
+  cap.style.opacity = 0;
+  setTimeout(() => { cap.textContent = SCOPES[scope][0]; cap.style.opacity = 1; }, 250);
+  const c = new THREE.Vector3(); set.forEach(i => c.add(pos[i])); c.divideScalar(set.length);
+  let r = 0.9; set.forEach(i => { r = Math.max(r, pos[i].distanceTo(c) + 0.75); });
+  bubbleTarget.c.copy(c); bubbleTarget.r = r;
+  nodes.forEach((n, i) => { n.target = set.includes(i) ? 1 : 0; });
+  edges.forEach(e => { e.on = set.includes(e.from) && set.includes(e.to); });
+  labels.forEach((l, i) => l.classList.toggle('on', set.includes(i)));
+}
+
+/* ---------- bucle ---------- */
+function resize() {
+  const w = innerWidth, h = innerHeight;
+  renderer.setSize(w, h, false);
+  camera.aspect = w / h; camera.updateProjectionMatrix();
+}
+addEventListener('resize', resize); resize();
+
+const clock = new THREE.Clock();
+let nextCascade = 0.6, nextScopeAt = 0;
+const tmp = new THREE.Vector3();
+const nodeColor = new THREE.Color(COL.node), nodeOn = new THREE.Color(COL.nodeOn);
+const edgeColor = new THREE.Color(COL.edge), edgeOn = new THREE.Color(COL.edgeOn);
+
+function frame() {
+  const dt = Math.min(clock.getDelta(), 0.05), t = clock.elapsedTime;
+  const R = LIGHT ? 14.5 : 19;
+  const ang = LIGHT ? Math.sin(t * 0.25) * 0.28 : t * 0.12;
+  camera.position.set(Math.sin(ang) * R, LIGHT ? 1.2 + Math.sin(t * .3) * .3 : 1.5 + Math.sin(t * 0.2) * 0.8, Math.cos(ang) * R);
+  camera.lookAt(0, LIGHT ? 0.05 : -0.4, 0);
+
+  if (!LIGHT && t > nextCascade) { cascade(0, 0); nodes[0].glow = 1; nextCascade = t + 4.2; }
+  if (LIGHT && t > nextScopeAt) { nextScope(); nextScopeAt = t + 3.2; if (scope === 0) cascade(0, 0.4); }
+
+  for (let k = pulses.length - 1; k >= 0; k--) {
+    const p = pulses[k];
+    p.t += dt / 0.85;
+    if (p.t < 0) continue;
+    if (p.t >= 1) {
+      nodes[p.e.to].glow = 1;
+      root.remove(p.sp); if (p.gl) root.remove(p.gl);
+      pulses.splice(k, 1); continue;
+    }
+    p.e.curve.getPoint(ease(p.t), tmp);
+    p.sp.visible = true; p.sp.position.copy(tmp);
+    if (p.gl) p.gl.position.copy(tmp);
+  }
+
+  nodes.forEach((n, i) => {
+    n.glow = Math.max(0, n.glow - dt * 1.1);
+    if (LIGHT) {
+      n.level = (n.level || 0) + ((n.target || 0) - (n.level || 0)) * Math.min(1, dt * 6);
+      n.mesh.material.color.copy(nodeColor).lerp(nodeOn, n.level);
+      n.mesh.material.emissive.setHex(0xf59e0b); n.mesh.material.emissiveIntensity = n.glow * 0.6;
+      n.mesh.scale.setScalar(1 + n.level * 0.22 + n.glow * 0.15);
+    } else {
+      n.mesh.material.emissiveIntensity = 0.15 + n.glow * 1.6;
+      n.mesh.material.color.copy(nodeColor).lerp(nodeOn, n.glow * 0.8);
+      n.mesh.scale.setScalar(1 + n.glow * 0.25 + Math.sin(t * 2 + i) * 0.015);
+      n.halo.material.opacity = 0.18 + n.glow * 0.8;
+    }
+  });
+  edges.forEach(e => {
+    const target = LIGHT ? (e.on ? 1 : 0) : nodes[e.to].glow;
+    e.level = (e.level || 0) + (target - (e.level || 0)) * Math.min(1, dt * 6);
+    e.mesh.material.color.copy(edgeColor).lerp(edgeOn, e.level);
+  });
+  if (LIGHT) {
+    bubble.position.lerp(bubbleTarget.c, Math.min(1, dt * 4));
+    const s = bubble.scale.x + (bubbleTarget.r - bubble.scale.x) * Math.min(1, dt * 4);
+    bubble.scale.set(s, s * 0.8, s * 0.7);
+    bubbleRing.position.copy(bubble.position);
+    bubbleRing.scale.set(s, s, s);
+    bubbleRing.rotation.set(Math.PI / 2 + Math.sin(t) * 0.15, 0, t * 0.4);
+  }
+  if (dust) { dust.rotation.y = t * 0.01; dust.position.y = Math.sin(t * 0.1) * 0.3; }
+
+  renderer.render(scene, camera);
+
+  if (LIGHT) {
+    const w = innerWidth, h = innerHeight;
+    labels.forEach((l, i) => {
+      tmp.copy(pos[i]).applyMatrix4(root.matrixWorld).project(camera);
+      l.style.left = ((tmp.x + 1) / 2 * w) + 'px';
+      l.style.top = ((1 - tmp.y) / 2 * h - 46) + 'px';
+      l.style.zIndex = String(1000 - Math.round(tmp.z * 1000));
+    });
+  }
+  requestAnimationFrame(frame);
+}
+if (!LIGHT && q.get('leyenda') !== '0') document.getElementById('hint').textContent = 'un cambio de estado viaja por el árbol de widgets';
+requestAnimationFrame(frame);
+</script>
+</body>
+</html>

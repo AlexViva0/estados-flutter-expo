@@ -5,6 +5,8 @@ html,body{margin:0;background:transparent;overflow:hidden;font-family:system-ui,
 .flash{animation:f .7s}
 @keyframes f{0%{fill:#FFFFFF}40%{fill:#FDE7C8}100%{fill:#FFFFFF}}
 .mono{font-family:"JetBrains Mono",Consolas,monospace}
+circle[fill="#F59E0B"]{filter:drop-shadow(0 0 6px rgba(245,158,11,.85))}
+g[transform] rect{filter:drop-shadow(0 4px 10px rgba(23,32,51,.25))}
 </style></head><body>
 <svg width="1664" height="440" viewBox="0 0 1664 440">
 <defs><marker id="a" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M0 0 L12 6 L0 12 z" fill="#4A5568"/></marker></defs>
@@ -26,10 +28,11 @@ html,body{margin:0;background:transparent;overflow:hidden;font-family:system-ui,
 <text x="832" y="400" font-size="30" text-anchor="middle" fill="#172033">Cambias el dato → Flutter vuelve a dibujar → la pantalla muestra el valor nuevo</text>
 </svg>
 <script>
+function E(k){return k<.5?4*k*k*k:1-Math.pow(-2*k+2,3)/2}
 var n=0;
 function fl(id){var e=document.getElementById(id);e.classList.remove('flash');void e.getBBox();e.classList.add('flash');}
 var dot=document.getElementById('dot');
-function mv(x0,x1,ms,cb){var t0=null;dot.setAttribute('opacity','1');function f(t){if(!t0)t0=t;var k=Math.min(1,(t-t0)/ms);dot.setAttribute('cx',x0+(x1-x0)*k);if(k<1)requestAnimationFrame(f);else cb&&cb();}requestAnimationFrame(f);}
+function mv(x0,x1,ms,cb){var t0=null;dot.setAttribute('opacity','1');function f(t){if(!t0)t0=t;var k=E(Math.min(1,(t-t0)/ms));dot.setAttribute('cx',x0+(x1-x0)*k);if(k<1)requestAnimationFrame(f);else cb&&cb();}requestAnimationFrame(f);}
 function tick(){n++;document.getElementById('v1').textContent=n;fl('b1');
  mv(490,712,450,function(){fl('b2');setTimeout(function(){mv(952,1184,450,function(){dot.setAttribute('opacity','0');document.getElementById('v3').textContent=n;fl('b3');});},300);});}
 setInterval(tick,2600);setTimeout(tick,600);

@@ -3,6 +3,8 @@
 html,body{margin:0;background:transparent;overflow:hidden;font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
 #sp{transform-origin:200px 330px;animation:r 1s linear infinite}
 @keyframes r{to{transform:rotate(360deg)}}
+circle[fill="#F59E0B"]{filter:drop-shadow(0 0 6px rgba(245,158,11,.85))}
+g[transform] rect{filter:drop-shadow(0 4px 10px rgba(23,32,51,.25))}
 </style></head><body>
 <svg id="s" width="1664" height="620" viewBox="0 0 1664 620">
 <rect x="40" y="90" width="320" height="460" rx="40" fill="#FFFFFF" stroke="#172033" stroke-width="6"/>
@@ -27,10 +29,11 @@ html,body{margin:0;background:transparent;overflow:hidden;font-family:system-ui,
 <g id="pk"></g>
 </svg>
 <script>
+function E(k){return k<.5?4*k*k*k:1-Math.pow(-2*k+2,3)/2}
 var ns='http://www.w3.org/2000/svg',pk=document.getElementById('pk');
 function pill(txt,fill,col){var g=document.createElementNS(ns,'g');var r=document.createElementNS(ns,'rect');var w=txt.length*15+40;r.setAttribute('x',-w/2);r.setAttribute('y',-26);r.setAttribute('width',w);r.setAttribute('height',52);r.setAttribute('rx',26);r.setAttribute('fill',fill);g.appendChild(r);
 var t=document.createElementNS(ns,'text');t.setAttribute('y',9);t.setAttribute('text-anchor','middle');t.setAttribute('font-size',24);t.setAttribute('font-weight',700);t.setAttribute('fill',col);t.textContent=txt;g.appendChild(t);pk.appendChild(g);return g;}
-function mv(g,x0,y0,x1,y1,ms,cb){var t0=null;function f(t){if(!t0)t0=t;var k=Math.min(1,(t-t0)/ms);g.setAttribute('transform','translate('+(x0+(x1-x0)*k)+' '+(y0+(y1-y0)*k)+')');if(1>k)requestAnimationFrame(f);else{pk.removeChild(g);cb&&cb();}}requestAnimationFrame(f);}
+function mv(g,x0,y0,x1,y1,ms,cb){var t0=null;function f(t){if(!t0)t0=t;var k=E(Math.min(1,(t-t0)/ms));g.setAttribute('transform','translate('+(x0+(x1-x0)*k)+' '+(y0+(y1-y0)*k)+')');if(1>k)requestAnimationFrame(f);else{pk.removeChild(g);cb&&cb();}}requestAnimationFrame(f);}
 function ui(n){for(var i=0;3>i;i++)document.getElementById('u'+i).setAttribute('opacity',i==n?1:0);}
 function cycle(){ui(0);
 setTimeout(function(){mv(pill('CargarEstudiantes','#1D4ED8','#F5F3EE'),360,200,640,200,1100,function(){

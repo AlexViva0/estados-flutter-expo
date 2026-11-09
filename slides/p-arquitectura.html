@@ -11,6 +11,7 @@ html,body{margin:0;background:transparent;overflow:hidden;font-family:system-ui,
 <g id="pk"></g>
 </svg>
 <script>
+function E(k){return k<.5?4*k*k*k:1-Math.pow(-2*k+2,3)/2}
 var ns='http://www.w3.org/2000/svg',bx=document.getElementById('bx'),pk=document.getElementById('pk');
 function el(p,t,a,txt){var e=document.createElementNS(ns,t);for(var k in a)e.setAttribute(k,a[k]);if(txt)e.textContent=txt;p.appendChild(e);return e;}
 var B=[[180,'screens/','EstudiantesPage','lo que ve el usuario','#FFFFFF','#172033'],[620,'cubit/','EstudiantesCubit','estados y lógica','#172033','#F5F3EE'],[1060,'services/','EstudianteService','habla con la API','#FFFFFF','#172033'],[1480,'internet','JSONPlaceholder','/users','#FDE7C8','#172033']];
@@ -19,7 +20,7 @@ el(bx,'text',{x:b[0],y:95,'text-anchor':'middle','font-size':28,'font-weight':70
 el(bx,'text',{x:b[0],y:225,'text-anchor':'middle','font-size':28,'font-weight':700,fill:b[5]},b[2]);
 el(bx,'text',{x:b[0],y:270,'text-anchor':'middle','font-size':24,fill:b[5]=='#F5F3EE'?'#C7D2E0':'#4A5568'},b[3]);});
 function pill(txt,fill,col){var g=el(pk,'g',{});var w=txt.length*14+40;el(g,'rect',{x:-w/2,y:-24,width:w,height:48,rx:24,fill:fill});el(g,'text',{y:8,'text-anchor':'middle','font-size':24,'font-weight':700,fill:col},txt);return g;}
-function mv(g,x0,x1,y,ms,cb){var t0=null;function f(t){if(!t0)t0=t;var k=Math.min(1,(t-t0)/ms);g.setAttribute('transform','translate('+(x0+(x1-x0)*k)+' '+y+')');if(1>k)requestAnimationFrame(f);else{pk.removeChild(g);cb&&cb();}}requestAnimationFrame(f);}
+function mv(g,x0,x1,y,ms,cb){var t0=null;function f(t){if(!t0)t0=t;var k=E(Math.min(1,(t-t0)/ms));g.setAttribute('transform','translate('+(x0+(x1-x0)*k)+' '+y+')');if(1>k)requestAnimationFrame(f);else{pk.removeChild(g);cb&&cb();}}requestAnimationFrame(f);}
 var D=[[340,460,'cargarEstudiantes()'],[780,900,'obtenerEstudiantes()'],[1220,1320,'GET']],U=[[1320,1220,'JSON'],[900,780,'List\u003CEstudiante>'],[460,340,'EstudiantesExito']];
 function down(i){if(i==3)return up(0);var d=D[i];mv(pill(d[2],'#1D4ED8','#F5F3EE'),d[0],d[1],30,900,function(){down(i+1);});}
 function up(i){if(i==3)return;var d=U[i];mv(pill(d[2],'#C2410C','#F5F3EE'),d[0],d[1],400,900,function(){up(i+1);});}
