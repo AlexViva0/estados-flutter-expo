@@ -34,7 +34,7 @@ fx/*.html         animaciones three.js usadas como fondos
 4. `data-build-in="fade|rise|pop"` en un elemento con `position:absolute` lo hace aparecer al avanzar.
 5. Para agregar o reordenar láminas, edita `order` en `deck.json`.
 
-Cada `git push` a `main` se publica solo en Vercel.
+Cada `git push` a `main` se publica solo en Vercel: <https://estados-flutter-expo.vercel.app>
 
 ## Desarrollo local
 
