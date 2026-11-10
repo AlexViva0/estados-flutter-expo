@@ -1,7 +1,11 @@
-<section id="s3-pizarron" data-transition="fade" style="background:#23262F;color:#F4F5F8;font-family:Poppins, Arial, sans-serif;padding:128px;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:32px">
-<x-embed src="fx/campo.html?tono=tinta&amp;bg=23262F&amp;fade=top" style="position:absolute;left:0;top:560px;width:1920px;height:520px"></x-embed>
-<x-icon name="Lightbulb" style="color:#F2A93B;width:120px;height:120px"></x-icon>
-<h1 style="font-family:Poppins, Arial, sans-serif;font-size:120px;font-weight:900;line-height:1.05;color:#F4F5F8;text-align:center;text-transform:uppercase;letter-spacing:-5px">Al pizarrón</h1>
-<p style="font-size:44px;line-height:1.3;color:#B9BDC8;text-align:center;width:1300px">El recorrido completo de un clic en “Agregar” con Provider</p>
+<section id="s3-pizarron" data-transition="fade" data-num="top" style="background:#FFFFFF;color:#23262F;font-family:Poppins, Arial, sans-serif;padding:80px 128px;display:flex;flex-direction:column;gap:18px">
+<div style="display:flex;flex-direction:row;align-items:center;gap:28px">
+<div style="width:96px;height:96px;flex:none;border-radius:28px;display:flex;align-items:center;justify-content:center;background:#FFF4E0"><x-icon name="Lightbulb" style="color:#D97706;width:54px;height:54px"></x-icon></div>
+<h1 style="font-family:Poppins, Arial, sans-serif;font-size:84px;font-weight:900;line-height:1;color:#23262F;text-transform:uppercase;letter-spacing:-3px">Al pizarrón</h1>
+<p style="font-size:40px;font-weight:900;line-height:1;color:#FFFFFF;background:#2F5BFF;padding:14px 0;border-radius:999px;width:96px;text-align:center">C</p>
+</div>
+<p style="font-size:34px;line-height:1.35;color:#6B7080;width:1500px">El recorrido completo de un clic en “Agregar” con Provider</p>
+
+<div style="position:absolute;left:128px;right:128px;top:380px;height:0;border-top:3px dashed #E1E4EA"></div>
 <aside>DIBUJAR A MANO (6 min). 1) Un rectángulo grande punteado: ChangeNotifierProvider. 2) Dentro, arriba, una caja “Carrito” con items = [ ]. 3) Abajo tres cajas: AppBar (watch), Total (watch), Botón (read). 4) Numerar las flechas: ① del Botón al Carrito con “read().agregar()”; ② dentro del Carrito escribir items.add() y notifyListeners(); ③ dos flechas del Carrito hacia AppBar y Total con “rebuild”. 5) Tachar una flecha imaginaria hacia el Botón y explicar por qué no se reconstruye. 6) Pedir a un compañero del grupo que pase a dibujar la flecha de “vaciar()”.</aside>
 </section>

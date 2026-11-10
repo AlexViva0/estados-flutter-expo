@@ -1,8 +1,11 @@
-<section id="s2-pizarron" data-transition="fade" style="background:#23262F;color:#F4F5F8;font-family:Poppins, Arial, sans-serif;padding:128px;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:32px">
-<x-embed src="fx/campo.html?tono=tinta&amp;bg=23262F&amp;fade=top" style="position:absolute;left:0;top:560px;width:1920px;height:520px"></x-embed>
-<x-icon name="Lightbulb" style="color:#F2A93B;width:120px;height:120px"></x-icon>
-<h1 style="font-family:Poppins, Arial, sans-serif;font-size:120px;font-weight:900;line-height:1.05;color:#F4F5F8;text-align:center;text-transform:uppercase;letter-spacing:-5px">Al pizarrón</h1>
-<p style="font-size:44px;line-height:1.3;color:#B9BDC8;text-align:center;width:1300px">El ciclo de setState() paso a paso y el viaje de un dato por el árbol</p>
-<p style="position:absolute;left:128px;bottom:64px;width:1664px;font-size:24px;color:#9A9EAC;text-align:center">Día 1 · Bloque 2 · [Expositor 2] · al terminar presenta al Expositor 3</p>
-<aside>DIBUJAR A MANO (6 min). Parte 1, el ciclo: un círculo con cuatro flechas: Toque, setState(), build(), Pantalla, y de regreso a Toque. Al lado escribir el código mínimo: setState(() { contador++; }); y marcar con una flecha que el cambio va DENTRO de la función. Parte 2, el árbol: dibujar 4 cajas en columna (App, Home, Perfil, Avatar). Primero con flechas que bajan caja por caja (prop drilling, tachar con una X). Luego una caja “InheritedWidget” arriba y una flecha curva directa hasta Avatar, con el texto “X.of(context)”. Cierre: “Esto es exactamente lo que Provider automatiza; [Expositor 3] nos lo explica”.</aside>
+<section id="s2-pizarron" data-transition="fade" data-num="top" style="background:#FFFFFF;color:#23262F;font-family:Poppins, Arial, sans-serif;padding:80px 128px;display:flex;flex-direction:column;gap:18px">
+<div style="display:flex;flex-direction:row;align-items:center;gap:28px">
+<div style="width:96px;height:96px;flex:none;border-radius:28px;display:flex;align-items:center;justify-content:center;background:#FFF4E0"><x-icon name="Lightbulb" style="color:#D97706;width:54px;height:54px"></x-icon></div>
+<h1 style="font-family:Poppins, Arial, sans-serif;font-size:84px;font-weight:900;line-height:1;color:#23262F;text-transform:uppercase;letter-spacing:-3px">Al pizarrón</h1>
+<p style="font-size:40px;font-weight:900;line-height:1;color:#FFFFFF;background:#2F5BFF;padding:14px 0;border-radius:999px;width:96px;text-align:center">B</p>
+</div>
+<p style="font-size:34px;line-height:1.35;color:#6B7080;width:1500px">El ciclo de setState() paso a paso y el viaje de un dato por el árbol</p>
+<p style="font-size:22px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#9A9EAC">Al terminar: presenta a <span style="color:#2F5BFF">C</span></p>
+<div style="position:absolute;left:128px;right:128px;top:380px;height:0;border-top:3px dashed #E1E4EA"></div>
+<aside>DIBUJAR A MANO (6 min). Parte 1, el ciclo: un círculo con cuatro flechas: Toque, setState(), build(), Pantalla, y de regreso a Toque. Al lado escribir el código mínimo: setState(() { contador++; }); y marcar con una flecha que el cambio va DENTRO de la función. Parte 2, el árbol: dibujar 4 cajas en columna (App, Home, Perfil, Avatar). Primero con flechas que bajan caja por caja (prop drilling, tachar con una X). Luego una caja “InheritedWidget” arriba y una flecha curva directa hasta Avatar, con el texto “X.of(context)”. Cierre: “Esto es exactamente lo que Provider automatiza; Expositor C nos lo explica”.</aside>
 </section>

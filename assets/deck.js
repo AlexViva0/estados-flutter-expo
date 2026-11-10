@@ -8,6 +8,10 @@
   var channel = 'BroadcastChannel' in window ? new BroadcastChannel('estados-flutter-deck') : null;
 
   var ICONS = {
+    PhoneSilent: '<rect x="6" y="2" width="12" height="20" rx="2.5"/><path d="M11 18h2"/><path d="M3 4l18 17"/>',
+    Hand: '<path d="M18 11V6a2 2 0 0 0-4 0v5"/><path d="M14 10V4a2 2 0 0 0-4 0v6"/><path d="M10 10.5V6a2 2 0 0 0-4 0v8"/><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"/>',
+    Dice: '<rect x="3" y="3" width="18" height="18" rx="4"/><circle cx="8.5" cy="8.5" r="1.2" fill="currentColor"/><circle cx="15.5" cy="8.5" r="1.2" fill="currentColor"/><circle cx="12" cy="12" r="1.2" fill="currentColor"/><circle cx="8.5" cy="15.5" r="1.2" fill="currentColor"/><circle cx="15.5" cy="15.5" r="1.2" fill="currentColor"/>',
+    LaptopOff: '<rect x="4" y="4" width="16" height="11" rx="1.5"/><path d="M2 19h20"/><path d="M3 3l18 18"/>',
     Lock: '<rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>',
     Chat: '<path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/>',
     Users: '<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>',
@@ -79,6 +83,12 @@
       })).then(function (texts) {
         texts.forEach(function (txt, i) {
           var s = parseSlide(deck.order[i], txt);
+          if (i > 0) {
+            var pg = document.createElement('div');
+            pg.className = 'pg';
+            pg.textContent = (i + 1 < 10 ? '0' : '') + (i + 1);
+            s.section.appendChild(pg);
+          }
           s.sectionStart = secStart[s.id] || null;
           slides.push(s);
           stage.appendChild(s.section);

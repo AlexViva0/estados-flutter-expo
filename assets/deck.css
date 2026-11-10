@@ -27,6 +27,10 @@ button{font:inherit;color:inherit}
 .x-icon svg{display:block;width:100%;height:100%}
 .embed-ph{width:100%;height:100%;border:3px dashed rgba(143,163,191,.45);border-radius:24px}
 
+/* número de lámina (abajo a la derecha; arriba en las láminas de pizarrón) */
+#stage section>.pg,#next-stage section>.pg{position:absolute!important;right:128px;bottom:56px;font:700 20px/1 Poppins,Arial,sans-serif;letter-spacing:3px;color:inherit;opacity:.45;font-variant-numeric:tabular-nums}
+#stage section[data-num="top"]>.pg,#next-stage section[data-num="top"]>.pg{bottom:auto;top:40px}
+
 /* ---------- builds ---------- */
 .build{opacity:0}
 .build.shown{opacity:1}
