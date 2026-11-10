@@ -1,35 +1,55 @@
 <section id="s5-future-stream" data-transition="fade" style="background:#ECEEF2;color:#23262F;font-family:Poppins, Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:16px">
-<x-embed style="position:absolute;left:128px;top:320px;width:1664px;height:580px"><!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&display=swap"><style>
-html,body{margin:0;background:transparent;overflow:hidden;font-family:Poppins,system-ui,sans-serif}
-</style></head><body>
-<svg id="s" width="1664" height="580" viewBox="0 0 1664 580">
-<rect x="0" y="0" width="1664" height="270" rx="24" fill="#FFFFFF"/>
-<rect x="0" y="300" width="1664" height="270" rx="24" fill="#FFFFFF"/>
-<text x="40" y="60" font-size="34" font-weight="700" fill="#2F5BFF">Future</text>
-<text x="200" y="60" font-size="26" fill="#6B7080">un solo resultado (o un error), una vez</text>
-<text x="40" y="360" font-size="34" font-weight="700" fill="#D97706">Stream</text>
-<text x="200" y="360" font-size="26" fill="#6B7080">muchos valores a lo largo del tiempo</text>
-<line x1="60" y1="170" x2="1600" y2="170" stroke="#CDD2DC" stroke-width="4"/>
-<line x1="60" y1="470" x2="1600" y2="470" stroke="#CDD2DC" stroke-width="4"/>
+<x-embed style="position:absolute;left:128px;top:320px;width:1664px;height:580px"><!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="fx/kit.css"><script src="fx/kit.js"></script></head><body>
+<svg width="1664" height="580" viewBox="0 0 1664 580">
+<rect class="card" x="10" y="10" width="1644" height="262" rx="26"/>
+<rect class="card" x="10" y="308" width="1644" height="262" rx="26"/>
+<text x="46" y="64" font-size="32" class="b blue">Future</text>
+<text x="190" y="62" font-size="24" class="gray">un solo resultado (o un error), una vez</text>
+<text x="46" y="362" font-size="32" class="b amb">Stream</text>
+<text x="190" y="360" font-size="24" class="gray">muchos valores a lo largo del tiempo</text>
+<line x1="60" y1="170" x2="1180" y2="170" stroke="#CDD2DC" stroke-width="4" stroke-linecap="round"/>
+<line x1="60" y1="468" x2="1180" y2="468" stroke="#CDD2DC" stroke-width="4" stroke-linecap="round"/>
+<text x="1180" y="524" font-size="21" text-anchor="end" class="mute">sigue abierto…</text>
 <g id="dyn"></g>
-<line id="ph1" x1="60" y1="120" x2="60" y2="220" stroke="#23262F" stroke-width="3"/>
-<line id="ph2" x1="60" y1="420" x2="60" y2="520" stroke="#23262F" stroke-width="3"/>
+<g id="ph"><line x1="60" y1="122" x2="60" y2="218" stroke="#23262F" stroke-width="3" stroke-linecap="round"/><line x1="60" y1="420" x2="60" y2="516" stroke="#23262F" stroke-width="3" stroke-linecap="round"/></g>
+<!-- quién consume cada uno -->
+<rect x="1250" y="42" width="376" height="198" rx="22" fill="#FFFFFF" stroke="#23262F" stroke-width="4"/>
+<rect id="ff" class="tint hl" x="1252" y="44" width="372" height="194" rx="20"/>
+<text x="1274" y="80" font-size="19" class="mono b blue">FutureBuilder</text>
+<g id="fs" class="fx"></g>
+<text id="ft" x="1438" y="196" font-size="24" text-anchor="middle" class="gray">esperando…</text>
+<rect x="1250" y="340" width="376" height="198" rx="22" fill="#FFFFFF" stroke="#23262F" stroke-width="4"/>
+<rect id="sf" class="tint hl" x="1252" y="342" width="372" height="194" rx="20"/>
+<text x="1274" y="378" font-size="19" class="mono b amb">StreamBuilder</text>
+<text id="sn" x="1438" y="458" font-size="44" text-anchor="middle" class="b ink c">–</text>
+<text id="stt" x="1438" y="500" font-size="22" text-anchor="middle" class="gray">sin mensajes todavía</text>
 </svg>
 <script>
-var ns='http://www.w3.org/2000/svg',d=document.getElementById('dyn');
-function el(t,a,txt){var e=document.createElementNS(ns,t);for(var k in a)e.setAttribute(k,a[k]);if(txt)e.textContent=txt;d.appendChild(e);return e;}
-var T=6000,t0=null,doneF=false,next=0,msgs=0;
-function f(t){if(!t0){t0=t;d.innerHTML='';doneF=false;next=600;msgs=0;el('text',{x:80,y:230,'font-size':24,fill:'#9A9EAC'},'esperando…');}
-var e=t-t0,x=60+1540*Math.min(1,e/T);
-document.getElementById('ph1').setAttribute('x1',x);document.getElementById('ph1').setAttribute('x2',x);
-document.getElementById('ph2').setAttribute('x1',x);document.getElementById('ph2').setAttribute('x2',x);
-if(!doneF&&e>2200){doneF=true;el('circle',{cx:x,cy:170,r:18,fill:'#2F5BFF'});el('text',{x:x,y:132,'text-anchor':'middle','font-size':26,'font-weight':700,fill:'#23262F'},'List\u003CEstudiante>');el('text',{x:x+40,y:230,'font-size':24,fill:'#2F5BFF'},'✓ completado: ya no emite más');}
-if(e>next&&T>e){msgs++;next+=700+Math.random()*500;el('circle',{cx:x,cy:470,r:14,fill:'#D97706'});el('text',{x:x,y:440,'text-anchor':'middle','font-size':24,fill:'#23262F'},'msj '+msgs);}
-if(e>T+800)t0=null;requestAnimationFrame(f);}
-requestAnimationFrame(f);
+spinner(1438,128,24,$('fs'));
+var T=7200,dyn=$('dyn');
+function X(t){return 60+1120*t/T;}
+var EV=[[700,'s'],[1700,'s'],[2500,'s'],[2900,'f'],[3800,'s'],[4600,'s'],[5700,'s'],[6600,'s']];
+loop(async function(){
+ dyn.innerHTML='';show('fs');txt('ft','esperando…');$('ft').setAttribute('class','gray');txt('sn','–');txt('stt','sin mensajes todavía');
+ el('text',{x:80,y:228,'font-size':21,'class':'mute'},'esperando…',dyn);
+ $('ph').animate([{transform:'translateX(0)'},{transform:'translateX(1120px)'}],{duration:T,fill:'forwards'});
+ var t=0,m=0;
+ for(var i=0;i<EV.length;i++){var e=EV[i];await wait(e[0]-t);t=e[0];var x=X(t);
+  if(e[1]=='f'){                                   // el Future se completa una sola vez
+   pop(el('circle',{cx:x,cy:170,r:18,fill:BLU,'class':'c'},null,dyn),1.5);
+   el('text',{x:x,y:134,'text-anchor':'middle','font-size':22,'class':'mono b ink'},'List<Estudiante>',dyn);
+   el('line',{x1:x+26,y1:170,x2:1180,y2:170,stroke:'#ECEEF2','stroke-width':6},null,dyn);
+   el('text',{x:x+34,y:228,'font-size':21,'class':'b blue'},'✓ completado: ya no llega nada más',dyn);
+   show('fs',false);txt('ft','10 estudiantes');$('ft').setAttribute('class','b ink');flash('ff');
+  }else{m++;                                       // el Stream sigue emitiendo
+   pop(el('circle',{cx:x,cy:468,r:14,fill:AMB,'class':'c'},null,dyn),1.5);
+   el('text',{x:x,y:438,'text-anchor':'middle','font-size':21,'class':'ink'},'msj '+m,dyn);
+   txt('sn','msj '+m);txt('stt','se redibuja con cada valor');flash('sf');pop('sn',1.15);}}
+ await wait(T-t+1600);
+},300);
 </script></body></html></x-embed>
 <p style="font-size:21px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#6B7080">7 · Asincronía</p>
 <h2 style="font-family:Poppins, Arial, sans-serif;font-size:64px;font-weight:900;line-height:1.02;color:#23262F;text-transform:uppercase;letter-spacing:-3px">Future frente a Stream</h2>
 <p style="position:absolute;left:128px;bottom:56px;width:1664px;font-size:18px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#9A9EAC"><span style="display:inline-block;min-width:44px;padding:4px 14px;margin-right:16px;border-radius:999px;background:#2F5BFF;color:#FFFFFF;font-size:20px;font-weight:800;letter-spacing:0;text-align:center;vertical-align:middle">E</span></p>
-<aside>Analogía: un Future es como pedir una pizza: llega una vez (o te avisan que no hay). Un Stream es como un chat: los mensajes siguen llegando mientras estés suscrito. Ejemplos de Future: consultar estudiantes en una API, leer un archivo. Ejemplos de Stream: notificaciones en tiempo real, ubicación GPS, mensajes de Firebase. Para cada uno, Flutter tiene un widget: FutureBuilder y StreamBuilder.</aside>
+<aside>Analogía: un Future es como pedir una pizza: llega una vez (o te avisan que no hay). Un Stream es como un chat: los mensajes siguen llegando mientras estés suscrito. Ejemplos de Future: consultar estudiantes en una API, leer un archivo. Ejemplos de Stream: notificaciones en tiempo real, ubicación GPS, mensajes de Firebase. Para cada uno, Flutter tiene un widget: FutureBuilder y StreamBuilder (las dos tarjetas de la derecha: la primera se dibuja una vez con el resultado; la segunda se redibuja con cada valor).</aside>
 </section>

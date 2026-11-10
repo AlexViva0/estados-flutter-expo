@@ -24,6 +24,7 @@ assets/deck.css   estilos del motor
 deck.json         orden de las láminas y secciones
 slides/*.html     una lámina por archivo (<section> + <aside> con notas)
 fx/*.html         animaciones three.js usadas como fondos
+fx/kit.css · kit.js  estilos y utilidades que comparten las animaciones SVG de las láminas
 ```
 
 ### Editar una lámina
@@ -33,6 +34,16 @@ fx/*.html         animaciones three.js usadas como fondos
 3. Un `<x-embed>` es una animación en `iframe`: puede llevar una página completa dentro o un atributo `src` (por ejemplo `src="fx/campo.html"`).
 4. `data-build-in="fade|rise|pop"` en un elemento con `position:absolute` lo hace aparecer al avanzar.
 5. Para agregar o reordenar láminas, edita `order` en `deck.json`.
+
+### Animaciones SVG
+
+Las animaciones dentro de un `<x-embed>` cargan `fx/kit.css` y `fx/kit.js`, que dan un lenguaje común:
+
+- `tap(x, y)`: el punto ámbar (el “dedo”) viaja y toca.
+- `send(recorrido, ms, {label, color})`: un paquete viaja por una línea o un `<path>`. Ámbar es una acción o evento; `color: BLU` es estado o datos.
+- `on`, `show`, `txt`, `pop`, `flash`, `press`: encender, mostrar, cambiar texto y dar énfasis.
+- `loop(async () => { … })`: repite la secuencia.
+- `builds()`: cuántos pasos `data-build-in` lleva revelados la lámina; así una animación reacciona a los clics (láminas 5, 15 y 40).
 
 Cada `git push` a `main` se publica solo en Vercel: <https://estados-flutter-expo.vercel.app>
 

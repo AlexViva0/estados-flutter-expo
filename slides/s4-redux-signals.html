@@ -1,27 +1,46 @@
 <section id="s4-redux-signals" data-transition="fade" style="background:#ECEEF2;color:#23262F;font-family:Poppins, Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
-<x-embed style="position:absolute;left:128px;top:390px;width:800px;height:520px"><!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&display=swap"><style>
-html,body{margin:0;background:transparent;overflow:hidden;font-family:Poppins,system-ui,sans-serif}
-.n{fill:#FFFFFF;stroke:#CDD2DC;stroke-width:3;animation:h 4s infinite}
-@keyframes h{0%,20%,100%{fill:#FFFFFF;stroke:#CDD2DC}5%,15%{fill:#DCE4FF;stroke:#2F5BFF}}
-circle[fill="#F2A93B"]{filter:drop-shadow(0 0 6px rgba(245,158,11,.85))}
-g[transform] rect{filter:drop-shadow(0 4px 10px rgba(23,32,51,.25))}
-</style></head><body>
-<svg width="800" height="520" viewBox="0 20 800 520">
-<path id="p" d="M210 110 H590 V420 H210 Z" fill="none" stroke="#CDD2DC" stroke-width="4" stroke-dasharray="12 10"/>
-<rect class="n" x="60" y="60" width="300" height="100" rx="20" style="animation-delay:0s"/>
-<rect class="n" x="440" y="60" width="300" height="100" rx="20" style="animation-delay:1s"/>
-<rect class="n" x="440" y="370" width="300" height="100" rx="20" style="animation-delay:2s"/>
-<rect class="n" x="60" y="370" width="300" height="100" rx="20" style="animation-delay:3s"/>
-<text x="210" y="120" font-size="32" font-weight="700" text-anchor="middle" fill="#23262F">UI</text>
-<text x="590" y="120" font-size="32" font-weight="700" text-anchor="middle" fill="#23262F">Acción</text>
-<text x="590" y="430" font-size="32" font-weight="700" text-anchor="middle" fill="#23262F">Reducer</text>
-<text x="210" y="430" font-size="32" font-weight="700" text-anchor="middle" fill="#23262F">Store</text>
-<text x="400" y="45" font-size="24" text-anchor="middle" fill="#D97706">dispatch</text>
-<text x="770" y="270" font-size="24" text-anchor="end" fill="#D97706">estado + acción</text>
-<text x="400" y="510" font-size="24" text-anchor="middle" fill="#D97706">estado nuevo</text>
-<text x="30" y="270" font-size="24" fill="#D97706">notifica</text>
-<circle r="14" fill="#F2A93B"><animateMotion dur="4s" repeatCount="indefinite" path="M210 110 H590 V420 H210 Z"/></circle>
-</svg></body></html></x-embed>
+<x-embed style="position:absolute;left:128px;top:390px;width:800px;height:520px"><!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="fx/kit.css"><script src="fx/kit.js"></script></head><body>
+<svg width="800" height="520" viewBox="0 0 800 520">
+<path id="w1" class="wire" d="M330 84H625V190"/>
+<path id="w2" class="wire st" d="M330 420H580V330"/>
+<path id="w3" class="wire st" d="M670 330V470H330"/>
+<path id="w4" class="wire st" d="M185 376V146"/>
+<text x="478" y="66" font-size="19" text-anchor="middle" class="b amb">dispatch(acción)</text>
+<text x="455" y="404" font-size="19" text-anchor="middle" class="b blue">estado actual</text>
+<text x="500" y="502" font-size="19" text-anchor="middle" class="b blue">estado nuevo</text>
+<text x="200" y="268" font-size="19" class="b blue">notifica</text>
+<!-- UI -->
+<rect class="scr" x="40" y="24" width="290" height="120" rx="24"/>
+<rect id="uf" class="tint hl" x="43" y="27" width="284" height="114" rx="21"/>
+<text x="66" y="60" font-size="20" class="head gray">UI</text>
+<text id="un" x="140" y="118" font-size="52" text-anchor="middle" class="b ink c">0</text>
+<g id="ub" class="c"><circle cx="270" cy="84" r="30" fill="#23262F"/><path d="M257 84h26M270 71v26" stroke="#F4F5F8" stroke-width="5" stroke-linecap="round"/></g>
+<!-- Reducer -->
+<rect class="dark" x="470" y="190" width="310" height="140" rx="24"/>
+<rect id="rh" class="hl" x="470" y="190" width="310" height="140" rx="24" fill="none" stroke="#F2A93B" stroke-width="6"/>
+<text x="625" y="246" font-size="28" text-anchor="middle" class="b wht">Reducer</text>
+<text x="625" y="290" font-size="17" text-anchor="middle" class="mono mute">(estado, acción) =&gt; nuevo</text>
+<!-- Store -->
+<rect class="card" x="40" y="376" width="290" height="120" rx="24"/>
+<text x="66" y="412" font-size="20" class="head gray">STORE</text>
+<text x="66" y="464" font-size="28" class="mono ink">estado = </text><text id="sv" x="218" y="464" font-size="28" class="mono b blue c">0</text>
+</svg>
+<script>
+var n=0;
+loop(async function(){
+ await tap(270,84);press('ub');
+ on('w1');on('w2');                                   // 1 · la acción y el estado actual llegan juntos al reducer
+ await Promise.all([send('w1',900,{label:'SUMAR',mono:true}),send('w2',900,{label:String(n),color:BLU,mono:true})]);
+ on('w1',false);on('w2',false);on('rh');
+ await wait(750);
+ n++;on('w3');await send('w3',800,{label:String(n),color:BLU,mono:true});   // 2 · devuelve un estado nuevo
+ on('w3',false);on('rh',false);txt('sv',n);pop('sv');
+ await wait(450);
+ on('w4');await send('w4',520,{color:BLU});on('w4',false);                   // 3 · el store avisa a la UI
+ txt('un',n);flash('uf');pop('un',1.2);
+ await wait(1500);
+});
+</script></body></html></x-embed>
 <div style="display:flex;flex-direction:column;gap:16px">
 <p style="font-size:21px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#6B7080">5.7 – 5.8 · Dos extremos</p>
 <h2 style="font-family:Poppins, Arial, sans-serif;font-size:64px;font-weight:900;line-height:1.02;color:#23262F;text-transform:uppercase;letter-spacing:-3px">Redux y Signals</h2>
@@ -35,5 +54,5 @@ g[transform] rect{filter:drop-shadow(0 4px 10px rgba(23,32,51,.25))}
 </div>
 </div>
 <p style="position:absolute;left:128px;bottom:56px;width:1664px;font-size:18px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#9A9EAC"><span style="display:inline-block;min-width:44px;padding:4px 14px;margin-right:16px;border-radius:999px;background:#2F5BFF;color:#FFFFFF;font-size:20px;font-weight:800;letter-spacing:0;text-align:center;vertical-align:middle">D</span></p>
-<aside>Redux (paquete flutter_redux): 1) un componente despacha una acción; 2) el reducer recibe el estado anterior y la acción; 3) devuelve un estado nuevo; 4) los componentes conectados al store se actualizan. Se usa en apps grandes, como paneles administrativos, donde importa rastrear cada cambio. Signals (paquete signals_flutter): sirve para cálculos derivados, filtros y formularios dinámicos; en el ejemplo, total se recalcula solo cuando cambia precio. Mencionar también flutter_hooks: reutiliza lógica del ciclo de vida con funciones llamadas hooks.</aside>
+<aside>Redux (paquete flutter_redux), siguiendo la animación del contador: 1) la UI despacha la acción SUMAR; 2) el reducer recibe a la vez la acción y el estado actual que le da el store; 3) devuelve un estado nuevo, que el store guarda; 4) el store notifica y la UI se actualiza. Se usa en apps grandes, como paneles administrativos, donde importa rastrear cada cambio. Signals (paquete signals_flutter): sirve para cálculos derivados, filtros y formularios dinámicos; en el ejemplo, total se recalcula solo cuando cambia precio. Mencionar también flutter_hooks: reutiliza lógica del ciclo de vida con funciones llamadas hooks.</aside>
 </section>

@@ -1,32 +1,37 @@
 <section id="s2-valuenotifier" data-transition="fade" style="background:#ECEEF2;color:#23262F;font-family:Poppins, Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:32px">
-<x-embed style="position:absolute;left:1120px;top:300px;width:672px;height:600px"><!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&display=swap"><style>
-html,body{margin:0;background:transparent;overflow:hidden;font-family:Poppins,system-ui,sans-serif}
-.fl{animation:f .8s}
-@keyframes f{0%{fill:#FFFFFF}30%{fill:#DCE4FF}100%{fill:#FFFFFF}}
-.mono{font-family:"JetBrains Mono",Consolas,monospace}
-</style></head><body>
+<x-embed style="position:absolute;left:1120px;top:300px;width:672px;height:600px"><!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="fx/kit.css"><script src="fx/kit.js"></script></head><body>
 <svg width="672" height="600" viewBox="0 0 672 600">
-<defs><marker id="a" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M0 0 L12 6 L0 12 z" fill="#D97706"/></marker></defs>
-<rect id="v" x="136" y="20" width="400" height="120" rx="24" fill="#FFFFFF" stroke="#2F5BFF" stroke-width="4"/>
-<text x="336" y="70" font-size="26" text-anchor="middle" fill="#6B7080">ValueNotifier</text>
-<text x="336" y="115" class="mono" font-size="34" text-anchor="middle" fill="#23262F">value = <tspan id="n" fill="#2F5BFF" font-weight="700">1</tspan></text>
-<path id="ar" d="M336 145 V250" stroke="#D97706" stroke-width="5" marker-end="url(#a)" opacity="0"/>
-<text x="352" y="210" font-size="24" fill="#D97706" id="avisa" opacity="0">avisa</text>
-<rect x="20" y="260" width="632" height="320" rx="24" fill="#E6E9EF" stroke="#CDD2DC" stroke-width="3"/>
-<text x="44" y="300" font-size="24" fill="#6B7080">La pantalla</text>
-<rect x="44" y="320" width="584" height="80" rx="16" fill="#DCE0E7"/>
-<text x="64" y="370" font-size="26" fill="#9A9EAC">AppBar: no se reconstruye</text>
-<rect id="w" x="44" y="420" width="584" height="130" rx="16" fill="#FFFFFF" stroke="#2F5BFF" stroke-width="4"/>
-<text x="64" y="460" font-size="24" fill="#2F5BFF">ValueListenableBuilder</text>
-<text x="64" y="515" font-size="36" font-weight="700" fill="#23262F">Cantidad: <tspan id="m">1</tspan></text>
-<text id="ok" x="610" y="515" font-size="24" font-weight="700" text-anchor="end" fill="#D97706" opacity="0">se reconstruye</text>
+<defs><clipPath id="cl"><rect x="60" y="196" width="552" height="392" rx="30"/></clipPath></defs>
+<rect class="card" x="126" y="14" width="420" height="112" rx="24"/>
+<text x="336" y="52" font-size="20" text-anchor="middle" class="gray">ValueNotifier&lt;int&gt;</text>
+<text x="185" y="98" font-size="28" class="mono ink">cantidad.value = </text><text id="v" x="471" y="98" font-size="28" class="mono b blue c">1</text>
+<rect class="scr" x="60" y="196" width="552" height="392" rx="30"/>
+<rect x="60" y="196" width="552" height="76" fill="#23262F" clip-path="url(#cl)"/>
+<text x="92" y="244" font-size="26" class="b wht">Carrito</text>
+<text x="584" y="243" font-size="19" text-anchor="end" class="mono mute">builds: 1</text>
+<path id="w2" class="wire st" d="M336 126V294"/>
+<text id="av" x="352" y="170" font-size="20" class="b blue fx off">avisa</text>
+<rect id="bf" class="tint hl" x="84" y="294" width="504" height="128" rx="18"/>
+<rect class="bound" x="84" y="294" width="504" height="128" rx="18"/>
+<text x="104" y="328" font-size="19" class="sb blue">ValueListenableBuilder</text>
+<text x="104" y="388" font-size="34" class="b ink">Cantidad:</text><text id="q" x="290" y="388" font-size="34" class="b ink c">1</text>
+<text id="bb" x="568" y="386" font-size="19" text-anchor="end" class="mono b blue">builds: 1</text>
+<path id="w1" class="wire" d="M294 506H28V70H126"/>
+<g id="btn" class="c"><circle cx="336" cy="506" r="42" fill="#23262F"/><path d="M318 506h36M336 488v36" stroke="#F4F5F8" stroke-width="6" stroke-linecap="round"/></g>
+<text x="396" y="513" font-size="19" class="mono gray">cantidad.value++</text>
 </svg>
 <script>
-var n=1;function fl(id){var e=document.getElementById(id);e.classList.remove('fl');void e.getBBox();e.classList.add('fl');}
-function op(id,v){document.getElementById(id).setAttribute('opacity',v);}
-setInterval(function(){n++;document.getElementById('n').textContent=n;fl('v');op('ar',1);op('avisa',1);
-setTimeout(function(){document.getElementById('m').textContent=n;fl('w');op('ok',1);},500);
-setTimeout(function(){op('ar',0);op('avisa',0);op('ok',0);},1500);},2200);
+var n=1,b=1;
+loop(async function(){
+ await tap(336,506);press('btn');
+ on('w1');await send('w1',850);on('w1',false);
+ n++;txt('v',n);pop('v');                                  // cambia el valor
+ await wait(500);
+ on('w2');show('av');await send('w2',520,{color:BLU});       // avisa a quien lo escucha
+ b++;txt('q',n);txt('bb','builds: '+b);flash('bf');pop('q',1.25);   // solo se reconstruye el builder
+ await wait(700);on('w2',false);show('av',false);
+ await wait(1300);
+});
 </script></body></html></x-embed>
 <div style="display:flex;flex-direction:column;gap:16px">
 <p style="font-size:21px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#6B7080">4.3 · ValueNotifier</p>
@@ -34,5 +39,5 @@ setTimeout(function(){op('ar',0);op('avisa',0);op('ok',0);},1500);},2200);
 </div>
 <div style="background:#23262F;border-radius:20px;padding:32px 40px;width:940px"><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;line-height:1.5;color:#E6EDF3;white-space:nowrap"><span style="color:#8EA4FF">final</span> cantidad = <span style="color:#FFFFFF">ValueNotifier</span>&lt;<span style="color:#8EA4FF">int</span>&gt;(<span style="color:#F2B66D">1</span>);<br><br><span style="color:#FFFFFF">ValueListenableBuilder</span>&lt;<span style="color:#8EA4FF">int</span>&gt;(<br>&#160;&#160;valueListenable: cantidad,<br>&#160;&#160;builder: (context, valor, child) {<br>&#160;&#160;&#160;&#160;<span style="color:#8EA4FF">return</span> <span style="color:#FFFFFF">Text</span>(<span style="color:#86D3A9">'Cantidad: $valor'</span>);<br>&#160;&#160;},<br>)<br><br><span style="color:#8A8F9C">// en un botón, sin setState:</span><br>onPressed: () =&gt; cantidad.value++,</p></div>
 <p style="position:absolute;left:128px;bottom:56px;width:1664px;font-size:18px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#9A9EAC"><span style="display:inline-block;min-width:44px;padding:4px 14px;margin-right:16px;border-radius:999px;background:#2F5BFF;color:#FFFFFF;font-size:20px;font-weight:800;letter-spacing:0;text-align:center;vertical-align:middle">B</span></p>
-<aside>ValueNotifier guarda un valor y notifica a quien lo escucha cuando cambia su propiedad value. Junto con ValueListenableBuilder, solo se redibuja la parte que observa el valor, no toda la pantalla (eso muestra la animación: el AppBar no se toca). Ventajas: sencillo, reactivo e incluido en Flutter. Desventaja: no resuelve por sí solo el estado de una app compleja. Dónde se usa: contadores, selecciones y preferencias pequeñas.</aside>
+<aside>ValueNotifier guarda un valor y notifica a quien lo escucha cuando cambia su propiedad value. Junto con ValueListenableBuilder, solo se redibuja la parte que observa el valor, no toda la pantalla (eso muestra la animación: el contador “builds” del AppBar se queda en 1 mientras el del ValueListenableBuilder sube con cada cambio). Ventajas: sencillo, reactivo e incluido en Flutter. Desventaja: no resuelve por sí solo el estado de una app compleja. Dónde se usa: contadores, selecciones y preferencias pequeñas.</aside>
 </section>

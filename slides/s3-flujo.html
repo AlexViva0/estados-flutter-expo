@@ -1,48 +1,52 @@
 <section id="s3-flujo" data-transition="fade" style="background:#ECEEF2;color:#23262F;font-family:Poppins, Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:16px">
-<x-embed style="position:absolute;left:128px;top:300px;width:1664px;height:620px"><!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&display=swap"><style>
-html,body{margin:0;background:transparent;overflow:hidden;font-family:Poppins,system-ui,sans-serif}
-.fl{animation:f .8s}
-@keyframes f{0%,100%{fill:#FFFFFF}35%{fill:#DCE4FF}}
-.ar{transition:opacity .3s}
-#btn{transform-origin:1364px 470px}
-.pr{animation:p .35s}
-@keyframes p{50%{transform:scale(.92)}}
-</style></head><body>
+<x-embed style="position:absolute;left:128px;top:300px;width:1664px;height:620px"><!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="fx/kit.css"><script src="fx/kit.js"></script></head><body>
 <svg width="1664" height="620" viewBox="0 0 1664 620">
-<defs><marker id="o" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M0 0 L12 6 L0 12 z" fill="#D97706"/></marker>
-<marker id="b" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M0 0 L12 6 L0 12 z" fill="#2F5BFF"/></marker></defs>
-<rect x="20" y="10" width="1624" height="600" rx="28" fill="none" stroke="#2F5BFF" stroke-width="3" stroke-dasharray="14 10"/>
-<text x="50" y="50" font-size="26" font-weight="700" fill="#2F5BFF">ChangeNotifierProvider</text>
-<rect id="c" x="572" y="70" width="520" height="150" rx="24" fill="#FFFFFF" stroke="#23262F" stroke-width="4"/>
-<text x="832" y="125" font-size="30" font-weight="700" text-anchor="middle" fill="#23262F">Carrito (ChangeNotifier)</text>
-<text x="832" y="180" font-family="JetBrains Mono,Consolas,monospace" font-size="30" text-anchor="middle" fill="#23262F">items: <tspan id="k" fill="#2F5BFF" font-weight="700">0</tspan></text>
-<path id="up" class="ar" d="M1364 395 C1364 280 1250 160 1100 150" fill="none" stroke="#D97706" stroke-width="5" marker-end="url(#o)" opacity="0"/>
-<text id="upl" class="ar" x="1290" y="260" font-size="26" font-weight="700" fill="#D97706" opacity="0">read().agregar()</text>
-<path id="d1" class="ar" d="M690 225 C600 300 330 300 300 385" fill="none" stroke="#2F5BFF" stroke-width="5" marker-end="url(#b)" opacity="0"/>
-<path id="d2" class="ar" d="M832 225 V385" fill="none" stroke="#2F5BFF" stroke-width="5" marker-end="url(#b)" opacity="0"/>
-<text id="nl" class="ar" x="560" y="310" font-size="26" font-weight="700" text-anchor="middle" fill="#2F5BFF" opacity="0">notifyListeners()</text>
-<rect id="w1" x="80" y="395" width="440" height="160" rx="22" fill="#FFFFFF" stroke="#2F5BFF" stroke-width="4"/>
-<text x="300" y="440" font-size="24" text-anchor="middle" fill="#2F5BFF">context.watch</text>
-<text x="300" y="500" font-size="34" font-weight="700" text-anchor="middle" fill="#23262F">AppBar: <tspan id="k1">0</tspan></text>
-<rect id="w2" x="612" y="395" width="440" height="160" rx="22" fill="#FFFFFF" stroke="#2F5BFF" stroke-width="4"/>
-<text x="832" y="440" font-size="24" text-anchor="middle" fill="#2F5BFF">context.watch</text>
-<text x="832" y="500" font-size="34" font-weight="700" text-anchor="middle" fill="#23262F">Total: $<tspan id="k2">0</tspan></text>
-<rect x="1144" y="395" width="440" height="160" rx="22" fill="#FFFFFF" stroke="#CDD2DC" stroke-width="3"/>
-<text x="1364" y="440" font-size="24" text-anchor="middle" fill="#9A9EAC">context.read · no se reconstruye</text>
-<g id="btn"><rect x="1234" y="465" width="260" height="64" rx="32" fill="#D97706"/><text x="1364" y="507" font-size="28" font-weight="700" text-anchor="middle" fill="#F4F5F8">Agregar</text></g>
+<rect x="20" y="10" width="1624" height="600" rx="28" class="bound"/>
+<text x="52" y="54" font-size="24" class="b blue">ChangeNotifierProvider</text>
+<path id="up" class="wire" d="M1364 395C1364 280 1250 150 1100 150"/>
+<path id="d1" class="wire st" d="M690 222C640 300 330 300 300 393"/>
+<path id="d2" class="wire st" d="M832 222V393"/>
+<text id="nl" x="856" y="316" font-size="21" class="mono b blue fx off">notifyListeners()</text>
+<!-- el modelo -->
+<rect class="card" x="572" y="70" width="520" height="150" rx="24"/>
+<rect id="cf" class="tint hl" x="572" y="70" width="520" height="150" rx="24"/>
+<text x="832" y="122" font-size="26" text-anchor="middle" class="b ink">Carrito · ChangeNotifier</text>
+<text x="748" y="182" font-size="30" class="mono ink">items = </text><text id="k" x="892" y="182" font-size="30" class="mono b blue c">0</text>
+<!-- widgets que escuchan -->
+<rect class="card" x="80" y="395" width="440" height="160" rx="22"/><rect id="f1" class="tint hl" x="80" y="395" width="440" height="160" rx="22"/>
+<rect class="bound" x="80" y="395" width="440" height="160" rx="22"/>
+<text x="108" y="436" font-size="20" class="mono b blue">context.watch</text>
+<text x="108" y="508" font-size="34" class="b ink">Insignia:</text><text id="k1" x="280" y="508" font-size="34" class="b ink c">0</text>
+<text id="b1" x="496" y="436" font-size="19" text-anchor="end" class="mono b blue">builds: 1</text>
+<rect class="card" x="612" y="395" width="440" height="160" rx="22"/><rect id="f2" class="tint hl" x="612" y="395" width="440" height="160" rx="22"/>
+<rect class="bound" x="612" y="395" width="440" height="160" rx="22"/>
+<text x="640" y="436" font-size="20" class="mono b blue">context.watch</text>
+<text x="640" y="508" font-size="34" class="b ink">Total: $</text><text id="k2" x="774" y="508" font-size="34" class="b ink">0</text>
+<text id="b2" x="1028" y="436" font-size="19" text-anchor="end" class="mono b blue">builds: 1</text>
+<!-- widget que solo actúa -->
+<rect class="card" x="1144" y="395" width="440" height="160" rx="22"/>
+<text x="1172" y="436" font-size="20" class="mono b gray">context.read</text>
+<text x="1560" y="436" font-size="19" text-anchor="end" class="mono mute">builds: 1</text>
+<g id="btn" class="c"><rect x="1244" y="462" width="240" height="64" rx="32" fill="#23262F"/><text x="1364" y="503" font-size="24" text-anchor="middle" class="sb wht">Agregar</text></g>
+<text x="1364" y="590" font-size="20" text-anchor="middle" class="gray">no escucha: no se reconstruye</text>
 </svg>
 <script>
-var n=0;function $(i){return document.getElementById(i);}
-function fl(i){var e=$(i);e.classList.remove('fl');void e.getBBox();e.classList.add('fl');}
-function op(a,v){a.forEach(function(i){$(i).setAttribute('opacity',v);});}
-function cycle(){var b=$('btn');b.classList.remove('pr');void b.getBBox();b.classList.add('pr');op(['up','upl'],1);
-setTimeout(function(){n++;$('k').textContent=n;fl('c');op(['up','upl'],0);op(['d1','d2','nl'],1);},700);
-setTimeout(function(){$('k1').textContent=n;$('k2').textContent=n*250;fl('w1');fl('w2');},1300);
-setTimeout(function(){op(['d1','d2','nl'],0);},2200);}
-cycle();setInterval(cycle,3200);
+var n=0,b=1;
+loop(async function(){
+ await tap(1364,494);press('btn');
+ on('up');await send('up',850,{label:'agregar()',mono:true});on('up',false);     // 1 · read: solo llama al método
+ n++;txt('k',n);pop('k');flash('cf');
+ await wait(550);
+ on('d1');on('d2');show('nl');                                                    // 2 · el modelo avisa
+ await Promise.all([send('d1',700,{color:BLU}),send('d2',700,{color:BLU})]);
+ b++;txt('k1',n);txt('k2',n*250);txt('b1','builds: '+b);txt('b2','builds: '+b);  // 3 · los que hacen watch se reconstruyen
+ flash('f1');flash('f2');pop('k1',1.2);
+ await wait(800);on('d1',false);on('d2',false);show('nl',false);
+ await wait(1500);
+});
 </script></body></html></x-embed>
 <p style="font-size:21px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#6B7080">5.1 · Cómo fluye</p>
 <h2 style="font-family:Poppins, Arial, sans-serif;font-size:64px;font-weight:900;line-height:1.02;color:#23262F;text-transform:uppercase;letter-spacing:-3px">Un cambio, todos se enteran</h2>
 <p style="position:absolute;left:128px;bottom:56px;width:1664px;font-size:18px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#9A9EAC"><span style="display:inline-block;min-width:44px;padding:4px 14px;margin-right:16px;border-radius:999px;background:#2F5BFF;color:#FFFFFF;font-size:20px;font-weight:800;letter-spacing:0;text-align:center;vertical-align:middle">C</span></p>
-<aside>Narrar la animación en tres tiempos. 1) El botón Agregar llama a context.read&lt;Carrito&gt;().agregar(): read solo toma el objeto, no se suscribe. 2) El carrito cambia sus datos y llama a notifyListeners(). 3) Los widgets que usan context.watch&lt;Carrito&gt;() (el contador del AppBar y el total) se reconstruyen. El botón no se reconstruye porque no está escuchando. Pregunta al grupo: “¿Qué pasaría si el botón usara watch?” Se reconstruiría sin necesidad cada vez que cambia el carrito.</aside>
+<aside>Narrar la animación en tres tiempos. 1) El botón Agregar llama a context.read&lt;Carrito&gt;().agregar(): read solo toma el objeto, no se suscribe. 2) El carrito cambia sus datos y llama a notifyListeners(). 3) Los widgets que usan context.watch&lt;Carrito&gt;() (el contador del AppBar y el total) se reconstruyen. El botón no se reconstruye porque no está escuchando: su contador “builds” se queda en 1 mientras los otros dos suben. Pregunta al grupo: “¿Qué pasaría si el botón usara watch?” Se reconstruiría sin necesidad cada vez que cambia el carrito.</aside>
 </section>

@@ -1,41 +1,58 @@
 <section id="s2-setstate" data-transition="fade" style="background:#ECEEF2;color:#23262F;font-family:Poppins, Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:16px">
-<x-embed style="position:absolute;left:128px;top:330px;width:1664px;height:580px"><!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&display=swap"><style>
-html,body{margin:0;background:transparent;overflow:hidden;font-family:Poppins,system-ui,sans-serif}
-.b{fill:#FFFFFF;stroke:#CDD2DC;stroke-width:3;transition:fill .3s,stroke .3s}
-.on{fill:#2F5BFF;stroke:#2F5BFF}
-.t{transition:fill .3s}
-#btn{transform-origin:832px 500px}
-.press{animation:pr .3s}
-@keyframes pr{50%{transform:scale(.92)}}
-</style></head><body>
-<svg width="1664" height="580" viewBox="0 0 1664 580">
-<defs><marker id="a" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M0 0 L12 6 L0 12 z" fill="#6B7080"/></marker></defs>
-<g id="g"></g>
-<path d="M1444 200 V270 H220 V200" fill="none" stroke="#6B7080" stroke-width="3" stroke-dasharray="10 8" marker-end="url(#a)"/>
-<text x="832" y="310" font-size="26" text-anchor="middle" fill="#6B7080">se repite en cada interacción</text>
-<rect x="582" y="350" width="500" height="210" rx="28" fill="#FFFFFF" stroke="#23262F" stroke-width="4"/>
-<text x="832" y="425" font-size="44" font-weight="700" text-anchor="middle" fill="#23262F">Contador: <tspan id="n">0</tspan></text>
-<g id="btn"><rect x="702" y="470" width="260" height="60" rx="30" fill="#D97706"/><text x="832" y="510" font-size="26" font-weight="700" text-anchor="middle" fill="#F4F5F8">Incrementar</text></g>
-</svg>
+<x-embed style="position:absolute;left:128px;top:330px;width:1664px;height:580px"><!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="fx/kit.css"><script src="fx/kit.js"></script></head><body>
+<svg width="1664" height="580" viewBox="0 0 1664 580"></svg>
 <script>
-var ns='http://www.w3.org/2000/svg',g=document.getElementById('g');
-var L=[['1 · Toque','el usuario presiona'],['2 · setState()','cambias el dato adentro'],['3 · build()','Flutter reprograma el dibujo'],['4 · Pantalla','muestra el valor nuevo']];
-var B=[],T=[];
-function el(t,a,p){var e=document.createElementNS(ns,t);for(var k in a)e.setAttribute(k,a[k]);(p||g).appendChild(e);return e;}
-L.forEach(function(l,i){var x=50+i*408;B.push(el('rect',{x:x,y:30,width:340,height:170,rx:24,'class':'b'}));
-var a=el('text',{x:x+170,y:102,'text-anchor':'middle','font-size':34,'font-weight':700,fill:'#23262F','class':'t'});a.textContent=l[0];
-var b=el('text',{x:x+170,y:148,'text-anchor':'middle','font-size':26,fill:'#6B7080','class':'t'});b.textContent=l[1];T.push([a,b]);
-if(i<3)el('line',{x1:x+346,y1:115,x2:x+402,y2:115,stroke:'#6B7080','stroke-width':4,'marker-end':'url(#a)'});});
-var s=0,n=0,btn=document.getElementById('btn');
-function step(){B.forEach(function(b,i){var on=i==s;b.setAttribute('class',on?'b on':'b');T[i][0].setAttribute('fill',on?'#F4F5F8':'#23262F');T[i][1].setAttribute('fill',on?'#DCE4FF':'#6B7080');});
-if(s==0){btn.classList.remove('press');void btn.getBBox();btn.classList.add('press');}
-if(s==3){n++;document.getElementById('n').textContent=n;}
-s=(s+1)%4;}
-step();setInterval(step,1100);
+// Dos carriles con las mismas cuatro cajas: botón → código → memoria → pantalla.
+function lane(p,y,ok){
+ var g=el('g',{id:p,'class':'fx'+(ok?'':' off')});
+ el('text',{x:20,y:y-18,'font-size':22,'letter-spacing':2,'class':'b '+(ok?'grn':'red')},ok?'CON setState( )':'SIN setState( )',g);
+ el('text',{x:258,y:y-18,'font-size':22,'class':'gray'},ok?'el dato cambia y Flutter se entera':'el dato cambia, pero nadie le avisa a Flutter',g);
+ el('rect',{x:20,y:y,width:320,height:190,rx:26,'class':'card'},null,g);
+ var b=el('g',{id:p+'b','class':'c'},null,g);
+ el('rect',{x:60,y:y+62,width:240,height:66,rx:33,fill:INK},null,b);
+ el('text',{x:180,y:y+104,'text-anchor':'middle','font-size':24,'class':'sb wht'},'Incrementar',b);
+ el('rect',{x:450,y:y,width:320,height:190,rx:26,'class':'dark'},null,g);
+ el('rect',{id:p+'h',x:466,y:y+(ok?72:66),width:288,height:46,rx:10,fill:AMB,'fill-opacity':.3,'class':'hl'},null,g);
+ var m=el('g',{'class':'mono','font-size':23},null,g);
+ if(ok){el('text',{x:482,y:y+62,'class':'gold'},'setState(() {',m);el('text',{x:482,y:y+104,'class':'wht'},'  contador++;',m);el('text',{x:482,y:y+146,'class':'gold'},'});',m);}
+ else{el('text',{x:482,y:y+98,'class':'wht'},'contador++;',m);el('text',{x:482,y:y+140,'class':'mute'},'// sin setState',m);}
+ el('rect',{x:880,y:y,width:320,height:190,rx:26,'class':'card'},null,g);
+ el('text',{x:1040,y:y+58,'text-anchor':'middle','font-size':20,'class':'gray'},'en memoria',g);
+ el('text',{x:936,y:y+118,'font-size':28,'class':'mono ink'},'contador = ',g);
+ el('text',{id:p+'m',x:1121,y:y+118,'font-size':28,'class':'mono b blue c'},'0',g);
+ el('rect',{x:1310,y:y,width:320,height:190,rx:26,'class':'scr'},null,g);
+ el('rect',{id:p+'f',x:1313,y:y+3,width:314,height:184,rx:23,'class':'tint hl'},null,g);
+ el('text',{x:1470,y:y+52,'text-anchor':'middle','font-size':22,'class':'gray'},'Contador',g);
+ el('text',{id:p+'n',x:1470,y:y+128,'text-anchor':'middle','font-size':64,'class':'b ink c'},'0',g);
+ [350,780,1210].forEach(function(x){el('line',{x1:x,y1:y+95,x2:x+90,y2:y+95,'class':'wire','marker-end':'url(#ar)'},null,g);});
+ if(ok)el('text',{x:1255,y:y+72,'text-anchor':'middle','font-size':19,'class':'mono gray'},'build()',g);
+ else{var x=el('g',{id:'Bx','class':'c'},null,g);
+  el('path',{d:'M1241 '+(y+81)+'l28 28m0-28l-28 28',stroke:RED,'stroke-width':6,'stroke-linecap':'round'},null,x);
+  el('text',{x:1255,y:y+62,'text-anchor':'middle','font-size':19,'class':'b red'},'sin aviso',g);
+  el('text',{id:'Bt',x:1470,y:y+168,'text-anchor':'middle','font-size':19,'class':'b red fx off'},'desactualizada',g);}
+}
+lane('A',44,true);lane('B',354,false);
+var cnt={A:0,B:0};
+async function run(p,y,ok){
+ await tap(180,y+95);press(p+'b');
+ await send([[350,y+95],[440,y+95]],400);
+ on(p+'h');await wait(550);
+ await send([[780,y+95],[870,y+95]],400);
+ cnt[p]++;txt(p+'m',cnt[p]);pop(p+'m');                       // el dato cambia en memoria
+ await wait(750);
+ if(ok){await send([[1210,y+95],[1300,y+95]],400);flash(p+'f');txt(p+'n',cnt[p]);pop(p+'n',1.25);}
+ else{await send([[1210,y+95],[1244,y+95]],240);pop('Bx',1.6);show('Bt');}   // nadie avisa: la pantalla se queda igual
+ on(p+'h',false);
+ await wait(1500);
+}
+// El carril "sin setState" aparece cuando la lámina revela su primer paso.
+setInterval(function(){show('B',builds()>0);},250);
+loop(async function(){await run('A',44,true);if(builds()>0)await run('B',354,false);});
 </script></body></html></x-embed>
 <p style="font-size:21px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#6B7080">4.1 · setState()</p>
 <h2 style="font-family:Poppins, Arial, sans-serif;font-size:64px;font-weight:900;line-height:1.02;color:#23262F;text-transform:uppercase;letter-spacing:-3px">Avisarle a Flutter que algo cambió</h2>
 <p style="font-size:32px;line-height:1.4;color:#6B7080;width:1500px">Método de la clase <b>State</b>: cambia el dato y programa una nueva construcción del widget.</p>
+<p data-build-in="rise" style="position:absolute;left:128px;top:922px;width:1664px;font-size:26px;line-height:1.3;color:#23262F"><b style="color:#E5484D">Trampa:</b> fuera de setState el dato sí cambia en memoria, pero la pantalla no se entera y sigue mostrando el valor viejo.</p>
 <p style="position:absolute;left:128px;bottom:56px;width:1664px;font-size:18px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#9A9EAC"><span style="display:inline-block;min-width:44px;padding:4px 14px;margin-right:16px;border-radius:999px;background:#2F5BFF;color:#FFFFFF;font-size:20px;font-weight:800;letter-spacing:0;text-align:center;vertical-align:middle">B</span></p>
-<aside>Seguir la animación con el dedo: 1) el usuario toca; 2) el código cambia el valor DENTRO de setState; 3) Flutter marca el widget como “sucio” y en el siguiente cuadro vuelve a llamar a build(); 4) la interfaz muestra el número nuevo. Pregunta trampa para el grupo: “¿Qué pasa si hago contador++ FUERA de setState?” Respuesta: el valor sí cambia en memoria, pero la pantalla no se entera y sigue mostrando el número viejo.</aside>
+<aside>Seguir el carril de arriba con el dedo: 1) el usuario toca; 2) el código cambia el valor DENTRO de setState; 3) el dato cambia en memoria y Flutter marca el widget como “sucio”; 4) en el siguiente cuadro vuelve a llamar a build() y la interfaz muestra el número nuevo. Pregunta trampa para el grupo ANTES de hacer clic: “¿Qué pasa si hago contador++ FUERA de setState?”. Escuchar respuestas y entonces hacer clic: aparece el segundo carril, donde el valor en memoria sigue subiendo pero la pantalla se queda en 0, porque nadie le avisó a Flutter.</aside>
 </section>

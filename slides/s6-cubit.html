@@ -1,43 +1,34 @@
 <section id="s6-cubit" data-transition="fade" style="background:#ECEEF2;color:#23262F;font-family:Poppins, Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:16px">
-<x-embed style="position:absolute;left:128px;top:300px;width:1664px;height:600px"><!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&display=swap"><style>
-html,body{margin:0;background:transparent;overflow:hidden;font-family:Poppins,system-ui,sans-serif}
-#btn{transform-origin:240px 440px}
-.pr{animation:p .35s}
-@keyframes p{50%{transform:scale(.9)}}
-.fl{animation:f .7s}
-@keyframes f{0%,100%{fill:#23262F}40%{fill:#2F5BFF}}
-circle[fill="#F2A93B"]{filter:drop-shadow(0 0 6px rgba(245,158,11,.85))}
-g[transform] rect{filter:drop-shadow(0 4px 10px rgba(23,32,51,.25))}
-</style></head><body>
+<x-embed style="position:absolute;left:128px;top:300px;width:1664px;height:600px"><!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="fx/kit.css"><script src="fx/kit.js"></script></head><body>
 <svg width="1664" height="600" viewBox="0 0 1664 600">
-<rect x="80" y="60" width="320" height="480" rx="40" fill="#FFFFFF" stroke="#23262F" stroke-width="6"/>
-<text x="240" y="40" font-size="28" font-weight="700" text-anchor="middle" fill="#23262F">Interfaz</text>
-<text x="240" y="200" font-size="26" text-anchor="middle" fill="#6B7080">Contador</text>
-<text id="n" x="240" y="320" font-size="110" font-weight="700" text-anchor="middle" fill="#23262F">0</text>
-<g id="btn"><circle cx="240" cy="440" r="48" fill="#D97706"/><text x="240" y="458" font-size="56" font-weight="700" text-anchor="middle" fill="#F4F5F8">+</text></g>
-<rect id="cb" x="1000" y="150" width="560" height="300" rx="28" fill="#23262F"/>
-<text x="1280" y="225" font-size="38" font-weight="700" text-anchor="middle" fill="#F4F5F8">ContadorCubit</text>
-<text x="1280" y="290" font-family="JetBrains Mono,Consolas,monospace" font-size="26" text-anchor="middle" fill="#F2A93B">aumentar() =&gt;</text>
-<text x="1280" y="335" font-family="JetBrains Mono,Consolas,monospace" font-size="26" text-anchor="middle" fill="#F2A93B">emit(state + 1)</text>
-<text x="1280" y="400" font-size="24" text-anchor="middle" fill="#B9BDC8">state = <tspan id="st">0</tspan></text>
-<text x="700" y="185" font-size="24" font-weight="700" text-anchor="middle" fill="#D97706">LLAMA A UN MÉTODO →</text>
-<text x="700" y="455" font-size="24" font-weight="700" text-anchor="middle" fill="#2F5BFF">← EMITE EL ESTADO</text>
-<line x1="405" y1="220" x2="995" y2="220" stroke="#CDD2DC" stroke-width="3" stroke-dasharray="8 8"/>
-<line x1="405" y1="390" x2="995" y2="390" stroke="#CDD2DC" stroke-width="3" stroke-dasharray="8 8"/>
-<text x="832" y="575" font-size="26" text-anchor="middle" fill="#6B7080">Sin clases de evento: la interfaz llama al método y el Cubit emite</text>
-<g id="pk"></g>
+<text x="240" y="38" font-size="22" text-anchor="middle" class="head gray">INTERFAZ</text>
+<rect class="scr" x="80" y="60" width="320" height="480" rx="40"/>
+<rect id="uf" class="tint hl" x="83" y="63" width="314" height="474" rx="37"/>
+<text x="240" y="190" font-size="24" text-anchor="middle" class="gray">Contador</text>
+<text id="n" x="240" y="320" font-size="104" text-anchor="middle" class="b ink c">0</text>
+<g id="btn" class="c"><circle cx="240" cy="440" r="46" fill="#23262F"/><path d="M220 440h40M240 420v40" stroke="#F4F5F8" stroke-width="7" stroke-linecap="round"/></g>
+<line id="wm" class="wire" x1="408" y1="220" x2="992" y2="220" marker-end="url(#ar)"/>
+<line id="ws" class="wire st" x1="992" y1="390" x2="408" y2="390" marker-end="url(#ar)"/>
+<text x="700" y="186" font-size="20" text-anchor="middle" letter-spacing="2" class="b amb">LLAMA A UN MÉTODO</text>
+<text x="700" y="434" font-size="20" text-anchor="middle" letter-spacing="2" class="b blue">EMITE EL ESTADO</text>
+<rect class="dark" x="1000" y="150" width="560" height="300" rx="28"/>
+<rect id="h1" class="hl" x="1024" y="252" width="512" height="88" rx="12" fill="#F2A93B" fill-opacity=".28"/>
+<text x="1280" y="216" font-size="34" text-anchor="middle" class="b wht">ContadorCubit</text>
+<g class="mono" font-size="24"><text x="1048" y="288" class="wht">void <tspan class="gold">aumentar</tspan>() =&gt;</text><text x="1048" y="326" class="wht">    <tspan class="sky">emit</tspan>(state + 1);</text>
+<text x="1048" y="402" class="mute">state = </text><text id="st" x="1164" y="402" class="b sky c">0</text></g>
+<text x="832" y="574" font-size="25" text-anchor="middle" class="gray">Sin clases de evento: la interfaz llama al método y el Cubit emite.</text>
 </svg>
 <script>
-function E(k){return k<.5?4*k*k*k:1-Math.pow(-2*k+2,3)/2}
-var ns='http://www.w3.org/2000/svg',pk=document.getElementById('pk'),n=0;
-function pill(txt,fill){var g=document.createElementNS(ns,'g');var w=txt.length*15+44;var r=document.createElementNS(ns,'rect');r.setAttribute('x',-w/2);r.setAttribute('y',-26);r.setAttribute('width',w);r.setAttribute('height',52);r.setAttribute('rx',26);r.setAttribute('fill',fill);g.appendChild(r);
-var t=document.createElementNS(ns,'text');t.setAttribute('y',9);t.setAttribute('text-anchor','middle');t.setAttribute('font-size',24);t.setAttribute('font-weight',700);t.setAttribute('fill','#F4F5F8');t.textContent=txt;g.appendChild(t);pk.appendChild(g);return g;}
-function mv(g,x0,y,x1,ms,cb){var t0=null;function f(t){if(!t0)t0=t;var k=E(Math.min(1,(t-t0)/ms));g.setAttribute('transform','translate('+(x0+(x1-x0)*k)+' '+y+')');if(1>k)requestAnimationFrame(f);else{pk.removeChild(g);cb();}}requestAnimationFrame(f);}
-function fl(id){var e=document.getElementById(id);e.classList.remove('fl');void e.getBBox();e.classList.add('fl');}
-function cycle(){var b=document.getElementById('btn');b.classList.remove('pr');void b.getBBox();b.classList.add('pr');
-mv(pill('aumentar()','#D97706'),420,220,990,900,function(){n++;document.getElementById('st').textContent=n;fl('cb');
-mv(pill('emit('+n+')','#2F5BFF'),990,390,420,900,function(){document.getElementById('n').textContent=n;});});}
-cycle();setInterval(cycle,2800);
+var n=0;
+loop(async function(){
+ await tap(240,440);press('btn');
+ on('wm');await send([[408,220],[992,220]],900,{label:'aumentar()',mono:true});on('wm',false);   // llamada directa
+ on('h1');await wait(450);n++;txt('st',n);pop('st');
+ await wait(550);
+ on('ws');await send([[992,390],[408,390]],900,{label:'emit('+n+')',color:BLU,mono:true});on('ws',false);
+ on('h1',false);txt('n',n);flash('uf');pop('n',1.15);
+ await wait(1700);
+});
 </script></body></html></x-embed>
 <p style="font-size:21px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#6B7080">5.4 · Cubit</p>
 <h2 style="font-family:Poppins, Arial, sans-serif;font-size:64px;font-weight:900;line-height:1.02;color:#23262F;text-transform:uppercase;letter-spacing:-3px">Métodos en vez de eventos</h2>

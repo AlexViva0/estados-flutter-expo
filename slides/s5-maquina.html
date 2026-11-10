@@ -1,26 +1,33 @@
 <section id="s5-maquina" data-transition="fade" style="background:#ECEEF2;color:#23262F;font-family:Poppins, Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:16px">
-<x-embed style="position:absolute;left:128px;top:300px;width:1664px;height:620px"><!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&display=swap"><style>
-html,body{margin:0;background:transparent;overflow:hidden;font-family:Poppins,system-ui,sans-serif}
-rect,path{transition:fill .35s,stroke .35s}text{transition:fill .35s}
+<x-embed style="position:absolute;left:128px;top:300px;width:1664px;height:620px"><!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="fx/kit.css"><script src="fx/kit.js"></script><style>
+.tr{fill:none;stroke:#CDD2DC;stroke-width:4;transition:stroke .3s}.tr.on{stroke:#F2A93B}
+.tl{fill:#6B7080;font-weight:700;transition:fill .3s}.tl.on{fill:#D97706}
 </style></head><body>
-<svg id="s" width="1664" height="620" viewBox="0 0 1664 620">
-<defs><marker id="a" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M0 0 L12 6 L0 12 z" fill="#6B7080"/></marker>
-<marker id="o" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M0 0 L12 6 L0 12 z" fill="#D97706"/></marker></defs>
-</svg>
+<svg width="1664" height="620" viewBox="0 0 1664 620"></svg>
 <script>
-var ns='http://www.w3.org/2000/svg',s=document.getElementById('s');
-function el(t,a,txt){var e=document.createElementNS(ns,t);for(var k in a)e.setAttribute(k,a[k]);if(txt)e.textContent=txt;s.appendChild(e);return e;}
 var N={ini:[200,300,'Inicial'],car:[680,300,'Carga'],exi:[1260,110,'Éxito'],vac:[1260,300,'Vacío'],err:[1260,490,'Error']};
-var E={a:['M340 300 H520','cargar()',430,280],b:['M840 270 C960 150 1040 110 1100 110','datos',960,160],c:['M840 300 H1100','lista vacía',970,285],d:['M840 330 C960 450 1040 490 1100 490','excepción',950,450],e:['M1260 555 C1260 610 680 610 680 365','reintentar',980,600],f:['M1260 45 C1260 0 680 0 680 235','refrescar',980,30]};
-var P={},T={};for(var k in E){var e=E[k];P[k]=el('path',{d:e[0],fill:'none',stroke:'#CDD2DC','stroke-width':5,'marker-end':'url(#a)'});el('text',{x:e[2],y:e[3],'text-anchor':'middle','font-size':26,'font-weight':700,fill:'#6B7080'},e[1]);}
-var B={};for(var k in N){var n=N[k];B[k]=el('rect',{x:n[0]-140,y:n[1]-60,width:280,height:120,rx:60,fill:'#FFFFFF',stroke:'#CDD2DC','stroke-width':4});T[k]=el('text',{x:n[0],y:n[1]+12,'text-anchor':'middle','font-size':34,'font-weight':700,fill:'#23262F'},n[2]);}
-var seq=[['ini',null],['car','a'],['exi','b'],['car','f'],['vac','c'],['car','f'],['err','d'],['car','e'],['exi','b']],i=0;
-function go(){var st=seq[i];for(var k in B){var on=k==st[0];B[k].setAttribute('fill',on?(k=='err'?'#E5484D':'#2F5BFF'):'#FFFFFF');B[k].setAttribute('stroke',on?'transparent':'#CDD2DC');T[k].setAttribute('fill',on?'#F4F5F8':'#23262F');}
-for(var k in P){var on=k==st[1];P[k].setAttribute('stroke',on?'#D97706':'#CDD2DC');P[k].setAttribute('marker-end',on?'url(#o)':'url(#a)');}i=(i+1)%seq.length;}
-go();setInterval(go,1500);
+var E={a:['M340 300H516','cargar()',430,280],b:['M840 270C960 150 1040 110 1116 110','datos',940,134],c:['M840 300H1116','lista vacía',985,284],
+ d:['M840 330C960 450 1040 490 1116 490','excepción',1040,528],e:['M1260 555C1260 618 680 618 680 366','reintentar',900,566],
+ f:['M1260 45C1260 4 680 4 680 234','refrescar',900,62],g:['M1133 342C1060 386 880 386 812 346','refrescar',972,404]};
+for(var k in E){var e=E[k];el('path',{id:'e'+k,d:e[0],'class':'tr','marker-end':'url(#ar)'});el('text',{id:'t'+k,x:e[2],y:e[3],'text-anchor':'middle','font-size':23,'class':'tl'},e[1]);}
+for(k in N){var n=N[k],g=el('g',{id:'n'+k,'class':'node c'+(k=='err'?' err':'')});
+ el('rect',{x:n[0]-140,y:n[1]-60,width:280,height:120,rx:60},null,g);
+ el('text',{x:n[0],y:n[1]+12,'text-anchor':'middle','font-size':34,'font-weight':700},n[2],g);}
+var S=[['car','a'],['exi','b'],['car','f'],['vac','c'],['car','g'],['err','d'],['car','e'],['exi','b']];
+function set(k){for(var j in N)on('n'+j,j==k);if(k)pop('n'+k,1.06);}
+// El punto azul es el estado actual: solo puede estar en un nodo a la vez.
+loop(async function(){
+ set('ini');await wait(1700);
+ for(var i=0;i<S.length;i++){var s=S[i];
+  on('e'+s[1]);on('t'+s[1]);set(null);
+  await send('e'+s[1],s[1]=='e'||s[1]=='f'?1100:750,{color:BLU,r:15});
+  on('e'+s[1],false);on('t'+s[1],false);set(s[0]);
+  await wait(s[0]=='car'?1200:2100);}
+ await wait(600);
+},300);
 </script></body></html></x-embed>
 <p style="font-size:21px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#6B7080">¿Cómo se relacionan?</p>
 <h2 style="font-family:Poppins, Arial, sans-serif;font-size:64px;font-weight:900;line-height:1.02;color:#23262F;text-transform:uppercase;letter-spacing:-3px">Una máquina de estados</h2>
 <p style="position:absolute;left:128px;bottom:56px;width:1664px;font-size:18px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#9A9EAC"><span style="display:inline-block;min-width:44px;padding:4px 14px;margin-right:16px;border-radius:999px;background:#2F5BFF;color:#FFFFFF;font-size:20px;font-weight:800;letter-spacing:0;text-align:center;vertical-align:middle">E</span></p>
-<aside>Los estados no siempre aparecen en el mismo orden: una operación puede empezar directo en Carga, y una consulta que se repite (refrescar) puede volver a Carga. Desde Error, el botón Reintentar regresa a Carga. Más allá del temario: al refrescar, muchas apps conservan los datos anteriores en pantalla mientras cargan los nuevos, en lugar de borrar la lista. El diseño depende del comportamiento que se quiere para la app.</aside>
+<aside>El punto azul es el estado actual: solo puede estar en un nodo a la vez y se mueve por las flechas. Los estados no siempre aparecen en el mismo orden: una operación puede empezar directo en Carga, y una consulta que se repite (refrescar) puede volver a Carga. Desde Error, el botón Reintentar regresa a Carga. Más allá del temario: al refrescar, muchas apps conservan los datos anteriores en pantalla mientras cargan los nuevos, en lugar de borrar la lista. El diseño depende del comportamiento que se quiere para la app.</aside>
 </section>

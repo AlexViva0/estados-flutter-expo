@@ -1,45 +1,138 @@
 <section id="s1-concepto" data-transition="fade" style="background:#ECEEF2;color:#23262F;font-family:Poppins, Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:24px">
-<x-embed style="position:absolute;left:128px;top:440px;width:1664px;height:440px"><!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&display=swap"><style>
-html,body{margin:0;background:transparent;overflow:hidden;font-family:Poppins,system-ui,sans-serif}
-.box{fill:#FFFFFF;stroke:#DCE0E7;stroke-width:3}
-.flash{animation:f .7s}
-@keyframes f{0%{fill:#FFFFFF}40%{fill:#DCE4FF}100%{fill:#FFFFFF}}
-.mono{font-family:"JetBrains Mono",Consolas,monospace}
-circle[fill="#F2A93B"]{filter:drop-shadow(0 0 6px rgba(245,158,11,.85))}
-g[transform] rect{filter:drop-shadow(0 4px 10px rgba(23,32,51,.25))}
+<x-embed style="position:absolute;left:128px;top:440px;width:1664px;height:520px"><!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600;700&display=swap"><style>
+html,body{margin:0;background:transparent;overflow:hidden}
+text{font-family:Poppins,system-ui,sans-serif}
+.mono,.mono text{font-family:"JetBrains Mono",Consolas,monospace}
+.mono text{white-space:pre}
+.c{transform-box:fill-box;transform-origin:center}
+.head{font-size:22px;font-weight:700;letter-spacing:3px;fill:#6B7080}
+.soft{filter:drop-shadow(10px 10px 20px #CFD3DB) drop-shadow(-10px -10px 20px #FFFFFF)}
+.hl{opacity:0;transition:opacity .3s}
+.hl.on{opacity:1}
+#hp{transition:fill .25s}
+.on #hp{fill:#2F5BFF}
+#fg{opacity:0;transform:translate(1500px,300px);transition:transform .65s cubic-bezier(.5,0,.2,1),opacity .4s}
+#fd,#dot{filter:drop-shadow(0 0 8px rgba(242,169,59,.8))}
+#ret{transition:stroke .3s}
+#ret.on{stroke:#F2A93B}
+#lab{fill:#9A9EAC;transition:fill .3s}
+#lab.on{fill:#D97706}
+.pill rect{fill:none;stroke:#CDD2DC;stroke-width:3;transition:fill .3s,stroke .3s}
+.pill text{font-size:24px;font-weight:600;fill:#9A9EAC;transition:fill .3s}
+.pill.on rect{fill:#23262F;stroke:#23262F}
+.pill.on text{fill:#FFFFFF}
 </style></head><body>
-<svg width="1664" height="440" viewBox="0 0 1664 440">
-<defs><marker id="a" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M0 0 L12 6 L0 12 z" fill="#6B7080"/></marker></defs>
-<text x="250" y="60" font-size="28" font-weight="700" text-anchor="middle" fill="#D97706">ESTADO (datos)</text>
-<rect id="b1" class="box" x="20" y="90" width="460" height="200" rx="24"/>
-<text x="250" y="180" class="mono" font-size="40" text-anchor="middle" fill="#23262F">likes = <tspan id="v1" fill="#2F5BFF" font-weight="700">0</tspan></text>
-<text x="250" y="240" font-size="26" text-anchor="middle" fill="#6B7080">vive en memoria</text>
-<line x1="490" y1="190" x2="650" y2="190" stroke="#6B7080" stroke-width="4" marker-end="url(#a)"/>
-<text x="832" y="60" font-size="28" font-weight="700" text-anchor="middle" fill="#D97706">build( )</text>
-<circle id="b2" class="box" cx="832" cy="190" r="120"/>
-<text x="832" y="185" font-size="30" font-weight="700" text-anchor="middle" fill="#23262F">Flutter</text>
-<text x="832" y="225" font-size="26" text-anchor="middle" fill="#6B7080">reconstruye</text>
-<line x1="1012" y1="190" x2="1172" y2="190" stroke="#6B7080" stroke-width="4" marker-end="url(#a)"/>
-<text x="1414" y="60" font-size="28" font-weight="700" text-anchor="middle" fill="#D97706">INTERFAZ (lo que ves)</text>
-<rect id="b3" class="box" x="1184" y="90" width="460" height="200" rx="24"/>
-<text x="1340" y="200" font-size="56" text-anchor="middle" fill="#D97706">♥</text>
-<text x="1480" y="205" font-size="48" font-weight="700" text-anchor="middle" fill="#23262F"><tspan id="v3">0</tspan></text>
-<circle id="dot" r="12" fill="#F2A93B" cx="490" cy="190" opacity="0"/>
-<text x="832" y="400" font-size="30" text-anchor="middle" fill="#23262F">Cambias el dato → Flutter vuelve a dibujar → la pantalla muestra el valor nuevo</text>
+<svg id="svg" width="1664" height="520" viewBox="0 0 1664 520">
+<defs>
+<marker id="a" markerWidth="12" markerHeight="12" refX="9" refY="6" orient="auto"><path d="M0 0L12 6L0 12z" fill="#9A9EAC"/></marker>
+<clipPath id="scr"><rect x="1184" y="60" width="460" height="280" rx="28"/></clipPath>
+</defs>
+
+<!-- ESTADO -->
+<text class="head" x="250" y="36" text-anchor="middle" style="fill:#2F5BFF">ESTADO · LOS DATOS</text>
+<rect class="soft" x="20" y="60" width="460" height="280" rx="28" fill="#F4F5F8"/>
+<rect id="r0" class="hl" x="44" y="118" width="412" height="68" rx="16" fill="#DCE4FF"/>
+<rect id="r1" class="hl" x="44" y="214" width="412" height="68" rx="16" fill="#DCE4FF"/>
+<g class="mono" font-size="34" fill="#23262F">
+<text x="68" y="164">meGusta</text><text x="238" y="164" fill="#6B7080">=</text>
+<text id="v0" class="c" x="282" y="164" font-weight="700" fill="#2F5BFF">false</text>
+<text x="68" y="260">carrito</text><text x="238" y="260" fill="#6B7080">=</text>
+<text id="v1" class="c" x="282" y="260" font-weight="700" fill="#2F5BFF">0</text>
+</g>
+
+<!-- f -->
+<text class="head mono" x="832" y="36" text-anchor="middle" style="letter-spacing:1px">f · build( )</text>
+<rect class="soft" x="602" y="60" width="460" height="280" rx="28" fill="#23262F"/>
+<rect id="c0" class="hl" x="622" y="152" width="420" height="50" rx="12" fill="#F2A93B" fill-opacity=".28"/>
+<rect id="c1" class="hl" x="622" y="210" width="420" height="50" rx="12" fill="#F2A93B" fill-opacity=".28"/>
+<g class="mono" font-size="27" fill="#F4F5F8" xml:space="preserve">
+<text x="640" y="128" fill="#9A9EAC">build() {</text>
+<text x="640" y="186">  Corazon(<tspan fill="#8FA8FF" font-weight="700">meGusta</tspan>),</text>
+<text x="640" y="244">  Insignia(<tspan fill="#8FA8FF" font-weight="700">carrito</tspan>),</text>
+<text x="640" y="302" fill="#9A9EAC">}</text>
+</g>
+
+<!-- UI -->
+<text class="head" x="1414" y="36" text-anchor="middle">UI · LO QUE VES</text>
+<rect class="soft" x="1184" y="60" width="460" height="280" rx="28" fill="#FFFFFF"/>
+<g clip-path="url(#scr)">
+<rect x="1184" y="60" width="460" height="84" fill="#23262F"/>
+<rect id="rp" x="1184" y="144" width="460" height="196" fill="#2F5BFF" opacity="0"/>
+</g>
+<rect x="1184" y="60" width="460" height="280" rx="28" fill="none" stroke="#23262F" stroke-width="6"/>
+<text x="1216" y="114" font-size="30" font-weight="700" fill="#F4F5F8">Tienda</text>
+<g fill="none" stroke="#F4F5F8" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" transform="translate(1120 14)"><path d="M404 62h10l9 30h30l7-21h-41"/><circle cx="428" cy="104" r="3"/><circle cx="450" cy="104" r="3"/></g>
+<g id="badge" class="c"><circle cx="1592" cy="80" r="18" fill="#2F5BFF"/><text id="cnt" x="1592" y="88" font-size="23" font-weight="700" text-anchor="middle" fill="#FFFFFF">0</text></g>
+<rect x="1212" y="168" width="148" height="148" rx="18" fill="#D5D9E2"/>
+<path d="M1254 262v-10a32 32 0 0 1 64 0v10" fill="none" stroke="#23262F" stroke-width="7" stroke-linecap="round"/>
+<rect x="1245" y="254" width="20" height="34" rx="9" fill="#23262F"/><rect x="1307" y="254" width="20" height="34" rx="9" fill="#23262F"/>
+<text x="1384" y="212" font-size="28" font-weight="700" fill="#23262F">Audífonos</text>
+<text x="1384" y="246" font-size="24" fill="#6B7080">$499</text>
+<g id="btn" class="c"><rect x="1384" y="268" width="150" height="48" rx="14" fill="#23262F"/><text x="1459" y="300" font-size="22" font-weight="600" text-anchor="middle" fill="#F4F5F8">Agregar</text></g>
+<g id="heart" class="c"><path id="hp" d="M1592 262l-26-26a15 15 0 0 1 26-20a15 15 0 0 1 26 20z" fill="none" stroke="#2F5BFF" stroke-width="5" stroke-linejoin="round"/></g>
+
+<!-- conexiones -->
+<line x1="496" y1="200" x2="588" y2="200" stroke="#9A9EAC" stroke-width="4" stroke-linecap="round" marker-end="url(#a)"/>
+<line x1="1078" y1="200" x2="1170" y2="200" stroke="#9A9EAC" stroke-width="4" stroke-linecap="round" marker-end="url(#a)"/>
+<path id="ret" d="M1414 350V382a20 20 0 0 1-20 20H270a20 20 0 0 1-20-20V354" fill="none" stroke="#CDD2DC" stroke-width="4" stroke-dasharray="2 12" stroke-linecap="round"/>
+<path d="M240 362l10-12l10 12" fill="none" stroke="#9A9EAC" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+<text id="lab" x="832" y="388" font-size="22" font-weight="600" text-anchor="middle">el toque no pinta nada: solo pide cambiar el dato</text>
+
+<!-- pasos -->
+<g id="p1" class="pill"><rect x="70" y="448" width="360" height="56" rx="28"/><text x="250" y="485" text-anchor="middle">1 · Cambia el dato</text></g>
+<g id="p2" class="pill"><rect x="632" y="448" width="400" height="56" rx="28"/><text x="832" y="485" text-anchor="middle">2 · Flutter ejecuta build( )</text></g>
+<g id="p3" class="pill"><rect x="1214" y="448" width="400" height="56" rx="28"/><text x="1414" y="485" text-anchor="middle">3 · La pantalla se redibuja</text></g>
+
+<circle id="dot" r="12" fill="#F2A93B" opacity="0"/>
+<g id="fg"><circle id="rip" r="26" fill="none" stroke="#F2A93B" stroke-width="4" opacity="0"/><circle id="fd" r="22" fill="#F2A93B" fill-opacity=".3" stroke="#F2A93B" stroke-width="4"/></g>
 </svg>
 <script>
-function E(k){return k<.5?4*k*k*k:1-Math.pow(-2*k+2,3)/2}
-var n=0;
-function fl(id){var e=document.getElementById(id);e.classList.remove('flash');void e.getBBox();e.classList.add('flash');}
-var dot=document.getElementById('dot');
-function mv(x0,x1,ms,cb){var t0=null;dot.setAttribute('opacity','1');function f(t){if(!t0)t0=t;var k=E(Math.min(1,(t-t0)/ms));dot.setAttribute('cx',x0+(x1-x0)*k);if(k<1)requestAnimationFrame(f);else cb&&cb();}requestAnimationFrame(f);}
-function tick(){n++;document.getElementById('v1').textContent=n;fl('b1');
- mv(490,712,450,function(){fl('b2');setTimeout(function(){mv(952,1184,450,function(){dot.setAttribute('opacity','0');document.getElementById('v3').textContent=n;fl('b3');});},300);});}
-setInterval(tick,2600);setTimeout(tick,600);
+var $=function(i){return document.getElementById(i)};
+var wait=function(ms){return new Promise(function(r){setTimeout(r,ms)})};
+var E='cubic-bezier(.2,.8,.2,1)',POP='cubic-bezier(.34,1.56,.64,1)',IO='cubic-bezier(.65,0,.35,1)';
+var meGusta=false,carrito=0;
+function on(id,v){$(id).classList.toggle('on',v);}
+function pill(n){[1,2,3].forEach(function(i){on('p'+i,i==n);});}
+function pop(id){$(id).animate([{transform:'scale(1)'},{transform:'scale(1.45)'},{transform:'scale(1)'}],{duration:460,easing:POP});}
+// El punto ámbar es el aviso que viaja de una caja a otra.
+async function go(keys,ms){$('dot').animate(keys,{duration:ms,easing:IO});await wait(ms);}
+function seg(x0,x1){return [{transform:'translate('+x0+'px,200px)',opacity:1},{transform:'translate('+x1+'px,200px)',opacity:1}];}
+var ret=(function(){var p=$('ret'),L=p.getTotalLength(),k=[],i,q;for(i=0;i<=30;i++){q=p.getPointAtLength(L*i/30);k.push({transform:'translate('+q.x+'px,'+q.y+'px)',opacity:1});}return k;})();
+async function tap(x,y){
+ $('fg').style.transform='translate('+x+'px,'+y+'px)';
+ await wait(720);
+ $('fd').animate([{transform:'scale(1)'},{transform:'scale(.72)'},{transform:'scale(1)'}],{duration:300,easing:'ease-out'});
+ $('rip').animate([{transform:'scale(.7)',opacity:.9},{transform:'scale(2.4)',opacity:0}],{duration:560,easing:E});
+ await wait(160);}
+async function cycle(k){
+ // 0 · el toque: la pantalla todavía no cambia
+ await tap(k?1459:1592,k?292:238);
+ if(k)$('btn').animate([{transform:'scale(1)'},{transform:'scale(.92)'},{transform:'scale(1)'}],{duration:320,easing:'ease-out'});
+ on('ret',true);on('lab',true);
+ await go(ret,1100);
+ // 1 · cambia el dato
+ on('ret',false);on('lab',false);pill(1);
+ if(k){carrito=carrito%9+1;$('v1').textContent=carrito;}else{meGusta=!meGusta;$('v0').textContent=meGusta;}
+ on('r'+k,true);pop('v'+k);
+ await wait(1300);
+ // 2 · build() se ejecuta completo y lee el estado
+ await go(seg(486,596),450);
+ pill(2);on('c0',true);await wait(320);on('c1',true);
+ await wait(900);
+ // 3 · la pantalla se redibuja con el valor nuevo
+ await go(seg(1068,1178),450);
+ pill(3);on('c0',false);on('c1',false);
+ $('rp').animate([{opacity:0},{opacity:.16},{opacity:0}],{duration:520,easing:'ease-out'});
+ if(k){$('cnt').textContent=carrito;pop('badge');}
+ else{$('heart').classList.toggle('on',meGusta);$('heart').animate([{transform:'scale(1)'},{transform:'scale(.7)'},{transform:'scale(1.35)'},{transform:'scale(1)'}],{duration:520,easing:'ease-out'});}
+ await wait(2000);
+ pill(0);on('r'+k,false);
+ await wait(300);}
+(async function(){await wait(600);$('fg').style.opacity=1;for(var k=0;;k=1-k)await cycle(k);})();
 </script></body></html></x-embed>
 <p style="font-size:21px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#6B7080">Concepto</p>
-<h2 style="font-family:Poppins, Arial, sans-serif;font-size:120px;font-weight:900;line-height:1.05;color:#23262F">UI = f(estado)</h2>
+<h2 style="font-family:Poppins, Arial, sans-serif;font-size:120px;font-weight:900;line-height:1.05;color:#23262F">UI = f(<span style="color:#2F5BFF">estado</span>)</h2>
 <p style="font-size:32px;line-height:1.4;color:#6B7080;width:1500px">El <b>estado</b> es la información que puede cambiar mientras la app corre y que decide cómo se ve. Flutter es <b>declarativo</b>: describes la pantalla según los datos y él la vuelve a dibujar.</p>
 <p style="position:absolute;left:128px;bottom:56px;width:1664px;font-size:18px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#9A9EAC"><span style="display:inline-block;min-width:44px;padding:4px 14px;margin-right:16px;border-radius:999px;background:#2F5BFF;color:#FFFFFF;font-size:20px;font-weight:800;letter-spacing:0;text-align:center;vertical-align:middle">A</span></p>
-<aside>Explicar la fórmula UI = f(estado): la interfaz es el resultado de una función que recibe el estado. Diferencias clave: el estado son los datos que pueden cambiar (número de elementos en una lista); la interfaz son los textos, botones y listas que muestran esos datos; la gestión de estados son los mecanismos para modificar los datos, avisar del cambio y actualizar la interfaz. Comparar con el enfoque imperativo (Android clásico): ahí tú buscas el TextView y le cambias el texto a mano. En Flutter solo cambias el dato.</aside>
+<aside>Explicar la fórmula UI = f(estado): la interfaz es el resultado de una función que recibe el estado. La animación usa la misma tienda de la lámina anterior y se lee de izquierda a derecha: ESTADO (los datos) → f, que es build( ) → UI (lo que ves). Señalar el detalle clave: cuando el punto ámbar toca el ♥ o “Agregar”, la pantalla NO cambia todavía; el toque viaja por la línea de abajo y solo cambia el dato (paso 1), Flutter ejecuta build( ) completo leyendo el estado (paso 2) y hasta entonces la pantalla se redibuja (paso 3). Diferencias clave: el estado son los datos que pueden cambiar; la interfaz son los textos, botones y listas que muestran esos datos; la gestión de estados son los mecanismos para modificar los datos, avisar del cambio y actualizar la interfaz. Comparar con el enfoque imperativo (Android clásico): ahí tú buscas el TextView y le cambias el texto a mano. En Flutter solo cambias el dato.</aside>
 </section>

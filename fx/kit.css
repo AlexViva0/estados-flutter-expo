@@ -1,0 +1,53 @@
+/* Estilos compartidos por las animaciones SVG de las láminas (se cargan dentro de cada <x-embed>).
+   Paleta: azul = estado · ámbar = acción o evento que viaja · verde = correcto · rojo = error. */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600;700&display=swap');
+html,body{margin:0;background:transparent;overflow:hidden}
+text{font-family:Poppins,system-ui,sans-serif}
+.mono,.mono text{font-family:"JetBrains Mono",Consolas,monospace}
+.mono text,text.mono{white-space:pre}
+
+/* color y peso del texto (como clase, para poder cambiarlo desde CSS) */
+.ink{fill:#23262F}.gray{fill:#6B7080}.mute{fill:#9A9EAC}.wht{fill:#F4F5F8}
+.blue{fill:#2F5BFF}.sky{fill:#8FA8FF}.amb{fill:#D97706}.gold{fill:#F2A93B}.red{fill:#E5484D}.grn{fill:#16A37B}
+.b{font-weight:700}.sb{font-weight:600}
+.head{font-size:22px;font-weight:700;letter-spacing:3px}
+
+/* superficies */
+.card{fill:#F4F5F8;filter:drop-shadow(10px 10px 20px #CFD3DB) drop-shadow(-10px -10px 20px #FFFFFF)}
+.dark{fill:#23262F;filter:drop-shadow(10px 10px 20px #CFD3DB) drop-shadow(-10px -10px 20px #FFFFFF)}
+.scr{fill:#FFFFFF;stroke:#23262F;stroke-width:6;filter:drop-shadow(10px 12px 20px #CFD3DB)}
+.tint{fill:#DCE4FF}
+.bound{fill:none;stroke:#2F5BFF;stroke-width:3;stroke-dasharray:8 8;stroke-linecap:round}
+
+/* conexiones: punteadas en reposo, de color mientras algo viaja por ellas */
+.wire{fill:none;stroke:#CDD2DC;stroke-width:4;stroke-dasharray:2 12;stroke-linecap:round;transition:stroke .3s}
+.wire.on{stroke:#F2A93B}
+.wire.st.on{stroke:#2F5BFF}
+
+/* utilidades de animación */
+.c{transform-box:fill-box;transform-origin:center}
+.hl{opacity:0;transition:opacity .3s}
+.hl.on{opacity:1}
+.fx{transition:opacity .35s}
+.off{opacity:0}
+.spin{transform-box:fill-box;transform-origin:center;animation:kspin .9s linear infinite}
+@keyframes kspin{to{transform:rotate(360deg)}}
+.row{opacity:0;transform:translateY(16px);transition:opacity .4s,transform .4s cubic-bezier(.2,.8,.2,1)}
+.row.in{opacity:1;transform:none}
+
+/* nodo de diagrama que se enciende */
+.node rect{fill:#FFFFFF;stroke:#CDD2DC;stroke-width:3;transition:fill .3s,stroke .3s}
+.node text{fill:#23262F;transition:fill .3s}
+.node.on rect{fill:#2F5BFF;stroke:#2F5BFF}
+.node.on text{fill:#FFFFFF}
+.node.err.on rect{fill:#E5484D;stroke:#E5484D}
+
+/* pastillas de paso */
+.pill rect{fill:none;stroke:#CDD2DC;stroke-width:3;transition:fill .3s,stroke .3s}
+.pill text{font-size:24px;font-weight:600;fill:#9A9EAC;transition:fill .3s}
+.pill.on rect{fill:#23262F;stroke:#23262F}
+.pill.on text{fill:#FFFFFF}
+
+/* el "dedo": punto ámbar que toca la interfaz */
+#fg{opacity:0;transition:transform .65s cubic-bezier(.5,0,.2,1),opacity .4s}
+#fd{filter:drop-shadow(0 0 8px rgba(242,169,59,.8))}

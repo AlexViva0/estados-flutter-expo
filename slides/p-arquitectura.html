@@ -1,33 +1,50 @@
 <section id="p-arquitectura" data-transition="fade" style="background:#ECEEF2;color:#23262F;font-family:Poppins, Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:16px">
-<x-embed style="position:absolute;left:128px;top:290px;width:1664px;height:630px"><!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&display=swap"><style>
-html,body{margin:0;background:transparent;overflow:hidden;font-family:Poppins,system-ui,sans-serif}
-.mono{font-family:"JetBrains Mono",Consolas,monospace}
-</style></head><body>
+<x-embed style="position:absolute;left:128px;top:290px;width:1664px;height:630px"><!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="fx/kit.css"><script src="fx/kit.js"></script></head><body>
 <svg width="1664" height="630" viewBox="0 0 1664 630">
+<line class="wire" x1="180" y1="44" x2="1480" y2="44"/>
+<line class="wire" x1="180" y1="392" x2="1480" y2="392"/>
+<text x="20" y="28" font-size="19" letter-spacing="2" class="b amb">PETICIÓN →</text>
+<text x="20" y="420" font-size="19" letter-spacing="2" class="b blue">← RESPUESTA</text>
 <g id="bx"></g>
-<rect x="580" y="470" width="660" height="120" rx="24" fill="#E6E9EF" stroke="#2F5BFF" stroke-width="3" stroke-dasharray="10 8"/>
-<text x="910" y="520" font-size="28" font-weight="700" text-anchor="middle" fill="#2F5BFF">models/ · Estudiante</text>
-<text x="910" y="562" font-size="24" text-anchor="middle" fill="#6B7080">id, nombre, correo y fromJson()</text>
-<g id="pk"></g>
+<rect class="card" x="580" y="470" width="660" height="124" rx="24"/>
+<rect id="mf" class="tint hl" x="580" y="470" width="660" height="124" rx="24"/>
+<rect class="bound" x="580" y="470" width="660" height="124" rx="24"/>
+<text x="910" y="522" font-size="26" text-anchor="middle" class="mono b blue">models/ · Estudiante</text>
+<text x="910" y="562" font-size="22" text-anchor="middle" class="gray">id, nombre, correo y fromJson()</text>
 </svg>
 <script>
-function E(k){return k<.5?4*k*k*k:1-Math.pow(-2*k+2,3)/2}
-var ns='http://www.w3.org/2000/svg',bx=document.getElementById('bx'),pk=document.getElementById('pk');
-function el(p,t,a,txt){var e=document.createElementNS(ns,t);for(var k in a)e.setAttribute(k,a[k]);if(txt)e.textContent=txt;p.appendChild(e);return e;}
-var B=[[180,'screens/','EstudiantesPage','lo que ve el usuario','#FFFFFF','#23262F'],[620,'cubit/','EstudiantesCubit','estados y lógica','#23262F','#F4F5F8'],[1060,'services/','EstudianteService','habla con la API','#FFFFFF','#23262F'],[1480,'internet','JSONPlaceholder','/users','#DCE4FF','#23262F']];
-B.forEach(function(b){el(bx,'rect',{x:b[0]-160,y:120,width:320,height:220,rx:26,fill:b[4],stroke:'#23262F','stroke-width':3});
-el(bx,'text',{x:b[0],y:95,'text-anchor':'middle','font-size':28,'font-weight':700,fill:'#6B7080','class':'mono'},b[1]);
-el(bx,'text',{x:b[0],y:225,'text-anchor':'middle','font-size':28,'font-weight':700,fill:b[5]},b[2]);
-el(bx,'text',{x:b[0],y:270,'text-anchor':'middle','font-size':24,fill:b[5]=='#F4F5F8'?'#B9BDC8':'#6B7080'},b[3]);});
-function pill(txt,fill,col){var g=el(pk,'g',{});var w=txt.length*14+40;el(g,'rect',{x:-w/2,y:-24,width:w,height:48,rx:24,fill:fill});el(g,'text',{y:8,'text-anchor':'middle','font-size':24,'font-weight':700,fill:col},txt);return g;}
-function mv(g,x0,x1,y,ms,cb){var t0=null;function f(t){if(!t0)t0=t;var k=E(Math.min(1,(t-t0)/ms));g.setAttribute('transform','translate('+(x0+(x1-x0)*k)+' '+y+')');if(1>k)requestAnimationFrame(f);else{pk.removeChild(g);cb&&cb();}}requestAnimationFrame(f);}
-var D=[[340,460,'cargarEstudiantes()'],[780,900,'obtenerEstudiantes()'],[1220,1320,'GET']],U=[[1320,1220,'JSON'],[900,780,'List\u003CEstudiante>'],[460,340,'EstudiantesExito']];
-function down(i){if(i==3)return up(0);var d=D[i];mv(pill(d[2],'#D97706','#F4F5F8'),d[0],d[1],30,900,function(){down(i+1);});}
-function up(i){if(i==3)return;var d=U[i];mv(pill(d[2],'#2F5BFF','#F4F5F8'),d[0],d[1],400,900,function(){up(i+1);});}
-down(0);setInterval(function(){down(0);},6400);
+var B=[[180,'screens/','EstudiantesPage','lo que ve el usuario','scr'],[620,'cubit/','EstudiantesCubit','estados y lógica','dark'],[1060,'services/','EstudianteService','habla con la API','card'],[1480,'internet','JSONPlaceholder','/users','card']];
+B.forEach(function(b,i){var g=$('bx'),d=b[4]=='dark';
+ el('rect',{x:b[0]-160,y:120,width:320,height:220,rx:26,'class':b[4]},null,g);
+ el('rect',{id:'f'+i,x:b[0]-160,y:120,width:320,height:220,rx:26,'class':'hl',fill:d?BLU:'#DCE4FF','fill-opacity':d?.5:1},null,g);
+ el('text',{x:b[0],y:98,'text-anchor':'middle','font-size':24,'class':'mono b gray'},b[1],g);
+ el('text',{x:b[0],y:i?222:196,'text-anchor':'middle','font-size':26,'class':'b '+(d?'wht':'ink')},b[2],g);
+ el('text',{x:b[0],y:i?264:234,'text-anchor':'middle','font-size':22,'class':d?'mute':'gray'},b[3],g);});
+// la pantalla muestra en qué estado está
+el('rect',{x:50,y:262,width:260,height:50,rx:25,fill:'#ECEEF2'},null,$('bx'));
+el('text',{id:'ps',x:180,y:295,'text-anchor':'middle','font-size':21,'class':'mono b blue c'},'Inicial',$('bx'));
+function st(t){txt('ps',t);pop('ps',1.15);}
+loop(async function(){
+ txt('ps','Inicial');await wait(1100);
+ await tap(180,152);
+ await send([[180,44],[620,44]],950,{label:'cargarEstudiantes()',mono:true});flash('f1');
+ var a=send([[620,392],[180,392]],850,{label:'EstudiantesCarga',color:BLU}).then(function(){st('Carga…');});
+ await send([[620,44],[1060,44]],950,{label:'obtenerEstudiantes()',mono:true});flash('f2');
+ await a;
+ await send([[1060,44],[1480,44]],850,{label:'GET /users',mono:true});flash('f3');
+ await wait(500);
+ await send([[1480,392],[1060,392]],850,{label:'JSON',color:BLU,mono:true});flash('f2');
+ await send([[1060,392],[1060,532]],550,{label:'JSON',color:BLU,mono:true});       // el modelo convierte el JSON
+ flash('mf');await wait(550);
+ await send([[620,532],[620,392]],550,{label:'List<Estudiante>',color:BLU,mono:true});flash('f1');
+ await wait(300);
+ await send([[620,392],[180,392]],950,{label:'EstudiantesExito',color:BLU});
+ st('Éxito · 10');flash('f0');
+ await wait(3200);
+});
 </script></body></html></x-embed>
 <p style="font-size:21px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#6B7080">Pasos 3 a 5 · la estructura</p>
 <h2 style="font-family:Poppins, Arial, sans-serif;font-size:64px;font-weight:900;line-height:1.02;color:#23262F;text-transform:uppercase;letter-spacing:-3px">Cada carpeta, una responsabilidad</h2>
 <p style="position:absolute;left:128px;bottom:56px;width:1664px;font-size:18px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#9A9EAC"><span style="display:inline-block;min-width:44px;padding:4px 14px;margin-right:16px;border-radius:999px;background:#2F5BFF;color:#FFFFFF;font-size:20px;font-weight:800;letter-spacing:0;text-align:center;vertical-align:middle">F</span></p>
-<aside>Crear las carpetas dentro de lib/: models, services, cubit y screens. La petición baja (azul): la pantalla llama a cargarEstudiantes(), el Cubit pide al servicio obtenerEstudiantes(), el servicio hace GET a la API. La respuesta sube (naranja): JSON, que el modelo convierte en List de Estudiante, y el Cubit emite EstudiantesExito. Modelo (Paso 4): Estudiante con id, nombre y correo, y un factory fromJson que lee 'id', 'name' y 'email'. Servicio (Paso 5): usa http.get con timeout de 10 segundos; si el código no es 200 lanza una excepción; tiene la opción simularVacio para probar el estado Vacío.</aside>
+<aside>Crear las carpetas dentro de lib/: models, services, cubit y screens. La petición va por arriba (ámbar): la pantalla llama a cargarEstudiantes(), el Cubit emite enseguida EstudiantesCarga y pide al servicio obtenerEstudiantes(), y el servicio hace GET a la API. La respuesta vuelve por abajo (azul): el JSON pasa por el modelo, que lo convierte en List de Estudiante, y el Cubit emite EstudiantesExito. La pastilla dentro de screens/ muestra el estado que ve la pantalla en cada momento. Modelo (Paso 4): Estudiante con id, nombre y correo, y un factory fromJson que lee 'id', 'name' y 'email'. Servicio (Paso 5): usa http.get con timeout de 10 segundos; si el código no es 200 lanza una excepción; tiene la opción simularVacio para probar el estado Vacío.</aside>
 </section>
