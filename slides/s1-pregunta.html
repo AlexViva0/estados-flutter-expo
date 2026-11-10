@@ -1,46 +1,135 @@
 <section id="s1-pregunta" data-transition="fade" style="background:#ECEEF2;color:#23262F;font-family:Poppins, Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
-<x-embed style="position:absolute;left:1152px;top:120px;width:640px;height:800px"><!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&display=swap"><style>
+<x-embed style="position:absolute;left:1152px;top:120px;width:640px;height:800px"><!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap"><style>
 html,body{margin:0;background:transparent;overflow:hidden;font-family:Poppins,system-ui,sans-serif}
-.pulse{animation:p .5s}
-@keyframes p{0%{transform:scale(1)}50%{transform:scale(1.35)}100%{transform:scale(1)}}
-#spin{transform-origin:320px 400px;animation:r 1s linear infinite}
+text{font-family:Poppins,system-ui,sans-serif}
+.c{transform-box:fill-box;transform-origin:center}
+#frame{filter:drop-shadow(14px 18px 26px #C9CED8)}
+#hp{transition:fill .25s}
+.on #hp{fill:#2F5BFF}
+.pg{transition:transform .55s cubic-bezier(.65,0,.35,1)}
+#tabm{transition:transform .5s cubic-bezier(.34,1.4,.64,1)}
+.tl{font-size:26px;font-weight:500;fill:#6B7080}
+.tl.on{fill:#2F5BFF;font-weight:700}
+#fg{opacity:0;transform:translate(330px,575px);transition:transform .65s cubic-bezier(.5,0,.2,1),opacity .4s}
+#fd{filter:drop-shadow(0 0 8px rgba(242,169,59,.7))}
+#fly{filter:drop-shadow(0 0 6px rgba(242,169,59,.85))}
+#load{transition:opacity .3s}
+#spin{animation:r .9s linear infinite}
 @keyframes r{to{transform:rotate(360deg)}}
-circle[fill="#F2A93B"]{filter:drop-shadow(0 0 6px rgba(245,158,11,.85))}
-g[transform] rect{filter:drop-shadow(0 4px 10px rgba(23,32,51,.25))}
+.row{opacity:0;transform:translateY(16px);transition:opacity .4s,transform .4s cubic-bezier(.2,.8,.2,1)}
+.row.in{opacity:1;transform:none}
+.halo{fill:none;stroke:#2F5BFF;stroke-width:3;stroke-dasharray:5 9;stroke-linecap:round;opacity:0;transition:opacity .4s;animation:dash 1.2s linear infinite}
+@keyframes dash{to{stroke-dashoffset:-28}}
+.hl .halo{opacity:1}
 </style></head><body>
-<svg width="640" height="800" viewBox="0 0 640 800">
-<rect x="130" y="16" width="380" height="700" rx="52" fill="#FFFFFF" stroke="#23262F" stroke-width="8"/>
+<svg id="svg" width="640" height="800" viewBox="0 0 640 800">
+<defs><clipPath id="scr"><rect x="134" y="130" width="372" height="488"/></clipPath></defs>
+<rect id="frame" x="130" y="16" width="380" height="700" rx="52" fill="#FFFFFF" stroke="#23262F" stroke-width="8"/>
 <rect x="134" y="20" width="372" height="110" rx="48" fill="#23262F"/>
 <rect x="134" y="80" width="372" height="50" fill="#23262F"/>
 <text x="170" y="100" font-size="34" font-weight="700" fill="#F4F5F8">Tienda</text>
-<rect x="420" y="66" width="44" height="38" rx="6" fill="none" stroke="#F4F5F8" stroke-width="5"/>
-<g id="badge" style="transform-origin:470px 62px"><circle cx="470" cy="62" r="20" fill="#2F5BFF"/><text id="cnt" x="470" y="71" font-size="26" font-weight="700" text-anchor="middle" fill="#FFFFFF">0</text></g>
+<g id="cart" class="c" fill="none" stroke="#F4F5F8" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"><path d="M404 62h10l9 30h30l7-21h-41"/><circle cx="428" cy="104" r="3"/><circle cx="450" cy="104" r="3"/></g>
+<g id="badge" class="c"><circle cx="470" cy="58" r="20" fill="#2F5BFF"/><text id="cnt" x="470" y="67" font-size="26" font-weight="700" text-anchor="middle" fill="#FFFFFF">0</text></g>
+<circle class="halo" cx="470" cy="58" r="30"/>
+<g clip-path="url(#scr)">
+<g id="pgA" class="pg">
 <rect x="166" y="160" width="308" height="300" rx="20" fill="#E6E9EF"/>
-<rect x="186" y="180" width="268" height="170" rx="12" fill="#CDD2DC"/>
+<rect x="186" y="180" width="268" height="170" rx="12" fill="#D5D9E2"/>
+<circle cx="320" cy="268" r="70" fill="#E6E9EF"/>
+<path d="M268 292v-16a52 52 0 0 1 104 0v16" fill="none" stroke="#23262F" stroke-width="9" stroke-linecap="round"/>
+<rect x="254" y="280" width="30" height="50" rx="13" fill="#23262F"/><rect x="356" y="280" width="30" height="50" rx="13" fill="#23262F"/>
 <text x="190" y="400" font-size="30" font-weight="700" fill="#23262F">Audífonos</text>
 <text x="190" y="438" font-size="26" fill="#6B7080">$499</text>
-<g id="heart" style="transform-origin:430px 410px"><path id="hp" d="M430 432 l-26 -26 a15 15 0 0 1 26 -20 a15 15 0 0 1 26 20 z" fill="none" stroke="#2F5BFF" stroke-width="5"/></g>
-<g id="load" opacity="0"><rect x="166" y="160" width="308" height="300" rx="20" fill="#FFFFFF" opacity=".9"/><g id="spin"><circle cx="320" cy="300" r="40" fill="none" stroke="#CDD2DC" stroke-width="10"/><path d="M320 260 a40 40 0 0 1 40 40" fill="none" stroke="#2F5BFF" stroke-width="10"/></g><text x="320" y="400" font-size="28" text-anchor="middle" fill="#23262F">Cargando…</text></g>
+<circle id="burst" class="c" cx="430" cy="408" r="30" fill="none" stroke="#2F5BFF" stroke-width="5" opacity="0"/>
+<g id="heart" class="c"><path id="hp" d="M430 432 l-26 -26 a15 15 0 0 1 26 -20 a15 15 0 0 1 26 20 z" fill="none" stroke="#2F5BFF" stroke-width="5" stroke-linejoin="round"/></g>
+<circle class="halo" cx="430" cy="408" r="38"/>
+<g id="btn" class="c"><rect x="166" y="484" width="308" height="64" rx="18" fill="#23262F"/><text x="320" y="525" font-size="24" font-weight="600" text-anchor="middle" fill="#F4F5F8">Agregar al carrito</text></g>
+</g>
+<g id="pgB" class="pg" style="transform:translateX(380px)">
+<rect x="166" y="156" width="308" height="60" rx="30" fill="#ECEEF2"/>
+<circle cx="198" cy="184" r="9" fill="none" stroke="#6B7080" stroke-width="4"/><path d="M205 191l8 8" stroke="#6B7080" stroke-width="4" stroke-linecap="round"/>
+<text x="228" y="195" font-size="24" fill="#23262F">audífonos</text>
+<g id="load"><g id="spin" class="c"><circle cx="320" cy="330" r="38" fill="none" stroke="#DCE0E7" stroke-width="10"/><path d="M320 292a38 38 0 0 1 38 38" fill="none" stroke="#2F5BFF" stroke-width="10" stroke-linecap="round"/></g><circle class="halo" cx="320" cy="330" r="60"/><text x="320" y="432" font-size="26" text-anchor="middle" fill="#6B7080">Cargando…</text></g>
+<g class="row"><rect x="166" y="244" width="84" height="84" rx="16" fill="#D5D9E2"/><text x="270" y="282" font-size="24" font-weight="700" fill="#23262F">Audífonos Pro</text><text x="270" y="314" font-size="22" fill="#6B7080">$899</text></g>
+<g class="row"><rect x="166" y="348" width="84" height="84" rx="16" fill="#D5D9E2"/><text x="270" y="386" font-size="24" font-weight="700" fill="#23262F">Audífonos Mini</text><text x="270" y="418" font-size="22" fill="#6B7080">$349</text></g>
+<g class="row"><rect x="166" y="452" width="84" height="84" rx="16" fill="#D5D9E2"/><text x="270" y="490" font-size="24" font-weight="700" fill="#23262F">Estuche</text><text x="270" y="522" font-size="22" fill="#6B7080">$129</text></g>
+</g>
+</g>
 <line x1="134" y1="620" x2="506" y2="620" stroke="#DCE0E7" stroke-width="3"/>
-<text x="196" y="672" font-size="26" text-anchor="middle" fill="#23262F">Inicio</text>
-<text x="320" y="672" font-size="26" text-anchor="middle" fill="#23262F">Buscar</text>
-<text x="444" y="672" font-size="26" text-anchor="middle" fill="#23262F">Perfil</text>
-<rect id="tab" x="156" y="622" width="80" height="8" rx="4" fill="#2F5BFF" style="transition:x .4s"/>
-<text id="ev" x="320" y="776" font-size="30" font-weight="700" text-anchor="middle" fill="#D97706">tocaste ♥</text>
+<text id="t0" class="tl on" x="196" y="672" text-anchor="middle">Inicio</text>
+<text id="t1" class="tl" x="320" y="672" text-anchor="middle">Buscar</text>
+<text id="t2" class="tl" x="444" y="672" text-anchor="middle">Perfil</text>
+<g id="tabm"><rect x="156" y="622" width="80" height="8" rx="4" fill="#2F5BFF"/><rect class="halo" x="142" y="638" width="108" height="50" rx="18"/></g>
+<circle id="fly" r="11" fill="#F2A93B" opacity="0"/>
+<g id="fg"><circle id="rip" r="26" fill="none" stroke="#F2A93B" stroke-width="4" opacity="0"/><circle id="fd" r="22" fill="#F2A93B" fill-opacity=".3" stroke="#F2A93B" stroke-width="4"/></g>
+<text id="ev" class="c" x="320" y="776" font-size="30" font-weight="700" text-anchor="middle" fill="#D97706"> </text>
 </svg>
 <script>
-var n=0,t=0,liked=false,s=0;
-var hp=document.getElementById('hp'),cnt=document.getElementById('cnt'),tab=document.getElementById('tab'),ev=document.getElementById('ev'),load=document.getElementById('load');
-function pulse(id){var e=document.getElementById(id);e.classList.remove('pulse');void e.getBBox();e.classList.add('pulse');}
-function step(){
- load.setAttribute('opacity','0');
- if(s==0){liked=!liked;hp.setAttribute('fill',liked?'#2F5BFF':'none');pulse('heart');ev.textContent=liked?'tocaste ♥ (me gusta)':'tocaste ♥ (quitar)';}
- if(s==1){n++;cnt.textContent=n;pulse('badge');ev.textContent='agregaste al carrito';}
- if(s==2){t=(t+1)%3;tab.setAttribute('x',156+t*124);ev.textContent='cambiaste de pestaña';}
- if(s==3){load.setAttribute('opacity','1');ev.textContent='pidió datos al servidor';}
- s=(s+1)%4;
-}
-step();setInterval(step,1700);
+var $=function(i){return document.getElementById(i)};
+var wait=function(ms){return new Promise(function(r){setTimeout(r,ms)})};
+var E='cubic-bezier(.2,.8,.2,1)',POP='cubic-bezier(.34,1.56,.64,1)';
+var n=0,liked=false,rows=document.querySelectorAll('.row');
+// Rótulo ámbar: la acción que acaba de ocurrir.
+function say(t){var ev=$('ev');
+ ev.animate([{opacity:1,transform:'translateY(0)'},{opacity:0,transform:'translateY(-12px)'}],{duration:150,easing:'ease-in',fill:'forwards'});
+ setTimeout(function(){ev.textContent=t;
+  ev.animate([{opacity:0,transform:'translateY(12px)'},{opacity:1,transform:'translateY(0)'}],{duration:260,easing:E,fill:'forwards'});},150);}
+// El "dedo" viaja al punto y toca.
+async function tap(x,y){
+ $('fg').style.transform='translate('+x+'px,'+y+'px)';
+ await wait(720);
+ $('fd').animate([{transform:'scale(1)'},{transform:'scale(.72)'},{transform:'scale(1)'}],{duration:300,easing:'ease-out'});
+ $('rip').animate([{transform:'scale(.7)',opacity:.9},{transform:'scale(2.4)',opacity:0}],{duration:560,easing:E});
+ await wait(140);}
+function setTab(t){
+ $('tabm').style.transform='translateX('+t*124+'px)';
+ ['t0','t1','t2'].forEach(function(id,i){$(id).setAttribute('class',i==t?'tl on':'tl');});
+ $('pgA').style.transform='translateX('+(t?-380:0)+'px)';
+ $('pgB').style.transform='translateX('+(t?0:380)+'px)';}
+// Trayectoria curva del punto que vuela del botón al carrito.
+function arc(){var k=[],i,t,u,x,y;for(i=0;i<=10;i++){t=i/10;u=1-t;
+ x=u*u*320+2*u*t*500+t*t*440;y=u*u*516+2*u*t*330+t*t*84;
+ k.push({transform:'translate('+x+'px,'+y+'px) scale('+(1-.45*t)+')',opacity:1});}return k;}
+async function loop(){
+ await wait(500);$('fg').style.opacity=1;
+ for(;;){
+  await tap(430,410);
+  liked=!liked;$('heart').classList.toggle('on',liked);
+  $('heart').animate([{transform:'scale(1)'},{transform:'scale(.7)'},{transform:'scale(1.3)'},{transform:'scale(1)'}],{duration:520,easing:'ease-out'});
+  if(liked)$('burst').animate([{transform:'scale(.4)',opacity:.9},{transform:'scale(1.6)',opacity:0}],{duration:600,easing:E});
+  say(liked?'tocaste ♥ · me gusta':'tocaste ♥ · ya no');
+  await wait(1500);
+
+  await tap(320,516);
+  $('btn').animate([{transform:'scale(1)'},{transform:'scale(.94)'},{transform:'scale(1)'}],{duration:320,easing:'ease-out'});
+  say('agregaste al carrito');
+  $('fly').animate(arc(),{duration:620,easing:'cubic-bezier(.4,0,.7,.4)'});
+  await wait(600);
+  n=n%9+1;$('cnt').textContent=n;
+  $('badge').animate([{transform:'scale(1)'},{transform:'scale(1.5)'},{transform:'scale(1)'}],{duration:460,easing:POP});
+  $('cart').animate([{transform:'rotate(0)'},{transform:'rotate(-12deg)'},{transform:'rotate(8deg)'},{transform:'rotate(0)'}],{duration:460,easing:'ease-out'});
+  await wait(1400);
+
+  await tap(320,664);
+  setTab(1);say('cambiaste de pestaña');
+  await wait(1100);
+  say('pidió datos al servidor');
+  await wait(1900);
+  $('load').style.opacity=0;
+  rows.forEach(function(r,i){setTimeout(function(){r.classList.add('in');},120+i*130);});
+  say('llegaron los datos');
+  await wait(1900);
+
+  await tap(196,664);
+  setTab(0);say('cambiaste de pestaña');
+  await wait(700);
+  rows.forEach(function(r){r.classList.remove('in');});$('load').style.opacity=1;
+  await wait(900);
+ }}
+loop();
+// Al revelar la lista en la lámina, se marcan en azul las cuatro piezas de estado.
+setInterval(function(){try{var s=frameElement&&frameElement.closest('section');
+ $('svg').classList.toggle('hl',!!(s&&s.querySelector('.build.shown')));}catch(e){}},250);
 </script></body></html></x-embed>
 <div style="display:flex;flex-direction:column;gap:16px;width:960px">
 <p style="font-size:21px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#6B7080">Pregunta al grupo</p>
@@ -50,5 +139,5 @@ step();setInterval(step,1700);
 <p data-build-in="rise" style="position:absolute;left:128px;top:560px;width:900px;font-size:32px;line-height:1.5;color:#23262F;background:#ECEEF2;box-shadow:12px 12px 28px #CFD3DB,-12px -12px 28px #FFFFFF;border-radius:20px;padding:32px 40px">Si el ♥ está activo · cuántos productos hay en el carrito · qué pestaña está elegida · si está cargando</p>
 <p data-build-in="pop" style="position:absolute;left:128px;top:790px;width:900px;font-size:44px;font-weight:700;color:#2F5BFF">Todo eso es <u>estado</u>.</p>
 <p style="position:absolute;left:128px;bottom:56px;width:900px;font-size:18px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#9A9EAC"><span style="display:inline-block;min-width:44px;padding:4px 14px;margin-right:16px;border-radius:999px;background:#2F5BFF;color:#FFFFFF;font-size:20px;font-weight:800;letter-spacing:0;text-align:center;vertical-align:middle">A</span></p>
-<aside>Arranque interactivo (cuenta en la rúbrica: “fomentan la participación”). Dejar correr la animación unos segundos y preguntar: “¿Qué cosas cambian en esta pantalla?”. Escuchar 2 o 3 respuestas. Luego hacer clic para revelar la lista y después la frase final. Mensaje clave: el estado es la información que puede cambiar mientras la app corre y que decide qué se ve.</aside>
+<aside>Arranque interactivo (cuenta en la rúbrica: “fomentan la participación”). Dejar correr la animación un ciclo completo (unos 12 segundos: el punto ámbar toca el ♥, agrega al carrito, cambia de pestaña y la app carga datos) y preguntar: “¿Qué cosas cambian en esta pantalla?”. Escuchar 2 o 3 respuestas. Luego hacer clic para revelar la lista (en el teléfono se marcan con un aro azul las cuatro piezas de estado) y después la frase final. Mensaje clave: el estado es la información que puede cambiar mientras la app corre y que decide qué se ve.</aside>
 </section>
