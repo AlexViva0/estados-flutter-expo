@@ -1,36 +1,131 @@
 {
   "v": 4,
-  "createdOnFiles": {"v": 1, "at": "2026-11-07T18:00:00Z"},
+  "createdOnFiles": {
+    "v": 1,
+    "at": "2026-11-07T18:00:00Z"
+  },
   "lists": "css",
   "title": "Estados en Flutter",
   "order": [
-    "cover", "equipo", "reglas", "agenda",
-    "s1-portada", "s1-pregunta", "s1-concepto", "s1-stateless", "s1-importancia", "s1-tipos", "s1-efimero", "s1-quiz", "s1-pizarron", "s1-reto",
-    "s2-portada", "s2-setstate", "s2-setstate-code", "s2-ciclo", "s2-valuenotifier", "s2-vn-trampa", "s2-inherited", "s2-familia", "s2-quiz", "s2-pizarron",
-    "s3-portada", "s3-porque", "s3-flujo", "s3-modelo", "s3-ui", "s3-watch-read", "s3-pizarron", "s3-reto",
+    "cover",
+    "reglas",
+    "agenda",
+    "s1-portada",
+    "s1-pregunta",
+    "s1-concepto",
+    "s1-stateless",
+    "s1-importancia",
+    "s1-tipos",
+    "s1-efimero",
+    "s1-quiz",
+    "s1-pizarron",
+    "s1-reto",
+    "s2-portada",
+    "s2-setstate",
+    "s2-setstate-code",
+    "s2-ciclo",
+    "s2-valuenotifier",
+    "s2-vn-trampa",
+    "s2-inherited",
+    "s2-familia",
+    "s2-quiz",
+    "s2-pizarron",
+    "s3-portada",
+    "s3-porque",
+    "s3-flujo",
+    "s3-modelo",
+    "s3-ui",
+    "s3-watch-read",
+    "s3-pizarron",
+    "s3-reto",
     "d1-cierre",
-    "d2-portada", "s4-portada", "s4-mapa", "s4-riverpod", "s4-getx-mobx", "s4-redux-signals", "s4-tabla", "s4-elegir", "s4-pizarron",
-    "s5-portada", "s5-cinco", "s5-maquina", "s5-future-stream", "s5-futurebuilder", "s5-error-comun", "s5-tabla", "s5-pizarron",
-    "s6-portada", "s6-bloc", "s6-cubit", "s6-cubit-code", "s6-comparar", "s6-pizarron",
-    "p-portada", "p-arquitectura", "p-estados", "p-cubit", "p-ui", "p-retos",
-    "cierre", "fuentes"
+    "d2-portada",
+    "s4-portada",
+    "s4-mapa",
+    "s4-riverpod",
+    "s4-getx-mobx",
+    "s4-redux-signals",
+    "s4-tabla",
+    "s4-elegir",
+    "s4-pizarron",
+    "s5-portada",
+    "s5-cinco",
+    "s5-maquina",
+    "s5-future-stream",
+    "s5-futurebuilder",
+    "s5-error-comun",
+    "s5-tabla",
+    "s5-pizarron",
+    "s6-portada",
+    "s6-bloc",
+    "s6-cubit",
+    "s6-cubit-code",
+    "s6-comparar",
+    "s6-pizarron",
+    "p-portada",
+    "p-arquitectura",
+    "p-estados",
+    "p-cubit",
+    "p-ui",
+    "p-retos",
+    "cierre",
+    "fuentes"
   ],
   "sections": {
-    "apertura": {"description": "Apertura: portada, equipo, reglas de atención y agenda de los dos días.", "start": "cover"},
-    "s1": {"description": "Bloque 1: qué es el estado, por qué importa y sus tipos.", "start": "s1-portada"},
-    "s2": {"description": "Bloque 2: mecanismos integrados de Flutter (setState, ciclo de vida, ValueNotifier, InheritedWidget).", "start": "s2-portada"},
-    "s3": {"description": "Bloque 3: Provider con ChangeNotifier, la solución más usada.", "start": "s3-portada"},
-    "d1": {"description": "Cierre del día 1.", "start": "d1-cierre"},
-    "s4": {"description": "Día 2, bloque 4: panorama de otras bibliotecas y cómo elegir.", "start": "d2-portada"},
-    "s5": {"description": "Bloque 5: estados de una operación y herramientas asíncronas.", "start": "s5-portada"},
-    "s6": {"description": "Bloque 6: BLoC y Cubit.", "start": "s6-portada"},
-    "practica": {"description": "Práctica guiada: consulta de estudiantes con Cubit.", "start": "p-portada"},
-    "cierre": {"description": "Conclusiones y fuentes.", "start": "cierre"}
+    "apertura": {
+      "description": "Apertura: portada, equipo, reglas de atención y agenda de los dos días.",
+      "start": "cover"
+    },
+    "s1": {
+      "description": "Bloque 1: qué es el estado, por qué importa y sus tipos.",
+      "start": "s1-portada"
+    },
+    "s2": {
+      "description": "Bloque 2: mecanismos integrados de Flutter (setState, ciclo de vida, ValueNotifier, InheritedWidget).",
+      "start": "s2-portada"
+    },
+    "s3": {
+      "description": "Bloque 3: Provider con ChangeNotifier, la solución más usada.",
+      "start": "s3-portada"
+    },
+    "d1": {
+      "description": "Cierre del día 1.",
+      "start": "d1-cierre"
+    },
+    "s4": {
+      "description": "Día 2, bloque 4: panorama de otras bibliotecas y cómo elegir.",
+      "start": "d2-portada"
+    },
+    "s5": {
+      "description": "Bloque 5: estados de una operación y herramientas asíncronas.",
+      "start": "s5-portada"
+    },
+    "s6": {
+      "description": "Bloque 6: BLoC y Cubit.",
+      "start": "s6-portada"
+    },
+    "practica": {
+      "description": "Práctica guiada: consulta de estudiantes con Cubit.",
+      "start": "p-portada"
+    },
+    "cierre": {
+      "description": "Conclusiones y fuentes.",
+      "start": "cierre"
+    }
   },
   "faces": {
-    "space-grotesk": {"family": "Space Grotesk", "href": "https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap"},
-    "inter": {"family": "Inter", "href": "https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"},
-    "jetbrains-mono": {"family": "JetBrains Mono", "href": "https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&display=swap"}
+    "space-grotesk": {
+      "family": "Space Grotesk",
+      "href": "https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap"
+    },
+    "inter": {
+      "family": "Inter",
+      "href": "https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
+    },
+    "jetbrains-mono": {
+      "family": "JetBrains Mono",
+      "href": "https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&display=swap"
+    }
   },
   "designSystems": []
 }

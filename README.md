@@ -1,6 +1,6 @@
 # Estados en Flutter · Equipo 2
 
-Presentación web de la exposición de la **Unidad 4 de Desarrollo de Aplicaciones Móviles** (TecNM · Instituto Tecnológico de Tlaxiaco). Tiene 64 láminas, animaciones en SVG y three.js, notas del orador y una vista del orador sincronizada.
+Presentación web de la exposición de la **Unidad 4 de Desarrollo de Aplicaciones Móviles** (TecNM · Instituto Tecnológico de Tlaxiaco). Tiene 63 láminas, animaciones en SVG y three.js, notas del orador y una vista del orador sincronizada.
 
 ## Uso
 
