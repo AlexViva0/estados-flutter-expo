@@ -6,7 +6,7 @@ button{font:inherit;color:inherit}
 /* ---------- escenario ---------- */
 #app{position:fixed;inset:0;display:flex}
 #viewport{position:relative;flex:1;overflow:hidden}
-#stage,#next-stage{position:absolute;left:50%;top:50%;width:1920px;height:1080px;transform-origin:center center;overflow:hidden;background:#0F1B2D}
+#stage,#next-stage{position:absolute;left:50%;top:50%;width:1920px;height:1080px;transform-origin:center center;overflow:hidden;background:#ECEEF2}
 #stage>section,#next-stage>section{position:absolute;inset:0;width:1920px;height:1080px;display:flex;flex-direction:column;overflow:hidden;font-size:32px;line-height:1.4}
 #stage>section:not(.active):not(.leaving){display:none!important}
 #stage section *,#next-stage section *{margin:0;box-sizing:border-box}
@@ -18,7 +18,7 @@ button{font:inherit;color:inherit}
 #stage p,#next-stage p{line-height:1.4}
 #stage ul,#stage ol{padding-left:1.2em}
 #stage table,#next-stage table{border-collapse:separate;border-spacing:0;width:100%;overflow:hidden}
-#stage th,#stage td,#next-stage th,#next-stage td{padding:.35em .6em;text-align:left;border-bottom:1px solid rgba(23,32,51,.10);vertical-align:middle}
+#stage th,#stage td,#next-stage th,#next-stage td{padding:.35em .6em;text-align:left;border-bottom:1px solid rgba(35,38,47,.08);vertical-align:middle}
 #stage th,#next-stage th{font-weight:700}
 #stage tr:last-child td{border-bottom:0}
 .x-embed{pointer-events:none}

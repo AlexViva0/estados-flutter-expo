@@ -36,6 +36,22 @@ fx/*.html         animaciones three.js usadas como fondos
 
 Cada `git push` a `main` se publica solo en Vercel: <https://estados-flutter-expo.vercel.app>
 
+## Paleta
+
+Hay pocos colores y cada uno tiene un significado. Úsalos igual al editar:
+
+| Color | Hex | Significado |
+|---|---|---|
+| Tinta | `#23262F` | estructura y títulos |
+| Gris | `#6B7080` | texto secundario y etiquetas |
+| Fondo | `#ECEEF2` | superficies neumórficas |
+| **Azul** | `#2F5BFF` | acento principal: **estado / lo que cambia** |
+| Ámbar | `#F2A93B` · `#D97706` | acción o evento que viaja (animaciones y código) |
+| Verde | `#16A37B` | ventaja o correcto |
+| Rojo | `#E5484D` | desventaja o error |
+
+La tipografía es Poppins (títulos en 900 y mayúsculas) y JetBrains Mono para el código.
+
 ## Desarrollo local
 
 ```bash

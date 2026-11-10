@@ -3,14 +3,15 @@
 <head>
 <meta charset="utf-8">
 <title>Árbol de widgets 3D</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;800&display=swap">
 <style>
-  html,body{margin:0;height:100%;overflow:hidden;background:transparent;font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+  html,body{margin:0;height:100%;overflow:hidden;background:transparent;font-family:Poppins,system-ui,sans-serif}
   canvas{display:block}
   #labels{position:absolute;inset:0;pointer-events:none}
-  .lb{position:absolute;transform:translate(-50%,-50%);padding:6px 14px;border-radius:12px;font-size:24px;font-weight:600;white-space:nowrap;transition:background .5s,color .5s,box-shadow .5s;background:rgba(255,255,255,.92);color:#172033;box-shadow:0 2px 10px rgba(23,32,51,.12)}
-  .lb.on{background:#1D4ED8;color:#F5F3EE;box-shadow:0 6px 24px rgba(29,78,216,.45)}
-  #cap{position:absolute;left:0;right:0;bottom:18px;text-align:center;font-size:30px;font-weight:800;color:#C2410C;letter-spacing:.5px;transition:opacity .35s}
-  #hint{position:absolute;left:0;right:0;bottom:24px;text-align:center;font-size:26px;color:#8FA3BF}
+  .lb{position:absolute;transform:translate(-50%,-50%);padding:6px 14px;border-radius:12px;font-size:24px;font-weight:600;white-space:nowrap;transition:background .5s,color .5s,box-shadow .5s;background:rgba(255,255,255,.92);color:#23262F;box-shadow:6px 6px 14px #CFD3DB,-6px -6px 14px #fff}
+  .lb.on{background:#2F5BFF;color:#fff;box-shadow:0 6px 24px rgba(47,91,255,.4)}
+  #cap{position:absolute;left:0;right:0;bottom:18px;text-align:center;font-size:28px;font-weight:800;color:#23262F;text-transform:uppercase;letter-spacing:1px;letter-spacing:.5px;transition:opacity .35s}
+  #hint{position:absolute;left:0;right:0;bottom:24px;text-align:center;font-size:24px;color:#6B7080}
 </style>
 </head>
 <body>
@@ -24,6 +25,7 @@ import * as THREE from 'three';
 const q = new URLSearchParams(location.search);
 const MODE = q.get('modo') || 'portada';          // portada | tipos
 const LIGHT = MODE === 'tipos';
+const CLARO = LIGHT || q.get('tema') === 'claro';
 
 let renderer;
 try { renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true }); }
@@ -64,13 +66,13 @@ if (LIGHT) {
 const root = new THREE.Group();
 scene.add(root);
 
-const COL = LIGHT
-  ? { node: 0xffffff, nodeOn: 0x1d4ed8, edge: 0xb9b3a5, edgeOn: 0x1d4ed8, pulse: 0xf59e0b, emissive: 0x000000 }
+const COL = CLARO
+  ? { node: 0xf4f5f8, nodeOn: 0x2f5bff, edge: 0xc4c9d3, edgeOn: 0x2f5bff, pulse: 0x2f5bff, emissive: 0x000000 }
   : { node: 0x16273f, nodeOn: 0x3b82f6, edge: 0x2a4366, edgeOn: 0x60a5fa, pulse: 0xf59e0b, emissive: 0x3b82f6 };
 
-scene.add(new THREE.AmbientLight(0xffffff, LIGHT ? 1.6 : 0.5));
-const key = new THREE.DirectionalLight(0xffffff, LIGHT ? 1.4 : 1.2); key.position.set(4, 8, 6); scene.add(key);
-const rim = new THREE.PointLight(0xf59e0b, LIGHT ? 0 : 30, 30); rim.position.set(-4, -2, 4); scene.add(rim);
+scene.add(new THREE.AmbientLight(0xffffff, CLARO ? 1.6 : 0.5));
+const key = new THREE.DirectionalLight(0xffffff, CLARO ? 1.4 : 1.2); key.position.set(4, 8, 6); scene.add(key);
+const rim = new THREE.PointLight(0xf59e0b, CLARO ? 0 : 30, 30); rim.position.set(-4, -2, 4); scene.add(rim);
 
 function glowTexture(color) {
   const c = document.createElement('canvas'); c.width = c.height = 128;
@@ -86,11 +88,11 @@ const haloOrange = glowTexture('rgba(245,158,11,1)');
 const nodes = TREE.map((n, i) => {
   const r = i === 0 ? 0.42 : (depth[i] === 1 ? 0.34 : 0.27);
   const m = new THREE.Mesh(new THREE.SphereGeometry(r, 48, 32),
-    new THREE.MeshStandardMaterial({ color: COL.node, emissive: COL.emissive, emissiveIntensity: 0.15, roughness: 0.35, metalness: LIGHT ? 0 : 0.3 }));
+    new THREE.MeshStandardMaterial({ color: COL.node, emissive: COL.emissive, emissiveIntensity: 0.15, roughness: 0.35, metalness: CLARO ? 0 : 0.3 }));
   m.position.copy(pos[i]);
   root.add(m);
   let s = null;
-  if (!LIGHT) {
+  if (!CLARO) {
     s = new THREE.Sprite(new THREE.SpriteMaterial({ map: halo, transparent: true, opacity: 0.0, depthWrite: false, blending: THREE.AdditiveBlending }));
     s.scale.setScalar(r * 6); s.position.copy(pos[i]); root.add(s);
   }
@@ -104,7 +106,7 @@ TREE.forEach((n, i) => {
   const mid = a.clone().lerp(b, 0.5); mid.y += 0.25;
   const curve = new THREE.QuadraticBezierCurve3(a, mid, b);
   const geo = new THREE.TubeGeometry(curve, 24, LIGHT ? 0.035 : 0.025, 8, false);
-  const mat = new THREE.MeshBasicMaterial({ color: COL.edge, transparent: true, opacity: LIGHT ? 1 : 0.8 });
+  const mat = new THREE.MeshBasicMaterial({ color: COL.edge, transparent: true, opacity: CLARO ? 1 : 0.8 });
   const mesh = new THREE.Mesh(geo, mat);
   root.add(mesh);
   edges.push({ from: n[1], to: i, curve, mesh });
@@ -116,7 +118,7 @@ if (!LIGHT) {
   const N = 900, g = new THREE.BufferGeometry(), p = new Float32Array(N * 3);
   for (let i = 0; i < N; i++) { p[i * 3] = (Math.random() - .5) * 30; p[i * 3 + 1] = (Math.random() - .5) * 18; p[i * 3 + 2] = (Math.random() - .5) * 20 - 4; }
   g.setAttribute('position', new THREE.BufferAttribute(p, 3));
-  dust = new THREE.Points(g, new THREE.PointsMaterial({ color: 0x8fa3bf, size: 0.05, transparent: true, opacity: 0.55, depthWrite: false }));
+  dust = new THREE.Points(g, new THREE.PointsMaterial({ color: CLARO ? 0xb9bec9 : 0x8fa3bf, size: 0.05, transparent: true, opacity: 0.55, depthWrite: false }));
   scene.add(dust);
 }
 
@@ -125,7 +127,7 @@ const pulses = [];
 function spawn(edgeIdx, delay) {
   const sp = new THREE.Mesh(new THREE.SphereGeometry(LIGHT ? 0.11 : 0.1, 16, 12), new THREE.MeshBasicMaterial({ color: COL.pulse }));
   let gl = null;
-  if (!LIGHT) { gl = new THREE.Sprite(new THREE.SpriteMaterial({ map: haloOrange, transparent: true, depthWrite: false, blending: THREE.AdditiveBlending })); gl.scale.setScalar(0.9); root.add(gl); }
+  if (!CLARO) { gl = new THREE.Sprite(new THREE.SpriteMaterial({ map: haloOrange, transparent: true, depthWrite: false, blending: THREE.AdditiveBlending })); gl.scale.setScalar(0.9); root.add(gl); }
   sp.visible = false; root.add(sp);
   pulses.push({ e: edges[edgeIdx], t: -delay, sp, gl });
 }
@@ -145,9 +147,9 @@ const SCOPES = [
 ];
 let scope = -1;
 const bubble = new THREE.Mesh(new THREE.SphereGeometry(1, 48, 32),
-  new THREE.MeshBasicMaterial({ color: 0x1d4ed8, transparent: true, opacity: 0.07, depthWrite: false }));
+  new THREE.MeshBasicMaterial({ color: 0x2f5bff, transparent: true, opacity: 0.07, depthWrite: false }));
 const bubbleRing = new THREE.Mesh(new THREE.TorusGeometry(1, 0.012, 8, 96),
-  new THREE.MeshBasicMaterial({ color: 0x1d4ed8, transparent: true, opacity: 0.5 }));
+  new THREE.MeshBasicMaterial({ color: 0x2f5bff, transparent: true, opacity: 0.5 }));
 if (LIGHT) { root.add(bubble); root.add(bubbleRing); }
 const bubbleTarget = { c: new THREE.Vector3(), r: 1 };
 function nextScope() {
@@ -209,11 +211,14 @@ function frame() {
       n.mesh.material.color.copy(nodeColor).lerp(nodeOn, n.level);
       n.mesh.material.emissive.setHex(0xf59e0b); n.mesh.material.emissiveIntensity = n.glow * 0.6;
       n.mesh.scale.setScalar(1 + n.level * 0.22 + n.glow * 0.15);
+    } else if (CLARO) {
+      n.mesh.material.color.copy(nodeColor).lerp(nodeOn, Math.min(1, n.glow * 1.2));
+      n.mesh.scale.setScalar(1 + n.glow * 0.22 + Math.sin(t * 2 + i) * 0.012);
     } else {
       n.mesh.material.emissiveIntensity = 0.15 + n.glow * 1.6;
       n.mesh.material.color.copy(nodeColor).lerp(nodeOn, n.glow * 0.8);
       n.mesh.scale.setScalar(1 + n.glow * 0.25 + Math.sin(t * 2 + i) * 0.015);
-      n.halo.material.opacity = 0.18 + n.glow * 0.8;
+      if (n.halo) n.halo.material.opacity = 0.18 + n.glow * 0.8;
     }
   });
   edges.forEach(e => {

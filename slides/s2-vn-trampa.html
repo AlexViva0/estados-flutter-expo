@@ -1,19 +1,19 @@
-<section id="s2-vn-trampa" data-transition="fade" style="background:#F5F3EE;color:#172033;font-family:Inter, Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<section id="s2-vn-trampa" data-transition="fade" style="background:#ECEEF2;color:#23262F;font-family:Poppins, Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
 <div style="display:flex;flex-direction:column;gap:16px">
-<p style="font-size:24px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#C2410C">Más allá del temario · error común</p>
-<h2 style="font-family:'Space Grotesk', Arial, sans-serif;font-size:72px;font-weight:700;line-height:1.1;color:#172033">Cambiar la lista por dentro no avisa</h2>
+<p style="font-size:21px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#6B7080">Más allá del temario · error común</p>
+<h2 style="font-family:Poppins, Arial, sans-serif;font-size:64px;font-weight:900;line-height:1.02;color:#23262F;text-transform:uppercase;letter-spacing:-3px">Cambiar la lista por dentro no avisa</h2>
 </div>
 <div style="display:grid;grid-template-columns:1fr 1fr;gap:40px">
 <div style="display:flex;flex-direction:column;gap:16px">
-<p style="font-size:32px;font-weight:700;color:#C2410C">✗ La pantalla no se entera</p>
-<div style="background:#0F1B2D;border-radius:20px;padding:32px 36px"><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;line-height:1.5;color:#E6EDF3;white-space:nowrap"><span style="color:#7AB8FF">final</span> lista =<br>&#160;&#160;<span style="color:#FFC66D">ValueNotifier</span>&lt;<span style="color:#FFC66D">List</span>&lt;<span style="color:#FFC66D">String</span>&gt;&gt;([]);<br><br><span style="color:#7C8BA1">// misma lista, mismo objeto</span><br>lista.value.add(<span style="color:#A5D6A7">'Ana'</span>);</p></div>
+<p style="font-size:32px;font-weight:700;color:#E5484D">✗ La pantalla no se entera</p>
+<div style="background:#23262F;border-radius:20px;padding:32px 36px"><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;line-height:1.5;color:#E6EDF3;white-space:nowrap"><span style="color:#8EA4FF">final</span> lista =<br>&#160;&#160;<span style="color:#FFFFFF">ValueNotifier</span>&lt;<span style="color:#FFFFFF">List</span>&lt;<span style="color:#FFFFFF">String</span>&gt;&gt;([]);<br><br><span style="color:#8A8F9C">// misma lista, mismo objeto</span><br>lista.value.add(<span style="color:#86D3A9">'Ana'</span>);</p></div>
 </div>
 <div style="display:flex;flex-direction:column;gap:16px">
-<p style="font-size:32px;font-weight:700;color:#1D4ED8">✓ Asigna una lista nueva</p>
-<div style="background:#0F1B2D;border-radius:20px;padding:32px 36px"><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;line-height:1.5;color:#E6EDF3;white-space:nowrap"><span style="color:#7AB8FF">final</span> lista =<br>&#160;&#160;<span style="color:#FFC66D">ValueNotifier</span>&lt;<span style="color:#FFC66D">List</span>&lt;<span style="color:#FFC66D">String</span>&gt;&gt;([]);<br><br><span style="color:#7C8BA1">// objeto distinto → notifica</span><br>lista.value = [...lista.value, <span style="color:#A5D6A7">'Ana'</span>];</p></div>
+<p style="font-size:32px;font-weight:700;color:#16A37B">✓ Asigna una lista nueva</p>
+<div style="background:#23262F;border-radius:20px;padding:32px 36px"><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;line-height:1.5;color:#E6EDF3;white-space:nowrap"><span style="color:#8EA4FF">final</span> lista =<br>&#160;&#160;<span style="color:#FFFFFF">ValueNotifier</span>&lt;<span style="color:#FFFFFF">List</span>&lt;<span style="color:#FFFFFF">String</span>&gt;&gt;([]);<br><br><span style="color:#8A8F9C">// objeto distinto → notifica</span><br>lista.value = [...lista.value, <span style="color:#86D3A9">'Ana'</span>];</p></div>
 </div>
 </div>
-<div style="background:#172033;border-radius:20px;padding:32px 40px"><p style="font-size:32px;line-height:1.4;color:#F5F3EE">ValueNotifier solo avisa cuando le <b>asignas</b> a <b>value</b> algo distinto al valor anterior. La misma idea aplica en Provider, BLoC y Cubit: <span style="color:#F59E0B">estado nuevo, objeto nuevo.</span></p></div>
-<p style="position:absolute;left:128px;bottom:64px;width:1664px;font-size:24px;color:#6B7689">Día 1 · Bloque 2 · [Expositor 2]</p>
+<div style="background:#23262F;border-radius:20px;padding:32px 40px"><p style="font-size:32px;line-height:1.4;color:#ECEEF2">ValueNotifier solo avisa cuando le <b>asignas</b> a <b>value</b> algo distinto al valor anterior. La misma idea aplica en Provider, BLoC y Cubit: <span style="color:#F2A93B">estado nuevo, objeto nuevo.</span></p></div>
+<p style="position:absolute;left:128px;bottom:64px;width:1664px;font-size:18px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#9A9EAC">Día 1 · Bloque 2 · [Expositor 2]</p>
 <aside>Este es un punto “más allá del temario” que el docente valora. ValueNotifier compara el valor nuevo con el anterior; si haces add() sobre la misma lista, el objeto es el mismo y no se dispara la notificación. La solución es crear una lista nueva con el operador spread (...). Es la base de la inmutabilidad que veremos mañana en Cubit con equatable.</aside>
 </section>

@@ -1,39 +1,39 @@
-<section id="s4-redux-signals" data-transition="fade" style="background:#F5F3EE;color:#172033;font-family:Inter, Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
-<x-embed style="position:absolute;left:128px;top:390px;width:800px;height:520px"><!doctype html><html><head><meta charset="utf-8"><style>
-html,body{margin:0;background:transparent;overflow:hidden;font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
-.n{fill:#FFFFFF;stroke:#C9C3B5;stroke-width:3;animation:h 4s infinite}
-@keyframes h{0%,20%,100%{fill:#FFFFFF;stroke:#C9C3B5}5%,15%{fill:#DCE6F7;stroke:#1D4ED8}}
-circle[fill="#F59E0B"]{filter:drop-shadow(0 0 6px rgba(245,158,11,.85))}
+<section id="s4-redux-signals" data-transition="fade" style="background:#ECEEF2;color:#23262F;font-family:Poppins, Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<x-embed style="position:absolute;left:128px;top:390px;width:800px;height:520px"><!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&display=swap"><style>
+html,body{margin:0;background:transparent;overflow:hidden;font-family:Poppins,system-ui,sans-serif}
+.n{fill:#FFFFFF;stroke:#CDD2DC;stroke-width:3;animation:h 4s infinite}
+@keyframes h{0%,20%,100%{fill:#FFFFFF;stroke:#CDD2DC}5%,15%{fill:#DCE4FF;stroke:#2F5BFF}}
+circle[fill="#F2A93B"]{filter:drop-shadow(0 0 6px rgba(245,158,11,.85))}
 g[transform] rect{filter:drop-shadow(0 4px 10px rgba(23,32,51,.25))}
 </style></head><body>
 <svg width="800" height="520" viewBox="0 20 800 520">
-<path id="p" d="M210 110 H590 V420 H210 Z" fill="none" stroke="#C9C3B5" stroke-width="4" stroke-dasharray="12 10"/>
+<path id="p" d="M210 110 H590 V420 H210 Z" fill="none" stroke="#CDD2DC" stroke-width="4" stroke-dasharray="12 10"/>
 <rect class="n" x="60" y="60" width="300" height="100" rx="20" style="animation-delay:0s"/>
 <rect class="n" x="440" y="60" width="300" height="100" rx="20" style="animation-delay:1s"/>
 <rect class="n" x="440" y="370" width="300" height="100" rx="20" style="animation-delay:2s"/>
 <rect class="n" x="60" y="370" width="300" height="100" rx="20" style="animation-delay:3s"/>
-<text x="210" y="120" font-size="32" font-weight="700" text-anchor="middle" fill="#172033">UI</text>
-<text x="590" y="120" font-size="32" font-weight="700" text-anchor="middle" fill="#172033">Acción</text>
-<text x="590" y="430" font-size="32" font-weight="700" text-anchor="middle" fill="#172033">Reducer</text>
-<text x="210" y="430" font-size="32" font-weight="700" text-anchor="middle" fill="#172033">Store</text>
-<text x="400" y="45" font-size="24" text-anchor="middle" fill="#C2410C">dispatch</text>
-<text x="770" y="270" font-size="24" text-anchor="end" fill="#C2410C">estado + acción</text>
-<text x="400" y="510" font-size="24" text-anchor="middle" fill="#C2410C">estado nuevo</text>
-<text x="30" y="270" font-size="24" fill="#C2410C">notifica</text>
-<circle r="14" fill="#F59E0B"><animateMotion dur="4s" repeatCount="indefinite" path="M210 110 H590 V420 H210 Z"/></circle>
+<text x="210" y="120" font-size="32" font-weight="700" text-anchor="middle" fill="#23262F">UI</text>
+<text x="590" y="120" font-size="32" font-weight="700" text-anchor="middle" fill="#23262F">Acción</text>
+<text x="590" y="430" font-size="32" font-weight="700" text-anchor="middle" fill="#23262F">Reducer</text>
+<text x="210" y="430" font-size="32" font-weight="700" text-anchor="middle" fill="#23262F">Store</text>
+<text x="400" y="45" font-size="24" text-anchor="middle" fill="#D97706">dispatch</text>
+<text x="770" y="270" font-size="24" text-anchor="end" fill="#D97706">estado + acción</text>
+<text x="400" y="510" font-size="24" text-anchor="middle" fill="#D97706">estado nuevo</text>
+<text x="30" y="270" font-size="24" fill="#D97706">notifica</text>
+<circle r="14" fill="#F2A93B"><animateMotion dur="4s" repeatCount="indefinite" path="M210 110 H590 V420 H210 Z"/></circle>
 </svg></body></html></x-embed>
 <div style="display:flex;flex-direction:column;gap:16px">
-<p style="font-size:24px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#C2410C">5.7 – 5.8 · Dos extremos</p>
-<h2 style="font-family:'Space Grotesk', Arial, sans-serif;font-size:72px;font-weight:700;line-height:1.1;color:#172033">Redux y Signals</h2>
+<p style="font-size:21px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#6B7080">5.7 – 5.8 · Dos extremos</p>
+<h2 style="font-family:Poppins, Arial, sans-serif;font-size:64px;font-weight:900;line-height:1.02;color:#23262F;text-transform:uppercase;letter-spacing:-3px">Redux y Signals</h2>
 </div>
 <div style="display:flex;flex-direction:row;gap:40px">
-<div style="width:800px;display:flex;flex-direction:column;gap:8px"><p style="font-size:28px;line-height:1.4;color:#4A5568"><b style="color:#172033">Redux:</b> un único <b>store</b>; los cambios son acciones que procesa un reducer.</p></div>
+<div style="width:800px;display:flex;flex-direction:column;gap:8px"><p style="font-size:28px;line-height:1.4;color:#6B7080"><b style="color:#23262F">Redux:</b> un único <b>store</b>; los cambios son acciones que procesa un reducer.</p></div>
 <div style="flex:1;display:flex;flex-direction:column;gap:24px">
-<p style="font-size:28px;line-height:1.4;color:#4A5568"><b style="color:#172033">Signals:</b> valores reactivos; lo que depende de ellos se recalcula solo.</p>
-<div style="background:#0F1B2D;border-radius:20px;padding:28px 32px"><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;line-height:1.5;color:#E6EDF3;white-space:nowrap"><span style="color:#7AB8FF">final</span> precio = <span style="color:#F59E0B">signal</span>(<span style="color:#F78C6C">100</span>);<br><span style="color:#7AB8FF">final</span> total = <span style="color:#F59E0B">computed</span>(<br>&#160;&#160;&#160;&#160;() =&gt; precio.value * <span style="color:#F78C6C">1.16</span>);<br>precio.value = <span style="color:#F78C6C">200</span>; <span style="color:#7C8BA1">// total → 232</span></p></div>
-<div style="background:#FFFFFF;border:2px solid #E2DED4;border-radius:20px;padding:24px 28px"><p style="font-size:26px;line-height:1.4"><b style="color:#1D4ED8">Redux</b>: flujo predecible, más código. <b style="color:#1D4ED8">Signals</b>: directo, API según la biblioteca.</p></div>
+<p style="font-size:28px;line-height:1.4;color:#6B7080"><b style="color:#23262F">Signals:</b> valores reactivos; lo que depende de ellos se recalcula solo.</p>
+<div style="background:#23262F;border-radius:20px;padding:28px 32px"><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;line-height:1.5;color:#E6EDF3;white-space:nowrap"><span style="color:#8EA4FF">final</span> precio = <span style="color:#F2A93B">signal</span>(<span style="color:#F2B66D">100</span>);<br><span style="color:#8EA4FF">final</span> total = <span style="color:#F2A93B">computed</span>(<br>&#160;&#160;&#160;&#160;() =&gt; precio.value * <span style="color:#F2B66D">1.16</span>);<br>precio.value = <span style="color:#F2B66D">200</span>; <span style="color:#8A8F9C">// total → 232</span></p></div>
+<div style="background:#ECEEF2;box-shadow:12px 12px 28px #CFD3DB,-12px -12px 28px #FFFFFF;border-radius:20px;padding:24px 28px"><p style="font-size:26px;line-height:1.4"><b style="color:#2F5BFF">Redux</b>: flujo predecible, más código. <b style="color:#2F5BFF">Signals</b>: directo, API según la biblioteca.</p></div>
 </div>
 </div>
-<p style="position:absolute;left:128px;bottom:64px;width:1664px;font-size:24px;color:#6B7689">Día 2 · Bloque 4 · [Expositor 4]</p>
+<p style="position:absolute;left:128px;bottom:64px;width:1664px;font-size:18px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#9A9EAC">Día 2 · Bloque 4 · [Expositor 4]</p>
 <aside>Redux (paquete flutter_redux): 1) un componente despacha una acción; 2) el reducer recibe el estado anterior y la acción; 3) devuelve un estado nuevo; 4) los componentes conectados al store se actualizan. Se usa en apps grandes, como paneles administrativos, donde importa rastrear cada cambio. Signals (paquete signals_flutter): sirve para cálculos derivados, filtros y formularios dinámicos; en el ejemplo, total se recalcula solo cuando cambia precio. Mencionar también flutter_hooks: reutiliza lógica del ciclo de vida con funciones llamadas hooks.</aside>
 </section>

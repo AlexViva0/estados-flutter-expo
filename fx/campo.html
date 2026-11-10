@@ -18,7 +18,9 @@ const TONO = q.get('tono') || 'azul';      // azul | calma | crema
 const PALETTES = {
   azul:  { low: 0x1b2e4a, mid: 0x3b82f6, high: 0xf59e0b, size: 0.07, alpha: 0.95, speed: 1 },
   calma: { low: 0x16273f, mid: 0x2f5ea8, high: 0xf59e0b, size: 0.06, alpha: 0.75, speed: 0.55 },
-  crema: { low: 0xd9733a, mid: 0xfde7c8, high: 0xfbf4ec, size: 0.07, alpha: 0.9, speed: 0.9 }
+  crema: { low: 0xd9733a, mid: 0xfde7c8, high: 0xfbf4ec, size: 0.07, alpha: 0.9, speed: 0.9 },
+  claro: { low: 0xd3d7df, mid: 0x9aa1b1, high: 0x2f5bff, size: 0.085, alpha: 0.9, speed: 0.8, normal: true },
+  tinta: { low: 0x2e323c, mid: 0x4b5162, high: 0xf2a93b, size: 0.065, alpha: 0.8, speed: 0.55 }
 };
 const P = PALETTES[TONO] || PALETTES.azul;
 if (q.get('fade')) document.body.classList.add('fade-' + q.get('fade'));
@@ -54,7 +56,7 @@ function dotTexture() {
   g.fillStyle = gr; g.fillRect(0, 0, 64, 64);
   return new THREE.CanvasTexture(c);
 }
-const mat = new THREE.PointsMaterial({ size: P.size, map: dotTexture(), vertexColors: true, transparent: true, opacity: P.alpha, depthWrite: false, blending: TONO === 'crema' ? THREE.NormalBlending : THREE.AdditiveBlending });
+const mat = new THREE.PointsMaterial({ size: P.size, map: dotTexture(), vertexColors: true, transparent: true, opacity: P.alpha, depthWrite: false, blending: (TONO === 'crema' || P.normal) ? THREE.NormalBlending : THREE.AdditiveBlending });
 const pts = new THREE.Points(geo, mat);
 scene.add(pts);
 

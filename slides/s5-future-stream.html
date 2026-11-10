@@ -1,35 +1,35 @@
-<section id="s5-future-stream" data-transition="fade" style="background:#F5F3EE;color:#172033;font-family:Inter, Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:16px">
-<x-embed style="position:absolute;left:128px;top:320px;width:1664px;height:580px"><!doctype html><html><head><meta charset="utf-8"><style>
-html,body{margin:0;background:transparent;overflow:hidden;font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+<section id="s5-future-stream" data-transition="fade" style="background:#ECEEF2;color:#23262F;font-family:Poppins, Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:16px">
+<x-embed style="position:absolute;left:128px;top:320px;width:1664px;height:580px"><!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&display=swap"><style>
+html,body{margin:0;background:transparent;overflow:hidden;font-family:Poppins,system-ui,sans-serif}
 </style></head><body>
 <svg id="s" width="1664" height="580" viewBox="0 0 1664 580">
 <rect x="0" y="0" width="1664" height="270" rx="24" fill="#FFFFFF"/>
 <rect x="0" y="300" width="1664" height="270" rx="24" fill="#FFFFFF"/>
-<text x="40" y="60" font-size="34" font-weight="700" fill="#1D4ED8">Future</text>
-<text x="200" y="60" font-size="26" fill="#4A5568">un solo resultado (o un error), una vez</text>
-<text x="40" y="360" font-size="34" font-weight="700" fill="#C2410C">Stream</text>
-<text x="200" y="360" font-size="26" fill="#4A5568">muchos valores a lo largo del tiempo</text>
-<line x1="60" y1="170" x2="1600" y2="170" stroke="#C9C3B5" stroke-width="4"/>
-<line x1="60" y1="470" x2="1600" y2="470" stroke="#C9C3B5" stroke-width="4"/>
+<text x="40" y="60" font-size="34" font-weight="700" fill="#2F5BFF">Future</text>
+<text x="200" y="60" font-size="26" fill="#6B7080">un solo resultado (o un error), una vez</text>
+<text x="40" y="360" font-size="34" font-weight="700" fill="#D97706">Stream</text>
+<text x="200" y="360" font-size="26" fill="#6B7080">muchos valores a lo largo del tiempo</text>
+<line x1="60" y1="170" x2="1600" y2="170" stroke="#CDD2DC" stroke-width="4"/>
+<line x1="60" y1="470" x2="1600" y2="470" stroke="#CDD2DC" stroke-width="4"/>
 <g id="dyn"></g>
-<line id="ph1" x1="60" y1="120" x2="60" y2="220" stroke="#172033" stroke-width="3"/>
-<line id="ph2" x1="60" y1="420" x2="60" y2="520" stroke="#172033" stroke-width="3"/>
+<line id="ph1" x1="60" y1="120" x2="60" y2="220" stroke="#23262F" stroke-width="3"/>
+<line id="ph2" x1="60" y1="420" x2="60" y2="520" stroke="#23262F" stroke-width="3"/>
 </svg>
 <script>
 var ns='http://www.w3.org/2000/svg',d=document.getElementById('dyn');
 function el(t,a,txt){var e=document.createElementNS(ns,t);for(var k in a)e.setAttribute(k,a[k]);if(txt)e.textContent=txt;d.appendChild(e);return e;}
 var T=6000,t0=null,doneF=false,next=0,msgs=0;
-function f(t){if(!t0){t0=t;d.innerHTML='';doneF=false;next=600;msgs=0;el('text',{x:80,y:230,'font-size':24,fill:'#6B7689'},'esperando…');}
+function f(t){if(!t0){t0=t;d.innerHTML='';doneF=false;next=600;msgs=0;el('text',{x:80,y:230,'font-size':24,fill:'#9A9EAC'},'esperando…');}
 var e=t-t0,x=60+1540*Math.min(1,e/T);
 document.getElementById('ph1').setAttribute('x1',x);document.getElementById('ph1').setAttribute('x2',x);
 document.getElementById('ph2').setAttribute('x1',x);document.getElementById('ph2').setAttribute('x2',x);
-if(!doneF&&e>2200){doneF=true;el('circle',{cx:x,cy:170,r:18,fill:'#1D4ED8'});el('text',{x:x,y:132,'text-anchor':'middle','font-size':26,'font-weight':700,fill:'#172033'},'List\u003CEstudiante>');el('text',{x:x+40,y:230,'font-size':24,fill:'#1D4ED8'},'✓ completado: ya no emite más');}
-if(e>next&&T>e){msgs++;next+=700+Math.random()*500;el('circle',{cx:x,cy:470,r:14,fill:'#C2410C'});el('text',{x:x,y:440,'text-anchor':'middle','font-size':24,fill:'#172033'},'msj '+msgs);}
+if(!doneF&&e>2200){doneF=true;el('circle',{cx:x,cy:170,r:18,fill:'#2F5BFF'});el('text',{x:x,y:132,'text-anchor':'middle','font-size':26,'font-weight':700,fill:'#23262F'},'List\u003CEstudiante>');el('text',{x:x+40,y:230,'font-size':24,fill:'#2F5BFF'},'✓ completado: ya no emite más');}
+if(e>next&&T>e){msgs++;next+=700+Math.random()*500;el('circle',{cx:x,cy:470,r:14,fill:'#D97706'});el('text',{x:x,y:440,'text-anchor':'middle','font-size':24,fill:'#23262F'},'msj '+msgs);}
 if(e>T+800)t0=null;requestAnimationFrame(f);}
 requestAnimationFrame(f);
 </script></body></html></x-embed>
-<p style="font-size:24px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#C2410C">7 · Asincronía</p>
-<h2 style="font-family:'Space Grotesk', Arial, sans-serif;font-size:72px;font-weight:700;line-height:1.1;color:#172033">Future frente a Stream</h2>
-<p style="position:absolute;left:128px;bottom:64px;width:1664px;font-size:24px;color:#6B7689">Día 2 · Bloque 5 · [Expositor 5]</p>
+<p style="font-size:21px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#6B7080">7 · Asincronía</p>
+<h2 style="font-family:Poppins, Arial, sans-serif;font-size:64px;font-weight:900;line-height:1.02;color:#23262F;text-transform:uppercase;letter-spacing:-3px">Future frente a Stream</h2>
+<p style="position:absolute;left:128px;bottom:64px;width:1664px;font-size:18px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#9A9EAC">Día 2 · Bloque 5 · [Expositor 5]</p>
 <aside>Analogía: un Future es como pedir una pizza: llega una vez (o te avisan que no hay). Un Stream es como un chat: los mensajes siguen llegando mientras estés suscrito. Ejemplos de Future: consultar estudiantes en una API, leer un archivo. Ejemplos de Stream: notificaciones en tiempo real, ubicación GPS, mensajes de Firebase. Para cada uno, Flutter tiene un widget: FutureBuilder y StreamBuilder.</aside>
 </section>

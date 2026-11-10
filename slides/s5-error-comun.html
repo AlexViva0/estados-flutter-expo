@@ -1,19 +1,19 @@
-<section id="s5-error-comun" data-transition="fade" style="background:#F5F3EE;color:#172033;font-family:Inter, Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<section id="s5-error-comun" data-transition="fade" style="background:#ECEEF2;color:#23262F;font-family:Poppins, Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
 <div style="display:flex;flex-direction:column;gap:16px">
-<p style="font-size:24px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#C2410C">Más allá del temario · error común</p>
-<h2 style="font-family:'Space Grotesk', Arial, sans-serif;font-size:72px;font-weight:700;line-height:1.1;color:#172033">No crees el Future dentro de build</h2>
+<p style="font-size:21px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#6B7080">Más allá del temario · error común</p>
+<h2 style="font-family:Poppins, Arial, sans-serif;font-size:64px;font-weight:900;line-height:1.02;color:#23262F;text-transform:uppercase;letter-spacing:-3px">No crees el Future dentro de build</h2>
 </div>
 <div style="display:grid;grid-template-columns:1fr 1fr;gap:40px">
 <div style="display:flex;flex-direction:column;gap:16px">
-<p style="font-size:32px;font-weight:700;color:#C2410C">✗ Consulta en cada redibujo</p>
-<div style="background:#0F1B2D;border-radius:20px;padding:32px 36px"><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;line-height:1.5;color:#E6EDF3;white-space:nowrap"><span style="color:#FFC66D">Widget</span> build(<span style="color:#FFC66D">BuildContext</span> context) {<br>&#160;&#160;<span style="color:#7AB8FF">return</span> <span style="color:#FFC66D">FutureBuilder</span>(<br>&#160;&#160;&#160;&#160;future: obtenerEstudiantes(),<br>&#160;&#160;&#160;&#160;<span style="color:#C2410C">// ↑ nueva petición cada vez</span><br>&#160;&#160;&#160;&#160;builder: ...,<br>&#160;&#160;);<br>}</p></div>
+<p style="font-size:32px;font-weight:700;color:#E5484D">✗ Consulta en cada redibujo</p>
+<div style="background:#23262F;border-radius:20px;padding:32px 36px"><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;line-height:1.5;color:#E6EDF3;white-space:nowrap"><span style="color:#FFFFFF">Widget</span> build(<span style="color:#FFFFFF">BuildContext</span> context) {<br>&#160;&#160;<span style="color:#8EA4FF">return</span> <span style="color:#FFFFFF">FutureBuilder</span>(<br>&#160;&#160;&#160;&#160;future: obtenerEstudiantes(),<br>&#160;&#160;&#160;&#160;<span style="color:#2F5BFF">// ↑ nueva petición cada vez</span><br>&#160;&#160;&#160;&#160;builder: ...,<br>&#160;&#160;);<br>}</p></div>
 </div>
 <div style="display:flex;flex-direction:column;gap:16px">
-<p style="font-size:32px;font-weight:700;color:#1D4ED8">✓ Créalo una vez en initState</p>
-<div style="background:#0F1B2D;border-radius:20px;padding:32px 36px"><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;line-height:1.5;color:#E6EDF3;white-space:nowrap"><span style="color:#7AB8FF">late final</span> <span style="color:#FFC66D">Future</span>&lt;<span style="color:#FFC66D">List</span>&lt;<span style="color:#FFC66D">String</span>&gt;&gt; _futuro;<br><br><span style="color:#7C8BA1">@override</span><br><span style="color:#7AB8FF">void</span> initState() {<br>&#160;&#160;<span style="color:#7AB8FF">super</span>.initState();<br>&#160;&#160;_futuro = obtenerEstudiantes();<br>}</p></div>
+<p style="font-size:32px;font-weight:700;color:#16A37B">✓ Créalo una vez en initState</p>
+<div style="background:#23262F;border-radius:20px;padding:32px 36px"><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;line-height:1.5;color:#E6EDF3;white-space:nowrap"><span style="color:#8EA4FF">late final</span> <span style="color:#FFFFFF">Future</span>&lt;<span style="color:#FFFFFF">List</span>&lt;<span style="color:#FFFFFF">String</span>&gt;&gt; _futuro;<br><br><span style="color:#8A8F9C">@override</span><br><span style="color:#8EA4FF">void</span> initState() {<br>&#160;&#160;<span style="color:#8EA4FF">super</span>.initState();<br>&#160;&#160;_futuro = obtenerEstudiantes();<br>}</p></div>
 </div>
 </div>
-<div style="background:#172033;border-radius:20px;padding:32px 40px"><p style="font-size:32px;line-height:1.4;color:#F5F3EE">build() puede ejecutarse muchas veces: al rotar la pantalla, al abrir el teclado o con cualquier setState. Si el Future se crea ahí, <span style="color:#F59E0B">la API se consulta una y otra vez.</span></p></div>
-<p style="position:absolute;left:128px;bottom:64px;width:1664px;font-size:24px;color:#6B7689">Día 2 · Bloque 5 · [Expositor 5]</p>
+<div style="background:#23262F;border-radius:20px;padding:32px 40px"><p style="font-size:32px;line-height:1.4;color:#ECEEF2">build() puede ejecutarse muchas veces: al rotar la pantalla, al abrir el teclado o con cualquier setState. Si el Future se crea ahí, <span style="color:#F2A93B">la API se consulta una y otra vez.</span></p></div>
+<p style="position:absolute;left:128px;bottom:64px;width:1664px;font-size:18px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#9A9EAC">Día 2 · Bloque 5 · [Expositor 5]</p>
 <aside>Detalle que vale puntos con el docente: muchos ejemplos en internet (incluido el de nuestra investigación) llaman a la función dentro de build por simplicidad, pero la documentación oficial de FutureBuilder advierte que el Future debe obtenerse antes, por ejemplo en initState. Conectar con el bloque 2: initState se ejecuta una vez y build muchas. DEMO: poner un print dentro de obtenerEstudiantes(), abrir el teclado y mostrar en la consola cómo se repite.</aside>
 </section>

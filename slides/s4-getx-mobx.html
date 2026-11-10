@@ -1,22 +1,22 @@
-<section id="s4-getx-mobx" data-transition="fade" style="background:#F5F3EE;color:#172033;font-family:Inter, Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<section id="s4-getx-mobx" data-transition="fade" style="background:#ECEEF2;color:#23262F;font-family:Poppins, Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
 <div style="display:flex;flex-direction:column;gap:16px">
-<p style="font-size:24px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#C2410C">5.5 – 5.6 · Enfoque reactivo</p>
-<h2 style="font-family:'Space Grotesk', Arial, sans-serif;font-size:72px;font-weight:700;line-height:1.1;color:#172033">GetX y MobX: observar valores</h2>
+<p style="font-size:21px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#6B7080">5.5 – 5.6 · Enfoque reactivo</p>
+<h2 style="font-family:Poppins, Arial, sans-serif;font-size:64px;font-weight:900;line-height:1.02;color:#23262F;text-transform:uppercase;letter-spacing:-3px">GetX y MobX: observar valores</h2>
 </div>
 <div style="display:grid;grid-template-columns:1fr 1fr;gap:40px">
-<div style="background:#FFFFFF;border:2px solid #E2DED4;border-radius:24px;padding:40px;display:flex;flex-direction:column;gap:20px">
-<h3 style="font-family:'Space Grotesk', Arial, sans-serif;font-size:44px;font-weight:700;color:#1D4ED8">GetX</h3>
-<p style="font-size:28px;line-height:1.4;color:#4A5568">Estado, navegación e inyección de dependencias en un solo paquete.</p>
-<div style="background:#0F1B2D;border-radius:16px;padding:24px 28px"><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;line-height:1.5;color:#E6EDF3;white-space:nowrap"><span style="color:#7AB8FF">final</span> contador = <span style="color:#F78C6C">0</span>.<span style="color:#F59E0B">obs</span>;<br><span style="color:#FFC66D">Obx</span>(() =&gt; <span style="color:#FFC66D">Text</span>(<span style="color:#A5D6A7">'${contador.value}'</span>));<br>contador.value++;</p></div>
-<p style="font-size:26px;line-height:1.4"><b style="color:#1D4ED8">+</b> Poco código. <b style="color:#C2410C">−</b> Mezclar todo complica el mantenimiento.</p>
+<div style="background:#ECEEF2;box-shadow:12px 12px 28px #CFD3DB,-12px -12px 28px #FFFFFF;border-radius:24px;padding:40px;display:flex;flex-direction:column;gap:20px">
+<h3 style="font-family:Poppins, Arial, sans-serif;font-size:44px;font-weight:800;color:#2F5BFF">GetX</h3>
+<p style="font-size:28px;line-height:1.4;color:#6B7080">Estado, navegación e inyección de dependencias en un solo paquete.</p>
+<div style="background:#23262F;border-radius:16px;padding:24px 28px"><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;line-height:1.5;color:#E6EDF3;white-space:nowrap"><span style="color:#8EA4FF">final</span> contador = <span style="color:#F2B66D">0</span>.<span style="color:#F2A93B">obs</span>;<br><span style="color:#FFFFFF">Obx</span>(() =&gt; <span style="color:#FFFFFF">Text</span>(<span style="color:#86D3A9">'${contador.value}'</span>));<br>contador.value++;</p></div>
+<p style="font-size:26px;line-height:1.4"><b style="color:#16A37B">+</b> Poco código. <b style="color:#E5484D">−</b> Mezclar todo complica el mantenimiento.</p>
 </div>
-<div style="background:#FFFFFF;border:2px solid #E2DED4;border-radius:24px;padding:40px;display:flex;flex-direction:column;gap:20px">
-<h3 style="font-family:'Space Grotesk', Arial, sans-serif;font-size:44px;font-weight:700;color:#1D4ED8">MobX</h3>
-<p style="font-size:28px;line-height:1.4;color:#4A5568"><b>Observables</b> (datos), <b>acciones</b> (cambios) y <b>reacciones</b> (respuestas).</p>
-<div style="background:#0F1B2D;border-radius:16px;padding:24px 28px"><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;line-height:1.5;color:#E6EDF3;white-space:nowrap"><span style="color:#7C8BA1">@observable</span> <span style="color:#7AB8FF">int</span> contador = <span style="color:#F78C6C">0</span>;<br><span style="color:#7C8BA1">@action</span> <span style="color:#7AB8FF">void</span> sumar() =&gt; contador++;<br><span style="color:#FFC66D">Observer</span>(builder: (_) =&gt; <span style="color:#FFC66D">Text</span>(...));</p></div>
-<p style="font-size:26px;line-height:1.4"><b style="color:#1D4ED8">+</b> Valores derivados automáticos. <b style="color:#C2410C">−</b> Requiere generar código.</p>
+<div style="background:#ECEEF2;box-shadow:12px 12px 28px #CFD3DB,-12px -12px 28px #FFFFFF;border-radius:24px;padding:40px;display:flex;flex-direction:column;gap:20px">
+<h3 style="font-family:Poppins, Arial, sans-serif;font-size:44px;font-weight:800;color:#2F5BFF">MobX</h3>
+<p style="font-size:28px;line-height:1.4;color:#6B7080"><b>Observables</b> (datos), <b>acciones</b> (cambios) y <b>reacciones</b> (respuestas).</p>
+<div style="background:#23262F;border-radius:16px;padding:24px 28px"><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;line-height:1.5;color:#E6EDF3;white-space:nowrap"><span style="color:#8A8F9C">@observable</span> <span style="color:#8EA4FF">int</span> contador = <span style="color:#F2B66D">0</span>;<br><span style="color:#8A8F9C">@action</span> <span style="color:#8EA4FF">void</span> sumar() =&gt; contador++;<br><span style="color:#FFFFFF">Observer</span>(builder: (_) =&gt; <span style="color:#FFFFFF">Text</span>(...));</p></div>
+<p style="font-size:26px;line-height:1.4"><b style="color:#16A37B">+</b> Valores derivados automáticos. <b style="color:#E5484D">−</b> Requiere generar código.</p>
 </div>
 </div>
-<p style="position:absolute;left:128px;bottom:64px;width:1664px;font-size:24px;color:#6B7689">Día 2 · Bloque 4 · [Expositor 4]</p>
+<p style="position:absolute;left:128px;bottom:64px;width:1664px;font-size:18px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#9A9EAC">Día 2 · Bloque 4 · [Expositor 4]</p>
 <aside>Los dos se basan en la misma idea: marcas un valor como observable y la interfaz que lo lee se actualiza sola. GetX: muy popular por lo poco que se escribe (.obs y Obx), pero al juntar navegación, dependencias y estado, el proyecto puede desordenarse si no hay una estructura clara. MobX: ejemplo de una calculadora, cambia un valor de entrada y los resultados derivados se recalculan solos. Necesita build_runner para generar código.</aside>
 </section>
