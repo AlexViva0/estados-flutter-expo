@@ -11,7 +11,7 @@ Presentación web de la exposición de la **Unidad 4 de Desarrollo de Aplicacion
 | `F` | pantalla completa |
 | `P` | abre la vista del orador en otra ventana (con notas, cronómetro y la siguiente lámina; se sincroniza sola) |
 | `N` | muestra las notas en la misma ventana |
-| `O` | vista general para saltar a cualquier lámina |
+| `O` | vista general con miniaturas para saltar a cualquier lámina |
 
 Se puede enlazar una lámina directamente con `#número`, por ejemplo `/#44`.
 
@@ -34,6 +34,20 @@ fx/kit.css · kit.js  estilos y utilidades que comparten las animaciones SVG de 
 3. Un `<x-embed>` es una animación en `iframe`: puede llevar una página completa dentro o un atributo `src` (por ejemplo `src="fx/campo.html"`).
 4. `data-build-in="fade|rise|pop"` en un elemento con `position:absolute` lo hace aparecer al avanzar.
 5. Para agregar o reordenar láminas, edita `order` en `deck.json`.
+
+### Decoración y transiciones (las pone el motor)
+
+Ninguna lámina dibuja su propio fondo: `assets/deck.js` clasifica cada una (`data-kind`) y le añade una capa `.deco`.
+
+- **Fondo**: degradado suave con la luz arriba a la izquierda, igual que las sombras de las tarjetas.
+- **Franjas**: en la esquina superior derecha de las láminas de contenido (tinta, relieve, azul y una línea fina) y en la inferior derecha de las portadas de bloque. Al entrar, un pulso ámbar recorre la franja azul: el evento que viaja hacia el estado.
+- **Franja de avance**: el borde inferior tiene un tramo por bloque de `deck.json`; el bloque actual se llena en azul según la lámina.
+- **Antetítulo**: el primer texto en versalitas recibe una marca azul que se dibuja al entrar.
+- **Equilibrio**: si el contenido de una lámina sin animación termina muy arriba, el cuerpo baja un poco para repartir el aire.
+- **Transiciones**: el contenido entra en cascada; un bloque nuevo se abre con un barrido de franjas, y su portada se va deslizándose (`data-transition="push"`). Con `prefers-reduced-motion` todo queda en un fundido.
+- **Pizarrón** (`data-num="top"`): fondo blanco con una retícula de puntos.
+
+Para que una lámina nueva herede todo esto basta con usar el fondo `#ECEEF2` (o `#23262F` / `#2F5BFF`) en el `<section>`. `fx/campo.html?bg=none` deja ver el fondo de la lámina detrás de los puntos.
 
 ### Animaciones SVG
 

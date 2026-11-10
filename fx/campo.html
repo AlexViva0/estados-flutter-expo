@@ -26,11 +26,13 @@ const P = PALETTES[TONO] || PALETTES.azul;
 if (q.get('fade')) document.body.classList.add('fade-' + q.get('fade'));
 
 let renderer;
-try { renderer = new THREE.WebGLRenderer({ antialias: true }); }
+const BG = q.get('bg') || '0F1B2D';      // color de fondo, o "none" para dejar ver la lámina
+const CLEAR = BG === 'none';
+try { renderer = new THREE.WebGLRenderer({ antialias: true, alpha: CLEAR }); }
 catch (e) { throw e; } // sin WebGL el fondo queda liso: es solo decoración
 renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
-renderer.setClearColor(new THREE.Color('#' + (q.get('bg') || '0F1B2D')), 1);
-document.body.style.background = '#' + (q.get('bg') || '0F1B2D');
+if (CLEAR) renderer.setClearColor(0x000000, 0);
+else { renderer.setClearColor(new THREE.Color('#' + BG), 1); document.body.style.background = '#' + BG; }
 document.body.appendChild(renderer.domElement);
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(50, 1, 0.1, 100);
